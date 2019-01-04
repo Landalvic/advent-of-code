@@ -6,14 +6,16 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import util.FileUtils;
 
 public class Jour15Exercice2 {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
-		List<String> liste = FileUtils.lireFichier("./jour15/data.txt");
+		List<String> liste = FileUtils.lireFichier("./jour15/datatest.txt");
 
+		long debut = System.currentTimeMillis();
 		int degatsElfe = 3;
 		boolean elfeMort = false;
 		do {
@@ -62,7 +64,7 @@ public class Jour15Exercice2 {
 			int round = 0;
 			boolean fullRound = true;
 			a: while (fullRound) {
-				afficher(map, round);
+				// afficher(map, round);
 				Collections.sort(personnages);
 				for (int i = 0; i < personnages.size(); i++) {
 					if (!resteEnnemis(personnages)) {
@@ -91,7 +93,7 @@ public class Jour15Exercice2 {
 					round++;
 				}
 			}
-			afficher(map, round);
+			// afficher(map, round);
 			int pvRestants = 0;
 			for (int i = 0; i < personnages.size(); i++) {
 				pvRestants += personnages.get(i).getPv();
@@ -100,6 +102,10 @@ public class Jour15Exercice2 {
 			System.out.println(round * pvRestants);
 		} while (elfeMort);
 		System.out.println(degatsElfe);
+		long fin = System.currentTimeMillis();
+		System.out.println("********** Le batch se termine **********");
+		System.out
+				.println("Le batch a dur� : " + DurationFormatUtils.formatDuration(fin - debut, "HH:mm:ss:SSS", true));
 	}
 
 	private static void afficher(Case[][] map, int round) {
