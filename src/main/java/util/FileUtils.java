@@ -11,10 +11,10 @@ import java.util.regex.Pattern;
 
 public abstract class FileUtils {
 
-	public static StringBuilder lireLigne(String lien, int sizebuff) {
+	public static StringBuilder lireLigne(String lien) {
 		StringBuilder builder = new StringBuilder();
 		InputStream inputStream = FileUtils.class.getClassLoader().getResourceAsStream(lien);
-		char[] buf = new char[sizebuff];
+		char[] buf = new char[1];
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
 			while (reader.ready()) {
 				reader.read(buf);
