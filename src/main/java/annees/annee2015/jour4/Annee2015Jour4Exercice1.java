@@ -6,10 +6,9 @@ import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.lang3.StringUtils;
 
-import commun.Exercice;
 import util.MathUtils;
 
-public class Annee2015Jour4Exercice1 extends Exercice {
+public class Annee2015Jour4Exercice1 implements Runnable {
 
 	public static void main(String[] args) {
 		new Annee2015Jour4Exercice1();

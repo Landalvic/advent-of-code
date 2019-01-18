@@ -2,10 +2,9 @@ package annees.annee2015.jour1;
 
 import org.apache.commons.lang3.StringUtils;
 
-import commun.Exercice;
 import util.FileUtils;
 
-public class Annee2015Jour1Exercice1 extends Exercice {
+public class Annee2015Jour1Exercice1 implements Runnable {
 
 	public static void main(String[] args) {
 		new Annee2015Jour1Exercice1();
@@ -22,7 +21,7 @@ public class Annee2015Jour1Exercice1 extends Exercice {
 				etage--;
 			}
 		}
-		System.out.println(etage);
+		System.out.println("" + etage);
 	}
 
 }

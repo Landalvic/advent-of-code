@@ -5,10 +5,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import commun.Exercice;
 import util.FileUtils;
 
-public class Annee2015Jour3Exercice1 extends Exercice {
+public class Annee2015Jour3Exercice1 implements Runnable {
 
 	public static void main(String[] args) {
 		new Annee2015Jour3Exercice1();

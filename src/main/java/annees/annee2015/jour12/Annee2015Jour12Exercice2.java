@@ -3,10 +3,9 @@ package annees.annee2015.jour12;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import commun.Exercice;
 import util.FileUtils;
 
-public class Annee2015Jour12Exercice2 extends Exercice {
+public class Annee2015Jour12Exercice2 implements Runnable {
 
 	public static void main(String[] args) {
 		new Annee2015Jour12Exercice2();

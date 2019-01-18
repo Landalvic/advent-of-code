@@ -3,10 +3,9 @@ package annees.annee2015.jour6;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import commun.Exercice;
 import util.FileUtils;
 
-public class Annee2015Jour6Exercice2 extends Exercice {
+public class Annee2015Jour6Exercice2 implements Runnable {
 
 	public static void main(String[] args) {
 		new Annee2015Jour6Exercice2();

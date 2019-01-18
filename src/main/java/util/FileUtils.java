@@ -1,15 +1,46 @@
 package util;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public abstract class FileUtils {
+
+	public static Stream<String> streamOfLines(String input) {
+		try {
+			return Files.lines(Paths.get(input));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static String firstLine(String input) {
+		return streamOfLines(input).findFirst().get();
+	}
+
+	public static IntStream streamOfInt(String input) {
+		return streamOfLines(input).mapToInt(Integer::parseInt);
+	}
+
+	public static List<String> listOfLines(String input) {
+		return streamOfLines(input).collect(Collectors.toList());
+	}
+
+	public static List<Integer> listOfIntegers(String input) {
+		return streamOfInt(input).boxed().collect(Collectors.toList());
+	}
 
 	public static StringBuilder lireLigne(String lien) {
 		StringBuilder builder = new StringBuilder();
@@ -60,6 +91,21 @@ public abstract class FileUtils {
 	public static boolean findPattern(String string, Pattern pattern) {
 		Matcher m = pattern.matcher(string);
 		return m.matches();
+	}
+
+	public static byte[] inputToByte(InputStream input) {
+		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+		try (InputStream input2 = input) {
+			int nRead;
+			byte[] data = new byte[16384];
+			while ((nRead = input.read(data, 0, data.length)) != -1) {
+				buffer.write(data, 0, nRead);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return buffer.toByteArray();
 	}
 
 }

@@ -6,10 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import commun.Exercice;
 import util.FileUtils;
 
-public class Annee2015Jour9Exercice1 extends Exercice {
+public class Annee2015Jour9Exercice1 implements Runnable {
 
 	public static void main(String[] args) {
 		new Annee2015Jour9Exercice1();

@@ -2,9 +2,7 @@ package annees.annee2015.jour11;
 
 import org.apache.commons.lang3.StringUtils;
 
-import commun.Exercice;
-
-public class Annee2015Jour11Exercice2 extends Exercice {
+public class Annee2015Jour11Exercice2 implements Runnable {
 
 	public static void main(String[] args) {
 		new Annee2015Jour11Exercice2();

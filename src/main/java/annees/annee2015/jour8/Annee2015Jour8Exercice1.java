@@ -2,10 +2,9 @@ package annees.annee2015.jour8;
 
 import java.util.List;
 
-import commun.Exercice;
 import util.FileUtils;
 
-public class Annee2015Jour8Exercice1 extends Exercice {
+public class Annee2015Jour8Exercice1 implements Runnable {
 
 	public static void main(String[] args) {
 		new Annee2015Jour8Exercice1();

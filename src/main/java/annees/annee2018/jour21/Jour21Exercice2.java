@@ -28,7 +28,7 @@ import util.FileUtils;
 public class Jour21Exercice2 {
 
 	public static void main(String[] args) {
-		List<String> liste = FileUtils.lireFichier("./jour21/data.txt");
+		List<String> liste = FileUtils.lireFichier("./annee2018/jour21/data.txt");
 		List<Operation> operations = new ArrayList<>(liste.size());
 		List<OperationRunnable> calculs = Arrays.asList(new AddI(), new AddR(), new BanI(), new BanR(), new BorI(),
 				new BorR(), new EqIR(), new EqRI(), new EqRR(), new GtIR(), new GtRI(), new GtRR(), new MulI(),

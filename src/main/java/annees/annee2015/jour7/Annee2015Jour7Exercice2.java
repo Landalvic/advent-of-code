@@ -9,10 +9,9 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import commun.Exercice;
 import util.FileUtils;
 
-public class Annee2015Jour7Exercice2 extends Exercice {
+public class Annee2015Jour7Exercice2 implements Runnable {
 
 	public static void main(String[] args) {
 		new Annee2015Jour7Exercice2();

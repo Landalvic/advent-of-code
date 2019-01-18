@@ -2,18 +2,24 @@ package commun;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
-public abstract class Exercice implements Runnable {
+public abstract class Exercice {
 
-	private long debut;
+	protected static final String AUCUNE_SOLUTION = "Aucune solution";
+	protected long debut;
 
 	public Exercice() {
 		super();
 		this.debut = System.currentTimeMillis();
-		lancer();
 	}
 
-	private void lancer() {
-		run();
+	protected abstract String run(String input) throws Exception;
+
+	protected void lancer(String input) {
+		try {
+			System.out.println(run(input));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		long fin = System.currentTimeMillis();
 		System.out.println("********** Le batch se termine **********");
 		System.out

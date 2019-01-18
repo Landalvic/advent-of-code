@@ -1,8 +1,6 @@
 package annees.annee2015.jour10;
 
-import commun.Exercice;
-
-public class Annee2015Jour10Exercice1 extends Exercice {
+public class Annee2015Jour10Exercice1 implements Runnable {
 
 	public static void main(String[] args) {
 		new Annee2015Jour10Exercice1();
