@@ -1,22 +1,22 @@
 package annees.annee2015.jour05;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 
+import commun.Exercice;
 import util.FileUtils;
 
-public class Annee2015Jour5Exercice2 implements Runnable {
+public class Annee2015Jour5Exercice2 extends Exercice {
 
 	public static void main(String[] args) {
-		new Annee2015Jour5Exercice2();
+		new Annee2015Jour5Exercice2().lancer("src/main/resources/annee2015/jour05/data.txt");
 	}
 
 	@Override
-	public void run() {
-		List<String> liste = FileUtils.lireFichier("./annee2015/jour5/data.txt");
-		int total = 0;
-		for (String string : liste) {
+	public String run(String input) throws Exception {
+		Stream<String> stream = FileUtils.streamOfLines(input);
+		long total = stream.filter(string -> {
 			boolean doubleLettre = false;
 			boolean conditionPair = false;
 			for (int i = 0; i < string.length(); i++) {
@@ -37,11 +37,9 @@ public class Annee2015Jour5Exercice2 implements Runnable {
 					}
 				}
 			}
-			if (conditionPair && doubleLettre) {
-				total++;
-			}
-		}
-		System.out.println(total);
+			return conditionPair && doubleLettre;
+		}).count();
+		return String.valueOf(total);
 	}
 
 }

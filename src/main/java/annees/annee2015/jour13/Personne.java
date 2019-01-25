@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class Personne {
 
@@ -26,13 +25,12 @@ public class Personne {
 			formations.add(formation);
 			return formations;
 		}
-		for (Entry<Personne, Integer> amitie : amities.entrySet()) {
-			if (!formation.getPersonnes().contains(amitie.getKey())) {
-				Formation newFormation = new Formation(new ArrayList<>(formation.getPersonnes()),
-						formation.getBonheur() + amitie.getValue() + amitie.getKey().getAmities().get(this));
-				formations.addAll(amitie.getKey().placer(newFormation, taille));
-			}
-		}
+		amities.entrySet().stream().filter(amitie -> !formation.getPersonnes().contains(amitie.getKey())).forEach(
+				amitie -> {
+					Formation newFormation = new Formation(new ArrayList<>(formation.getPersonnes()),
+							formation.getBonheur() + amitie.getValue() + amitie.getKey().getAmities().get(this));
+					formations.addAll(amitie.getKey().placer(newFormation, taille));
+				});
 		return formations;
 	}
 

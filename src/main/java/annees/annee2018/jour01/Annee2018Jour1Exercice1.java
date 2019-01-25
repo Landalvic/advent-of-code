@@ -14,7 +14,7 @@ public class Annee2018Jour1Exercice1 extends Exercice {
 	@Override
 	public String run(String input) throws Exception {
 		IntStream stream = FileUtils.streamOfInt(input);
-		return String.valueOf(stream.reduce((a, b) -> a + b).getAsInt());
+		return String.valueOf(stream.sum());
 	}
 
 }

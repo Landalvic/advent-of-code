@@ -1,20 +1,20 @@
 package annees.annee2015.jour02;
 
-import java.util.List;
+import java.util.stream.Stream;
 
+import commun.Exercice;
 import util.FileUtils;
 
-public class Annee2015Jour2Exercice2 implements Runnable {
+public class Annee2015Jour2Exercice2 extends Exercice {
 
 	public static void main(String[] args) {
-		new Annee2015Jour2Exercice2();
+		new Annee2015Jour2Exercice2().lancer("src/main/resources/annee2015/jour02/data.txt");
 	}
 
 	@Override
-	public void run() {
-		List<String> liste = FileUtils.lireFichier("./annee2015/jour2/data.txt");
-		int total = 0;
-		for (String string : liste) {
+	public String run(String input) throws Exception {
+		Stream<String> stream = FileUtils.streamOfLines(input);
+		int total = stream.mapToInt(string -> {
 			String[] dimensions = string.split("x");
 			int longueur = Integer.valueOf(dimensions[0]);
 			int largeur = Integer.valueOf(dimensions[1]);
@@ -24,9 +24,9 @@ public class Annee2015Jour2Exercice2 implements Runnable {
 			int enveloppe = 2 * (longueur + largeur + hauteur - max);
 			int arc = longueur * largeur * hauteur;
 
-			total += enveloppe + arc;
-		}
-		System.out.println(total);
+			return enveloppe + arc;
+		}).sum();
+		return String.valueOf(total);
 	}
 
 }

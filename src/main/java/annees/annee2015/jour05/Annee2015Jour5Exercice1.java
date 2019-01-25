@@ -1,30 +1,30 @@
 package annees.annee2015.jour05;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 
+import commun.Exercice;
 import util.FileUtils;
 
-public class Annee2015Jour5Exercice1 implements Runnable {
+public class Annee2015Jour5Exercice1 extends Exercice {
 
 	public static void main(String[] args) {
-		new Annee2015Jour5Exercice1();
+		new Annee2015Jour5Exercice1().lancer("src/main/resources/annee2015/jour05/data.txt");
 	}
 
 	@Override
-	public void run() {
-		List<String> liste = FileUtils.lireFichier("./annee2015/jour5/data.txt");
-		int total = 0;
-		for (String string : liste) {
+	public String run(String input) throws Exception {
+		Stream<String> stream = FileUtils.streamOfLines(input);
+		long total = stream.filter(string -> {
 			int nbrVoyelle = 0;
 			boolean doubleLettre = false;
 			boolean condition3 = true;
 			for (int i = 0; i < string.length(); i++) {
-				if (StringUtils.equals("" + string.charAt(i), "a") || StringUtils.equals("" + string.charAt(i), "e")
-						|| StringUtils.equals("" + string.charAt(i), "i")
-						|| StringUtils.equals("" + string.charAt(i), "o")
-						|| StringUtils.equals("" + string.charAt(i), "u")) {
+				String strChar = String.valueOf(string.charAt(i));
+				if (StringUtils.equals(strChar, "a") || StringUtils.equals(strChar, "e")
+						|| StringUtils.equals(strChar, "i") || StringUtils.equals(strChar, "o")
+						|| StringUtils.equals(strChar, "u")) {
 					nbrVoyelle++;
 				}
 				if (i >= 1) {
@@ -39,11 +39,9 @@ public class Annee2015Jour5Exercice1 implements Runnable {
 					}
 				}
 			}
-			if (nbrVoyelle >= 3 && doubleLettre && condition3) {
-				total++;
-			}
-		}
-		System.out.println(total);
+			return nbrVoyelle >= 3 && doubleLettre && condition3;
+		}).count();
+		return String.valueOf(total);
 	}
 
 }

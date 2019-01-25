@@ -7,15 +7,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import util.FileUtils;
 
-public class Annee2015Jour3Exercice2 implements Runnable {
+public class Annee2015Jour3Exercice2 extends Annee2015Jour3 {
 
 	public static void main(String[] args) {
-		new Annee2015Jour3Exercice2();
+		new Annee2015Jour3Exercice2().lancer("src/main/resources/annee2015/jour03/data.txt");
 	}
 
 	@Override
-	public void run() {
-		StringBuilder arbre = FileUtils.lireLigne("./annee2015/jour3/data.txt");
+	public String run(String input) throws Exception {
+		String arbre = FileUtils.firstLine(input);
 		List<Maison> maisons = new ArrayList<>();
 		Maison ancienneMaison = new Maison(0, 0);
 		Maison ancienneMaison2 = ancienneMaison;
@@ -43,19 +43,7 @@ public class Annee2015Jour3Exercice2 implements Runnable {
 				ancienneMaison2 = aRetenir;
 			}
 		}
-		System.out.println(maisons.size());
-	}
-
-	private Maison addMaison(List<Maison> maisons, int positionX, int positionY) {
-		for (Maison maison : maisons) {
-			if (maison.getPositionX() == positionX && maison.getPositionY() == positionY) {
-				maison.setNbrCadeaux(maison.getNbrCadeaux() + 1);
-				return maison;
-			}
-		}
-		Maison maison = new Maison(positionX, positionY);
-		maisons.add(maison);
-		return maison;
+		return String.valueOf(maisons.size());
 	}
 
 }

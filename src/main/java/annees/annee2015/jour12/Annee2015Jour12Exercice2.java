@@ -1,70 +1,50 @@
 package annees.annee2015.jour12;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 
 import util.FileUtils;
 
-public class Annee2015Jour12Exercice2 implements Runnable {
+public class Annee2015Jour12Exercice2 extends Annee2015Jour12 {
 
 	public static void main(String[] args) {
-		new Annee2015Jour12Exercice2();
+		new Annee2015Jour12Exercice2().lancer("src/main/resources/annee2015/jour12/data.txt");
 	}
 
 	@Override
-	public void run() {
-		StringBuilder input = FileUtils.lireLigne("./annee2015/jour12/data.txt");
-		int total = 0;
+	public String run(String input) throws Exception {
+		StringBuilder string = new StringBuilder(FileUtils.firstLine(input));
 
-		int indexRouge = input.indexOf(":\"red\"");
+		int indexRouge = string.indexOf(":\"red\"");
 		while (indexRouge != -1) {
 			int decalageAccolade = 0;
-			for (int i = indexRouge; i < input.length(); i++) {
-				if (StringUtils.equals("" + input.charAt(i), "}")) {
+			for (int i = indexRouge; i < string.length(); i++) {
+				if (StringUtils.equals(String.valueOf(string.charAt(i)), "}")) {
 					if (decalageAccolade == 0) {
 						int indexDebut = 0;
 						for (int j = indexRouge; j >= 0; j--) {
-							if (StringUtils.equals("" + input.charAt(j), "{")) {
+							if (StringUtils.equals(String.valueOf(string.charAt(j)), "{")) {
 								if (decalageAccolade == 0) {
 									indexDebut = j;
 									break;
 								} else {
 									decalageAccolade--;
 								}
-							} else if (StringUtils.equals("" + input.charAt(j), "}")) {
+							} else if (StringUtils.equals(String.valueOf(string.charAt(j)), "}")) {
 								decalageAccolade++;
 							}
 						}
-						if (indexDebut - 1 == -1) {
-							System.out.println("test");
-						}
-						input = new StringBuilder(input.substring(0, indexDebut) + input.substring(i + 1));
+						string = new StringBuilder(string.substring(0, indexDebut) + string.substring(i + 1));
 						break;
 					} else {
 						decalageAccolade--;
 					}
-				} else if (StringUtils.equals("" + input.charAt(i), "{")) {
+				} else if (StringUtils.equals(String.valueOf(string.charAt(i)), "{")) {
 					decalageAccolade++;
 				}
 			}
-			indexRouge = input.indexOf(":\"red\"");
+			indexRouge = string.indexOf(":\"red\"");
 		}
-
-		for (int i = 0; i < input.length(); i++) {
-			if (StringUtils.equals("" + input.charAt(i), "-") || NumberUtils.isDigits("" + input.charAt(i))) {
-				StringBuilder builder = new StringBuilder("" + input.charAt(i));
-				for (int j = i + 1; j < input.length(); j++, i++) {
-					if (NumberUtils.isDigits("" + input.charAt(j))) {
-						builder.append(input.charAt(j));
-					} else {
-						break;
-					}
-				}
-				total += Integer.valueOf(builder.toString());
-				System.out.println(builder.toString() + " -> " + Integer.valueOf(builder.toString()));
-			}
-		}
-		System.out.println(total);
+		return calcul(string);
 	}
 
 }

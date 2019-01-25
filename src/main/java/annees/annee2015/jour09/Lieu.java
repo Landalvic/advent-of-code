@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class Lieu {
 
@@ -24,13 +23,10 @@ public class Lieu {
 			chemins.add(chemin);
 			return chemins;
 		}
-		for (Entry<Lieu, Integer> lieu : distance.entrySet()) {
-			if (!chemin.getLieux().contains(lieu.getKey())) {
-				Chemin newChemin = new Chemin(new ArrayList<>(chemin.getLieux()),
-						chemin.getDistance() + lieu.getValue());
-				chemins.addAll(lieu.getKey().parcourir(newChemin, taille));
-			}
-		}
+		distance.entrySet().stream().filter(lieu -> !chemin.getLieux().contains(lieu.getKey())).forEach(lieu -> {
+			Chemin newChemin = new Chemin(new ArrayList<>(chemin.getLieux()), chemin.getDistance() + lieu.getValue());
+			chemins.addAll(lieu.getKey().parcourir(newChemin, taille));
+		});
 		return chemins;
 	}
 

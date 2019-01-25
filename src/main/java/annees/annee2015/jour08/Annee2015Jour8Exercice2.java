@@ -1,23 +1,23 @@
 package annees.annee2015.jour08;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 
+import commun.Exercice;
 import util.FileUtils;
 
-public class Annee2015Jour8Exercice2 implements Runnable {
+public class Annee2015Jour8Exercice2 extends Exercice {
 
 	public static void main(String[] args) {
-		new Annee2015Jour8Exercice2();
+		new Annee2015Jour8Exercice2().lancer("src/main/resources/annee2015/jour08/data.txt");
 	}
 
 	@Override
-	public void run() {
-		List<String> liste = FileUtils.lireFichier("./annee2015/jour8/data.txt");
+	public String run(String input) throws Exception {
+		Stream<String> stream = FileUtils.streamOfLines(input);
 
-		int total = 0;
-		for (String string : liste) {
+		int total = stream.mapToInt(string -> {
 			StringBuilder builder = new StringBuilder();
 			for (int i = 0; i < string.length(); i++) {
 				if (StringUtils.equals("" + string.charAt(i), "\\")) {
@@ -27,10 +27,9 @@ public class Annee2015Jour8Exercice2 implements Runnable {
 				}
 				builder.append(string.charAt(i));
 			}
-			total += builder.length() + 2 - string.length();
-		}
-		System.out.println(total);
-
+			return builder.length() + 2 - string.length();
+		}).sum();
+		return String.valueOf(total);
 	}
 
 }
