@@ -1,7 +1,8 @@
 package annees.annee2018.jour04;
 
 import java.util.Collection;
-import java.util.Comparator;
+
+import commun.AdventOfCodeException;
 
 public class Annee2018Jour4Exercice2 extends Annee2018Jour4 {
 
@@ -10,15 +11,13 @@ public class Annee2018Jour4Exercice2 extends Annee2018Jour4 {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		Collection<Garde> gardes = inputToGardes(input);
-
-		Garde gardeMauvais = gardes.stream().filter(garde -> garde.minuteLaPire() >= 0).max(new Comparator<Garde>() {
-			@Override
-			public int compare(Garde o1, Garde o2) {
-				return Integer.compare(o1.getSommeil()[o1.minuteLaPire()], o2.getSommeil()[o2.minuteLaPire()]);
-			}
-		}).get();
+		Garde gardeMauvais = gardes
+				.stream()
+				.filter(garde -> garde.minuteLaPire() >= 0)
+				.max((Garde o1, Garde o2) -> Integer.compare(o1.getSommeil()[o1.minuteLaPire()], o2.getSommeil()[o2.minuteLaPire()]))
+				.orElseThrow();
 		return String.valueOf(gardeMauvais.minuteLaPire() * gardeMauvais.getId());
 	}
 

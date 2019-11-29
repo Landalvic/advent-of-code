@@ -2,11 +2,12 @@ package annees.annee2015.jour11;
 
 import org.apache.commons.lang3.StringUtils;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 
 public abstract class Annee2015Jour11 extends Exercice {
 
-	public String runCommun(String input) throws Exception {
+	public String runCommun(String input) throws AdventOfCodeException {
 		do {
 			input = increment(input);
 		} while (!verifierConditions(input));
@@ -44,8 +45,7 @@ public abstract class Annee2015Jour11 extends Exercice {
 				}
 			}
 			String strChar = String.valueOf(string.charAt(i));
-			if (StringUtils.equals(strChar, "i") || StringUtils.equals(strChar, "l")
-					|| StringUtils.equals(strChar, "o")) {
+			if (StringUtils.equals(strChar, "i") || StringUtils.equals(strChar, "l") || StringUtils.equals(strChar, "o")) {
 				condition2 = false;
 				break;
 			}

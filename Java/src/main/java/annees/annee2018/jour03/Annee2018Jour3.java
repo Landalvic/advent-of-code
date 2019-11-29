@@ -22,7 +22,7 @@ public abstract class Annee2018Jour3 extends Exercice {
 
 	protected List<Demande> inputToDemandes(String input) {
 		Stream<String> liste = FileUtils.streamOfLines(input);
-		return liste.map(string -> toDemande(string)).collect(toList());
+		return liste.map(this::toDemande).collect(toList());
 	}
 
 	protected Demande toDemande(String string) {

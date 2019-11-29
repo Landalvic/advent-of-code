@@ -1,5 +1,6 @@
 package annees.annee2015.jour12;
 
+import commun.AdventOfCodeException;
 import util.FileUtils;
 
 public class Annee2015Jour12Exercice1 extends Annee2015Jour12 {
@@ -9,9 +10,13 @@ public class Annee2015Jour12Exercice1 extends Annee2015Jour12 {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		StringBuilder string = new StringBuilder(FileUtils.firstLine(input));
-		return calcul(string);
+		try {
+			return calcul(string);
+		} catch (Exception e) {
+			throw new AdventOfCodeException(e.getMessage(), e);
+		}
 	}
 
 }

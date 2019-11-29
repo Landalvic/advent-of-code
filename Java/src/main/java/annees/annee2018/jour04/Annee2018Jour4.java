@@ -24,7 +24,7 @@ public abstract class Annee2018Jour4 extends Exercice {
 
 	protected Collection<Garde> inputToGardes(String input) {
 		Stream<String> liste = FileUtils.streamOfLines(input);
-		List<Ligne> lignes = liste.map(string -> toLigne(string)).collect(toList());
+		List<Ligne> lignes = liste.map(this::toLigne).collect(toList());
 
 		Collections.sort(lignes);
 		HashMap<Integer, Garde> gardes = new HashMap<>();
@@ -35,7 +35,7 @@ public abstract class Annee2018Jour4 extends Exercice {
 				gardeEnCours = gardes.computeIfAbsent(ligne.getIdGarde(), k -> new Garde(ligne.getIdGarde()));
 			} else if (minuteDebutDodo == null) {
 				minuteDebutDodo = ligne.getMinute();
-			} else {
+			} else if (gardeEnCours != null) {
 				gardeEnCours.dormir(minuteDebutDodo, ligne.getMinute());
 				minuteDebutDodo = null;
 			}

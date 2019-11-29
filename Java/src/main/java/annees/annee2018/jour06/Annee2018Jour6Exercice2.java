@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -14,7 +15,7 @@ public class Annee2018Jour6Exercice2 extends Exercice {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		List<String> liste = FileUtils.listOfLines(input);
 		Pattern xPattern = Pattern.compile("(.*), .*");
 		Pattern yPattern = Pattern.compile(".*, (.*)");

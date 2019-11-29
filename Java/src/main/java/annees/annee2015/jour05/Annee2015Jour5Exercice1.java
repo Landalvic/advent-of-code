@@ -4,6 +4,7 @@ import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -14,7 +15,7 @@ public class Annee2015Jour5Exercice1 extends Exercice {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		Stream<String> stream = FileUtils.streamOfLines(input);
 		long total = stream.filter(string -> {
 			int nbrVoyelle = 0;
@@ -22,9 +23,8 @@ public class Annee2015Jour5Exercice1 extends Exercice {
 			boolean condition3 = true;
 			for (int i = 0; i < string.length(); i++) {
 				String strChar = String.valueOf(string.charAt(i));
-				if (StringUtils.equals(strChar, "a") || StringUtils.equals(strChar, "e")
-						|| StringUtils.equals(strChar, "i") || StringUtils.equals(strChar, "o")
-						|| StringUtils.equals(strChar, "u")) {
+				if (StringUtils.equals(strChar, "a") || StringUtils.equals(strChar, "e") || StringUtils.equals(strChar, "i")
+						|| StringUtils.equals(strChar, "o") || StringUtils.equals(strChar, "u")) {
 					nbrVoyelle++;
 				}
 				if (i >= 1) {
@@ -33,8 +33,8 @@ public class Annee2015Jour5Exercice1 extends Exercice {
 					if (voyellePrec == string.charAt(i)) {
 						doubleLettre = true;
 					}
-					if (StringUtils.equals(chaine, "ab") || StringUtils.equals(chaine, "cd")
-							|| StringUtils.equals(chaine, "pq") || StringUtils.equals(chaine, "xy")) {
+					if (StringUtils.equals(chaine, "ab") || StringUtils.equals(chaine, "cd") || StringUtils.equals(chaine, "pq")
+							|| StringUtils.equals(chaine, "xy")) {
 						condition3 = false;
 					}
 				}

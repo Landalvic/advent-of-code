@@ -2,6 +2,7 @@ package annees.annee2018.jour05;
 
 import org.apache.commons.lang3.StringUtils;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -12,7 +13,7 @@ public class Annee2018Jour5Exercice2 extends Exercice {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		String polymere = FileUtils.firstLine(input);
 
 		char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();

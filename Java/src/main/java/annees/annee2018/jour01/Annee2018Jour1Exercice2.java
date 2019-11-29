@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -14,15 +15,17 @@ public class Annee2018Jour1Exercice2 extends Exercice {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		List<Integer> liste = FileUtils.listOfIntegers(input);
 		Set<Integer> frequencesDejaVues = new HashSet<>();
 		int total = 0;
-		fin: while (true) {
+		boolean dejaVu = false;
+		while (!dejaVu) {
 			for (Integer i : liste) {
 				total += i;
 				if (!frequencesDejaVues.add(total)) {
-					break fin;
+					dejaVu = true;
+					break;
 				}
 			}
 		}

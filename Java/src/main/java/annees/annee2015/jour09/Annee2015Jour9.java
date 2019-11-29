@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -17,7 +18,7 @@ public abstract class Annee2015Jour9 extends Exercice {
 	protected static final Pattern lieuArrivePattern = Pattern.compile(".* to (.*) = .*");
 	protected static final Pattern distancePattern = Pattern.compile(".* = (.*)");
 
-	public IntStream runCommun(String input) throws Exception {
+	public IntStream runCommun(String input) throws AdventOfCodeException {
 		Stream<String> stream = FileUtils.streamOfLines(input);
 		Map<String, Lieu> lieux = new HashMap<>();
 		stream.forEach(string -> {

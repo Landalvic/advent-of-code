@@ -1,18 +1,24 @@
 package annees.annee2018.jour15;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import commun.AdventOfCodeException;
+import commun.Exercice;
 import util.FileUtils;
 
-public class Jour15Exercice1 {
+public class Jour15Exercice1 extends Exercice {
 
-	public static void main(String[] args) throws InterruptedException, IOException {
-		List<String> liste = FileUtils.lireFichier("./jour15/data.txt");
+	public static void main(String[] args) {
+		new Jour15Exercice1().lancer("src/main/resources/annee2018/jour15/data.txt");
+	}
+
+	@Override
+	public String run(String input) throws AdventOfCodeException {
+		List<String> liste = FileUtils.listOfLines(input);
 
 		Case[][] map = new Case[liste.get(0).length()][liste.size()];
 		List<Personnage> personnages = new ArrayList<>();
@@ -57,7 +63,7 @@ public class Jour15Exercice1 {
 		int round = 0;
 		boolean fullRound = true;
 		while (fullRound) {
-			afficher(map, round);
+			// afficher(map, round);
 			Collections.sort(personnages);
 			for (int i = 0; i < personnages.size(); i++) {
 				if (!resteEnnemis(personnages)) {
@@ -82,13 +88,14 @@ public class Jour15Exercice1 {
 				round++;
 			}
 		}
-		afficher(map, round);
+		// afficher(map, round);
 		int pvRestants = 0;
 		for (int i = 0; i < personnages.size(); i++) {
 			pvRestants += personnages.get(i).getPv();
 		}
 		System.out.println(pvRestants);
 		System.out.println(round * pvRestants);
+		return "" + pvRestants + " - " + round * pvRestants;
 	}
 
 	private static void afficher(Case[][] map, int round) {

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.regex.Pattern;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -16,7 +17,7 @@ public class Jour9Exercice2 extends Exercice {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 
 		List<String> liste = FileUtils.listOfLines(input);
 		Pattern nbrJoueursPattern = Pattern.compile("(.*) players.*");

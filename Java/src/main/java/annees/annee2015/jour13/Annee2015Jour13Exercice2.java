@@ -1,5 +1,7 @@
 package annees.annee2015.jour13;
 
+import commun.AdventOfCodeException;
+
 public class Annee2015Jour13Exercice2 extends Annee2015Jour13 {
 
 	public static void main(String[] args) {
@@ -7,7 +9,7 @@ public class Annee2015Jour13Exercice2 extends Annee2015Jour13 {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		inputToInvites(input);
 		Personne vous = new Personne("Vous");
 		for (Personne personne : invites.values()) {

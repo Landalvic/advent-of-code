@@ -2,6 +2,7 @@ package annees.annee2015.jour12;
 
 import org.apache.commons.lang3.StringUtils;
 
+import commun.AdventOfCodeException;
 import util.FileUtils;
 
 public class Annee2015Jour12Exercice2 extends Annee2015Jour12 {
@@ -11,7 +12,7 @@ public class Annee2015Jour12Exercice2 extends Annee2015Jour12 {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		StringBuilder string = new StringBuilder(FileUtils.firstLine(input));
 
 		int indexRouge = string.indexOf(":\"red\"");
@@ -44,7 +45,11 @@ public class Annee2015Jour12Exercice2 extends Annee2015Jour12 {
 			}
 			indexRouge = string.indexOf(":\"red\"");
 		}
-		return calcul(string);
+		try {
+			return calcul(string);
+		} catch (Exception e) {
+			throw new AdventOfCodeException(e.getMessage(), e);
+		}
 	}
 
 }

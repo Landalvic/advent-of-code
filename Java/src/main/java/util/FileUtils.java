@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public abstract class FileUtils {
+public interface FileUtils {
 
 	public static Stream<String> streamOfLines(String input) {
 		try {

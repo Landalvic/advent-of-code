@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -16,7 +17,7 @@ public class Jour17Exercice2 extends Exercice {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		List<String> liste = FileUtils.listOfLines(input);
 		Pattern axe1Pattern = Pattern.compile(".*=(.*),.*");
 		Pattern debutPattern = Pattern.compile(".*=(.*)\\.\\..*");

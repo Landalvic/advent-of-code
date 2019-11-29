@@ -2,6 +2,7 @@ package annees.annee2018.jour02;
 
 import java.util.List;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -12,7 +13,7 @@ public class Annee2018Jour2Exercice2 extends Exercice {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		List<String> liste = FileUtils.listOfLines(input);
 		StringBuilder creationReponse = new StringBuilder();
 		fin: for (int i = 0; i < liste.size(); i++) {

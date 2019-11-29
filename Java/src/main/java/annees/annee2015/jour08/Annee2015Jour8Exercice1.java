@@ -2,6 +2,7 @@ package annees.annee2015.jour08;
 
 import java.util.stream.Stream;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -12,7 +13,7 @@ public class Annee2015Jour8Exercice1 extends Exercice {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		Stream<String> stream = FileUtils.streamOfLines(input);
 		int total = stream.mapToInt(string -> {
 			String epuration = string.replace("\\\\", "a");

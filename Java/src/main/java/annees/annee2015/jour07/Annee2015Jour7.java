@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -16,7 +17,7 @@ public abstract class Annee2015Jour7 extends Exercice {
 	protected static final Pattern operationPattern = Pattern.compile("(.*) -> .*");
 	protected static final Pattern wireArriveePattern = Pattern.compile(".* -> (.*)");
 
-	public String runCommun(String input, Integer b) throws Exception {
+	public String runCommun(String input, Integer b) throws AdventOfCodeException {
 		List<String> liste = FileUtils.listOfLines(input);
 		Map<String, Integer> map = new HashMap<>();
 

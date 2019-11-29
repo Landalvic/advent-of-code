@@ -1,6 +1,5 @@
 package annees.annee2018.jour15;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,12 +7,19 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
+import commun.AdventOfCodeException;
+import commun.Exercice;
 import util.FileUtils;
 
-public class Jour15Exercice2 {
+public class Jour15Exercice2 extends Exercice {
 
-	public static void main(String[] args) throws InterruptedException, IOException {
-		List<String> liste = FileUtils.lireFichier("./jour15/datatest.txt");
+	public static void main(String[] args) {
+		new Jour15Exercice2().lancer("src/main/resources/annee2018/jour15/data.txt");
+	}
+
+	@Override
+	public String run(String input) throws AdventOfCodeException {
+		List<String> liste = FileUtils.listOfLines(input);
 
 		long debut = System.currentTimeMillis();
 		int degatsElfe = 3;
@@ -104,8 +110,8 @@ public class Jour15Exercice2 {
 		System.out.println(degatsElfe);
 		long fin = System.currentTimeMillis();
 		System.out.println("********** Le batch se termine **********");
-		System.out
-				.println("Le batch a dur� : " + DurationFormatUtils.formatDuration(fin - debut, "HH:mm:ss:SSS", true));
+		System.out.println("Le batch a dur� : " + DurationFormatUtils.formatDuration(fin - debut, "HH:mm:ss:SSS", true));
+		return "";
 	}
 
 	private static void afficher(Case[][] map, int round) {

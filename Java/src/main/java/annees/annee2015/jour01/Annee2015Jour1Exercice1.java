@@ -2,6 +2,7 @@ package annees.annee2015.jour01;
 
 import org.apache.commons.lang3.StringUtils;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -12,7 +13,7 @@ public class Annee2015Jour1Exercice1 extends Exercice {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		String arbre = FileUtils.firstLine(input);
 		return String.valueOf(arbre.codePoints().mapToObj(c -> String.valueOf((char) c)).mapToInt(s -> {
 			if (StringUtils.equals(s, "(")) {

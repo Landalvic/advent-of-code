@@ -1,10 +1,11 @@
 package annees.annee2015.jour10;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 
 public abstract class Annee2015Jour10 extends Exercice {
 
-	public String runCommun(String input, int iterations) throws Exception {
+	public String runCommun(String input, int iterations) throws AdventOfCodeException {
 		for (int iteration = 0; iteration < iterations; iteration++) {
 			StringBuilder builder = new StringBuilder();
 			for (int i = 0; i < input.length(); i++) {

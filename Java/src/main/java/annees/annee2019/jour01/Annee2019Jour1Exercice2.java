@@ -1,4 +1,4 @@
-package annees.annee2018.jour01;
+package annees.annee2019.jour01;
 
 import java.util.stream.IntStream;
 
@@ -6,10 +6,10 @@ import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
-public class Annee2018Jour1Exercice1 extends Exercice {
+public class Annee2019Jour1Exercice2 extends Exercice {
 
 	public static void main(String[] args) {
-		new Annee2018Jour1Exercice1().lancer("src/main/resources/annee2018/jour01/data.txt");
+		new Annee2019Jour1Exercice2().lancer("src/main/resources/annee2019/jour01/data.txt");
 	}
 
 	@Override

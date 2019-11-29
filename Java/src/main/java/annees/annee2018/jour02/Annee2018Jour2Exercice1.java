@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -18,7 +19,7 @@ public class Annee2018Jour2Exercice1 extends Exercice {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		Stream<String> stream = FileUtils.streamOfLines(input);
 		AtomicInteger total2Fois = new AtomicInteger(0);
 		AtomicInteger total3Fois = new AtomicInteger(0);

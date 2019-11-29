@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import commun.AdventOfCodeException;
 import util.FileUtils;
 
 public class Annee2015Jour3Exercice2 extends Annee2015Jour3 {
@@ -14,7 +15,7 @@ public class Annee2015Jour3Exercice2 extends Annee2015Jour3 {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		String arbre = FileUtils.firstLine(input);
 		List<Maison> maisons = new ArrayList<>();
 		Maison ancienneMaison = new Maison(0, 0);

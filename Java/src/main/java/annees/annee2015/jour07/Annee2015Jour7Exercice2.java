@@ -1,5 +1,7 @@
 package annees.annee2015.jour07;
 
+import commun.AdventOfCodeException;
+
 public class Annee2015Jour7Exercice2 extends Annee2015Jour7 {
 
 	public static void main(String[] args) {
@@ -7,7 +9,7 @@ public class Annee2015Jour7Exercice2 extends Annee2015Jour7 {
 	}
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		return runCommun(input, Integer.valueOf(runCommun(input, null)));
 	}
 

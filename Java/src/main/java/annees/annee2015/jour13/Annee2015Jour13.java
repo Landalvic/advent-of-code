@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -14,11 +15,10 @@ public abstract class Annee2015Jour13 extends Exercice {
 
 	private static final Pattern personnePattern = Pattern.compile("(.*) would .*");
 	private static final Pattern voisinPattern = Pattern.compile(".* happiness units by sitting next to (.*).");
-	private static final Pattern nombrePattern = Pattern
-			.compile(".*(?:gain|lose) (.*) happiness units by sitting next to .*");
+	private static final Pattern nombrePattern = Pattern.compile(".*(?:gain|lose) (.*) happiness units by sitting next to .*");
 	protected Map<String, Personne> invites = new HashMap<>();
 
-	public void inputToInvites(String input) throws Exception {
+	public void inputToInvites(String input) throws AdventOfCodeException {
 		Stream<String> stream = FileUtils.streamOfLines(input);
 		stream.forEach(string -> {
 			boolean gain = string.contains(" gain ");

@@ -3,6 +3,7 @@ package annees.annee2015.jour06;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -15,7 +16,7 @@ public abstract class Annee2015Jour6 extends Exercice {
 	protected int[][] lumieres = new int[1000][1000];
 
 	@Override
-	public String run(String input) throws Exception {
+	public String run(String input) throws AdventOfCodeException {
 		Stream<String> liste = FileUtils.streamOfLines(input);
 		liste.forEach(string -> allumerLumiere(string));
 		int total = 0;
