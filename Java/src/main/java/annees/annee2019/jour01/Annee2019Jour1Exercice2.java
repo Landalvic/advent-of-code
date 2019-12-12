@@ -1,7 +1,5 @@
 package annees.annee2019.jour01;
 
-import java.util.stream.IntStream;
-
 import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
@@ -14,8 +12,17 @@ public class Annee2019Jour1Exercice2 extends Exercice {
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		IntStream stream = FileUtils.streamOfInt(input);
-		return String.valueOf(stream.sum());
+		var stream = FileUtils.listOfIntegers(input);
+		int total = 0;
+		for (Integer a : stream) {
+			int redux = ((int) (a / 3.0)) - 2;
+			while (redux > 0) {
+				total += redux;
+				redux = ((int) (redux / 3.0)) - 2;
+			}
+		}
+
+		return String.valueOf(total);
 	}
 
 }

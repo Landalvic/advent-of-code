@@ -15,7 +15,8 @@ public class Annee2019Jour1Exercice1 extends Exercice {
 	@Override
 	public String run(String input) throws AdventOfCodeException {
 		IntStream stream = FileUtils.streamOfInt(input);
-		return String.valueOf(stream.sum());
+
+		return String.valueOf(stream.map(a -> ((int) (a / 3.0)) - 2).sum());
 	}
 
 }
