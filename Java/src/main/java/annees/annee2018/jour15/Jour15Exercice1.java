@@ -63,7 +63,7 @@ public class Jour15Exercice1 extends Exercice {
 		int round = 0;
 		boolean fullRound = true;
 		while (fullRound) {
-			// afficher(map, round);
+			afficher(map, round);
 			Collections.sort(personnages);
 			for (int i = 0; i < personnages.size(); i++) {
 				if (!resteEnnemis(personnages)) {
@@ -88,7 +88,7 @@ public class Jour15Exercice1 extends Exercice {
 				round++;
 			}
 		}
-		// afficher(map, round);
+		afficher(map, round);
 		int pvRestants = 0;
 		for (int i = 0; i < personnages.size(); i++) {
 			pvRestants += personnages.get(i).getPv();
