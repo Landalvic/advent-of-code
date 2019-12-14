@@ -63,7 +63,7 @@ public class Annee2019Jour14Exercice2 extends Exercice {
 	private int calculer(List<Reaction> reactions, Map<String, Produit> quantites, String besoin) {
 		Reaction b = chercherResultat(reactions, besoin);
 		AtomicInteger nbrOre = new AtomicInteger();
-		b.getBesoins().parallelStream().forEach(produit -> {
+		for (var produit : b.getBesoins()) {
 			if (StringUtils.equals(produit.getKey(), "ORE")) {
 				nbrOre.addAndGet(produit.getNbr());
 			} else {
@@ -81,7 +81,7 @@ public class Annee2019Jour14Exercice2 extends Exercice {
 					}
 				}
 			}
-		});
+		}
 		Produit quant = chercherQuantite(quantites, b.getResultat().getKey());
 		if (quant == null) {
 			quant = new Produit(b.getResultat().getKey(), 0);
