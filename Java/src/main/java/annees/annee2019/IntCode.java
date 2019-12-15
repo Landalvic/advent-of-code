@@ -45,6 +45,12 @@ public class IntCode {
 		}
 	}
 
+	public Long lancer(Long input) {
+		List<Long> list = new ArrayList<Long>();
+		list.add(input);
+		return lancer(list);
+	}
+
 	public List<Long> lancer(int nbrOutputs) {
 		return lancer(nbrOutputs, new ArrayList<>());
 	}
@@ -53,14 +59,17 @@ public class IntCode {
 		int ipointer = Integer.parseInt(blocs[pointer]);
 		List<Long> outputs = new ArrayList<>();
 		while (!fini) {
-			int opcodePointer = Integer.parseInt(String.valueOf(ipointer).substring(Math.max(String.valueOf(ipointer).length() - 2, 0)));
+			int opcodePointer = Integer
+					.parseInt(String.valueOf(ipointer).substring(Math.max(String.valueOf(ipointer).length() - 2, 0)));
 			int mode1 = 0;
 			if (String.valueOf(ipointer).length() >= 3) {
-				mode1 = Integer.parseInt("" + String.valueOf(ipointer).charAt(Math.max(2 + String.valueOf(ipointer).length() - 5, 0)));
+				mode1 = Integer.parseInt(
+						"" + String.valueOf(ipointer).charAt(Math.max(2 + String.valueOf(ipointer).length() - 5, 0)));
 			}
 			int mode2 = 0;
 			if (String.valueOf(ipointer).length() >= 4) {
-				mode2 = Integer.parseInt("" + String.valueOf(ipointer).charAt(Math.max(1 + String.valueOf(ipointer).length() - 5, 0)));
+				mode2 = Integer.parseInt(
+						"" + String.valueOf(ipointer).charAt(Math.max(1 + String.valueOf(ipointer).length() - 5, 0)));
 			}
 			int mode3 = 0;
 			if (String.valueOf(ipointer).length() >= 5) {
@@ -75,8 +84,8 @@ public class IntCode {
 				valeur1 = Long.parseLong(blocs[Integer.parseInt(blocs[pointer + 1])]);
 			}
 			long valeur2 = 0;
-			if (opcodePointer == 1 || opcodePointer == 2 || opcodePointer == 5 || opcodePointer == 6 || opcodePointer == 7
-					|| opcodePointer == 8) {
+			if (opcodePointer == 1 || opcodePointer == 2 || opcodePointer == 5 || opcodePointer == 6
+					|| opcodePointer == 7 || opcodePointer == 8) {
 				if (mode2 == 1) {
 					valeur2 = Long.parseLong(blocs[pointer + 2]);
 				} else if (mode2 == 2) {

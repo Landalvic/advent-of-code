@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -36,7 +35,7 @@ public class Annee2019Jour14Exercice3 extends Exercice {
 			reactions.add(new Reaction(produits, new Produit(compose[1].trim().split(" "))));
 		}
 		Map<String, Produit> quantites = new HashMap<>();
-		int tailleE = 200000;
+		int tailleE = 50000;
 		long quantiteDepart = 0;
 		for (int i = 1; i <= tailleE; i++) {
 			quantiteDepart += calculer(reactions, quantites, "FUEL");
@@ -47,7 +46,7 @@ public class Annee2019Jour14Exercice3 extends Exercice {
 		System.out.println("echantillon fait");
 		long ores = 1000000000000L;
 
-		int multiplicateur = (int) ((ores / quantiteDepart));
+		int multiplicateur = (int) ((ores / quantiteDepart) * 0.90);
 		long nbrOre = quantiteDepart * multiplicateur;
 		long fois = multiplicateur * tailleE;
 		while (nbrOre < ores) {
@@ -73,10 +72,13 @@ public class Annee2019Jour14Exercice3 extends Exercice {
 
 	private int calculer(List<Reaction> reactions, Map<String, Produit> quantites, String besoin) {
 		Reaction b = chercherResultat(reactions, besoin);
-		AtomicInteger nbrOre = new AtomicInteger();
+		int nbrOre = 0;
 		b.getBesoins().parallelStream().forEach(produit -> {
+
+		});
+		for (Produit produit : b.getBesoins()) {
 			if (StringUtils.equals(produit.getKey(), "ORE")) {
-				nbrOre.addAndGet(produit.getNbr());
+				nbrOre += produit.getNbr();
 			} else {
 				Produit quant = chercherQuantite(quantites, produit.getKey());
 				if (quant == null) {
@@ -88,18 +90,18 @@ public class Annee2019Jour14Exercice3 extends Exercice {
 						quant.setNbr(quant.getNbr() - produit.getNbr());
 						break;
 					} else {
-						nbrOre.addAndGet(calculer(reactions, quantites, produit.getKey()));
+						nbrOre += calculer(reactions, quantites, produit.getKey());
 					}
 				}
 			}
-		});
+		}
 		Produit quant = chercherQuantite(quantites, b.getResultat().getKey());
 		if (quant == null) {
 			quant = new Produit(b.getResultat().getKey(), 0);
 			quantites.put(quant.getKey(), quant);
 		}
 		quant.setNbr(quant.getNbr() + b.getResultat().getNbr());
-		return nbrOre.get();
+		return nbrOre;
 	}
 
 	private Produit chercherQuantite(Map<String, Produit> quantites, String key) {
