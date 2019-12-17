@@ -3,15 +3,16 @@ package annees.annee2019;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IntCode {
+public class IntCodeEssai {
 
 	private int pointer;
 	private int relativeBase;
 	private String programme;
 	private String[] blocs;
 	private boolean fini;
+	private boolean attenteInput;
 
-	public IntCode(String programme) {
+	public IntCodeEssai(String programme) {
 		super();
 		this.programme = programme;
 		init();
@@ -21,7 +22,7 @@ public class IntCode {
 		pointer = 0;
 		relativeBase = 0;
 		var sblocs = programme.split(",");
-		blocs = new String[sblocs.length + 1000000];
+		blocs = new String[sblocs.length + 1000];
 		for (int i = 0; i < blocs.length; i++) {
 			if (i < sblocs.length) {
 				blocs[i] = sblocs[i];
@@ -30,6 +31,7 @@ public class IntCode {
 			}
 		}
 		fini = false;
+		attenteInput = false;
 	}
 
 	public Long lancer() {
@@ -56,9 +58,15 @@ public class IntCode {
 	}
 
 	public List<Long> lancer(int nbrOutputs, List<Long> inputs) {
+		return lancer(nbrOutputs, inputs, null);
+	}
+
+	public List<Long> lancer(int nbrOutputs, List<Long> inputs, Long nbrExecution) {
 		int ipointer = Integer.parseInt(blocs[pointer]);
 		List<Long> outputs = new ArrayList<>();
+		Long etapes = 0L;
 		while (!fini) {
+			etapes++;
 			int opcodePointer = Integer
 					.parseInt(String.valueOf(ipointer).substring(Math.max(String.valueOf(ipointer).length() - 2, 0)));
 			int mode1 = 0;
@@ -113,6 +121,10 @@ public class IntCode {
 				}
 				pointer += 4;
 			} else if (opcodePointer == 3) {
+				if (inputs.isEmpty()) {
+					attenteInput = true;
+					return outputs;
+				}
 				if (mode1 == 2) {
 					blocs[relativeBase + Integer.parseInt(blocs[pointer + 1])] = "" + inputs.remove(0);
 				} else {
@@ -174,6 +186,9 @@ public class IntCode {
 				pointer += 1;
 			}
 			ipointer = Integer.parseInt(blocs[pointer]);
+			if (nbrExecution != null && etapes == nbrExecution.longValue()) {
+				return outputs;
+			}
 		}
 		return outputs;
 	}
