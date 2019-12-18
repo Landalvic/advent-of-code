@@ -25,7 +25,7 @@ public class Annee2019Jour17Exercice2 extends Exercice {
 		map.add(ligneEnCours);
 		int x = 0;
 		int y = 0;
-		Robot robot = null;
+		List<Long> phrase = new ArrayList<Long>();
 		while (!code.isFini()) {
 			Long retour = code.lancer();
 			Case c = new Case(x, y);
@@ -44,91 +44,36 @@ public class Annee2019Jour17Exercice2 extends Exercice {
 				ligneEnCours = new ArrayList<Case>();
 				map.add(ligneEnCours);
 			} else if (retour.intValue() == 94) {
-				robot = new Robot(x, y);
 				c.setEchafaudage(true);
 				ajouterCase(map, ligneEnCours, c);
 				x++;
 			} else if (retour.intValue() == 58) {
 				break;
 			} else {
-				System.out.println(retour);
+				phrase.add(retour);
 			}
 		}
-		var inputs = new ArrayList(Arrays.asList(110L, 10L));
-		Long retour1 = code.lancer(inputs);
-		inputs = new ArrayList(Arrays.asList(65L, 44L, 65L, 44L, 66L, 44L, 66L, 44L, 67L, 44L, 66L, 44L, 67L, 44L, 66L,
-				44L, 67L, 44L, 65L, 10L));
-		retour1 = code.lancer(inputs);
-		while (!code.isFini()) {
-			Long retour = code.lancer();
-			Case c = new Case(x, y);
-			if (retour == null) {
-				break;
-			} else if (retour.intValue() == 58) {
-				break;
-			} else {
-				System.out.println(retour);
-			}
-		}
-		Long retour2 = code.lancer();
-		inputs = new ArrayList(Arrays.asList(76L, 44L, 49L, 48L, 44L, 76L, 44L, 49L, 48L, 44L, 82L, 44L, 54L, 10L));
-		retour1 = code.lancer(inputs);
-		while (!code.isFini()) {
-			Long retour = code.lancer();
-			Case c = new Case(x, y);
-			if (retour == null) {
-				break;
-			} else if (retour.intValue() == 58) {
-				break;
-			} else {
-				System.out.println(retour);
-			}
-		}
-		retour2 = code.lancer();
-		inputs = new ArrayList(
+		System.out.println(code.lireAscii(phrase));
+		var inputs = new ArrayList<>(Arrays.asList(110L, 10L));
+		code.lancer(inputs);
+		inputs = new ArrayList<>(Arrays.asList(65L, 44L, 65L, 44L, 66L, 44L, 66L, 44L, 67L, 44L, 66L, 44L, 67L, 44L,
+				66L, 44L, 67L, 44L, 65L, 10L));
+		var retour3 = code.lancerAttendreInput(inputs);
+		System.out.println(code.lireAscii(retour3));
+		inputs = new ArrayList<>(Arrays.asList(76L, 44L, 49L, 48L, 44L, 76L, 44L, 49L, 48L, 44L, 82L, 44L, 54L, 10L));
+		retour3 = code.lancerAttendreInput(inputs);
+		System.out.println(code.lireAscii(retour3));
+		inputs = new ArrayList<>(
 				Arrays.asList(82L, 44L, 49L, 50L, 44L, 76L, 44L, 49L, 50L, 44L, 76L, 44L, 49L, 50L, 10L));
-		retour1 = code.lancer(inputs);
-		while (!code.isFini()) {
-			Long retour = code.lancer();
-			Case c = new Case(x, y);
-			if (retour == null) {
-				break;
-			} else if (retour.intValue() == 58) {
-				break;
-			} else {
-				System.out.println(retour);
-			}
-		}
-		retour2 = code.lancer();
-		inputs = new ArrayList(Arrays.asList(76L, 44L, 54L, 44L, 76L, 44L, 49L, 48L, 44L, 82L, 44L, 49L, 50L, 44L, 82L,
-				44L, 49L, 50L, 10L));
-		retour1 = code.lancer(inputs);
-		while (!code.isFini()) {
-			Long retour = code.lancer();
-			Case c = new Case(x, y);
-			if (retour == null) {
-				break;
-			} else if (retour.intValue() == 10) {
-				break;
-			} else {
-				System.out.println(retour);
-			}
-		}
-		inputs = new ArrayList(Arrays.asList(110L, 10L));
-		retour1 = code.lancer(inputs);
-		while (!code.isFini()) {
-			Long retour = code.lancer(inputs);
-			Case c = new Case(x, y);
-			if (retour == null) {
-				break;
-			} else if (retour.intValue() == 10) {
-			} else {
-				System.out.println(retour);
-			}
-		}
-		visualiserMap(map, robot);
-
-		return "";
+		retour3 = code.lancerAttendreInput(inputs);
+		System.out.println(code.lireAscii(retour3));
+		inputs = new ArrayList<>(Arrays.asList(76L, 44L, 54L, 44L, 76L, 44L, 49L, 48L, 44L, 82L, 44L, 49L, 50L, 44L,
+				82L, 44L, 49L, 50L, 10L));
+		retour3 = code.lancerAttendreInput(inputs);
+		System.out.println(code.lireAscii(retour3));
+		inputs = new ArrayList<>(Arrays.asList(110L, 10L));
+		retour3 = code.lancerAttendreInput(inputs);
+		return "" + retour3.get(retour3.size() - 1);
 	}
 
 	public void visualiserMap(List<List<Case>> map, Robot robot) {

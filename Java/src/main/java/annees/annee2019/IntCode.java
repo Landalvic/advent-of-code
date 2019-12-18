@@ -45,6 +45,14 @@ public class IntCode {
 		}
 	}
 
+	public List<Long> lancerAttendreInput() {
+		return lancer(Integer.MAX_VALUE, new ArrayList<>());
+	}
+
+	public List<Long> lancerAttendreInput(List<Long> inputs) {
+		return lancer(Integer.MAX_VALUE, inputs);
+	}
+
 	public Long lancer(Long input) {
 		List<Long> list = new ArrayList<Long>();
 		list.add(input);
@@ -113,6 +121,9 @@ public class IntCode {
 				}
 				pointer += 4;
 			} else if (opcodePointer == 3) {
+				if (inputs.isEmpty()) {
+					return outputs;
+				}
 				if (mode1 == 2) {
 					blocs[relativeBase + Integer.parseInt(blocs[pointer + 1])] = "" + inputs.remove(0);
 				} else {
@@ -216,6 +227,22 @@ public class IntCode {
 
 	public void setFini(boolean fini) {
 		this.fini = fini;
+	}
+
+	public List<Long> ecrireAscii(String texte) {
+		List<Long> inputs = new ArrayList<Long>();
+		for (int i = 0; i < texte.length(); i++) {
+			inputs.add((long) texte.charAt(i));
+		}
+		return inputs;
+	}
+
+	public String lireAscii(List<Long> outputs) {
+		StringBuilder s = new StringBuilder();
+		for (Long long1 : outputs) {
+			s.append(Character.toString((char) long1.intValue()));
+		}
+		return s.toString();
 	}
 
 }
