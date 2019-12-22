@@ -21,7 +21,7 @@ public class IntCode {
 		pointer = 0;
 		relativeBase = 0;
 		var sblocs = programme.split(",");
-		blocs = new String[sblocs.length + 1000];
+		blocs = new String[sblocs.length + 1000000];
 		for (int i = 0; i < blocs.length; i++) {
 			if (i < sblocs.length) {
 				blocs[i] = sblocs[i];
@@ -45,6 +45,20 @@ public class IntCode {
 		}
 	}
 
+	public List<Long> lancerAttendreInput() {
+		return lancer(Integer.MAX_VALUE, new ArrayList<>());
+	}
+
+	public List<Long> lancerAttendreInput(List<Long> inputs) {
+		return lancer(Integer.MAX_VALUE, inputs);
+	}
+
+	public Long lancer(Long input) {
+		List<Long> list = new ArrayList<Long>();
+		list.add(input);
+		return lancer(list);
+	}
+
 	public List<Long> lancer(int nbrOutputs) {
 		return lancer(nbrOutputs, new ArrayList<>());
 	}
@@ -53,14 +67,17 @@ public class IntCode {
 		int ipointer = Integer.parseInt(blocs[pointer]);
 		List<Long> outputs = new ArrayList<>();
 		while (!fini) {
-			int opcodePointer = Integer.parseInt(String.valueOf(ipointer).substring(Math.max(String.valueOf(ipointer).length() - 2, 0)));
+			int opcodePointer = Integer
+					.parseInt(String.valueOf(ipointer).substring(Math.max(String.valueOf(ipointer).length() - 2, 0)));
 			int mode1 = 0;
 			if (String.valueOf(ipointer).length() >= 3) {
-				mode1 = Integer.parseInt("" + String.valueOf(ipointer).charAt(Math.max(2 + String.valueOf(ipointer).length() - 5, 0)));
+				mode1 = Integer.parseInt(
+						"" + String.valueOf(ipointer).charAt(Math.max(2 + String.valueOf(ipointer).length() - 5, 0)));
 			}
 			int mode2 = 0;
 			if (String.valueOf(ipointer).length() >= 4) {
-				mode2 = Integer.parseInt("" + String.valueOf(ipointer).charAt(Math.max(1 + String.valueOf(ipointer).length() - 5, 0)));
+				mode2 = Integer.parseInt(
+						"" + String.valueOf(ipointer).charAt(Math.max(1 + String.valueOf(ipointer).length() - 5, 0)));
 			}
 			int mode3 = 0;
 			if (String.valueOf(ipointer).length() >= 5) {
@@ -75,8 +92,8 @@ public class IntCode {
 				valeur1 = Long.parseLong(blocs[Integer.parseInt(blocs[pointer + 1])]);
 			}
 			long valeur2 = 0;
-			if (opcodePointer == 1 || opcodePointer == 2 || opcodePointer == 5 || opcodePointer == 6 || opcodePointer == 7
-					|| opcodePointer == 8) {
+			if (opcodePointer == 1 || opcodePointer == 2 || opcodePointer == 5 || opcodePointer == 6
+					|| opcodePointer == 7 || opcodePointer == 8) {
 				if (mode2 == 1) {
 					valeur2 = Long.parseLong(blocs[pointer + 2]);
 				} else if (mode2 == 2) {
@@ -104,6 +121,9 @@ public class IntCode {
 				}
 				pointer += 4;
 			} else if (opcodePointer == 3) {
+				if (inputs.isEmpty()) {
+					return outputs;
+				}
 				if (mode1 == 2) {
 					blocs[relativeBase + Integer.parseInt(blocs[pointer + 1])] = "" + inputs.remove(0);
 				} else {
@@ -207,6 +227,22 @@ public class IntCode {
 
 	public void setFini(boolean fini) {
 		this.fini = fini;
+	}
+
+	public List<Long> ecrireAscii(String texte) {
+		List<Long> inputs = new ArrayList<Long>();
+		for (int i = 0; i < texte.length(); i++) {
+			inputs.add((long) texte.charAt(i));
+		}
+		return inputs;
+	}
+
+	public String lireAscii(List<Long> outputs) {
+		StringBuilder s = new StringBuilder();
+		for (Long long1 : outputs) {
+			s.append(Character.toString((char) long1.intValue()));
+		}
+		return s.toString();
 	}
 
 }
