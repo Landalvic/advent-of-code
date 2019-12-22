@@ -21,43 +21,34 @@ public class Annee2019Jour22Exercice2 extends Exercice {
 	@Override
 	public String run(String input) throws AdventOfCodeException {
 		var lignes = FileUtils.listOfLines(input);
-		int taille = 39971;
-		int monNombre = 53;
-		int[] cartes = new int[taille];
-		for (int i = 0; i < cartes.length; i++) {
-			cartes[i] = i;
-		}
+		long taille = 119315717514047L;
+		long monNombre = 2020L;
 		List<Operation> operations = new ArrayList<Operation>();
 		for (String string : lignes) {
-			int[] newCartes = new int[taille];
 			var matcher = FileUtils.trouverPatternInt(string, pattern1, 1);
 			var matcher2 = FileUtils.trouverPattern(string, pattern2, 0);
 			var matcher3 = FileUtils.trouverPatternInt(string, pattern3, 1);
 			if (matcher != null) {
 				int increment = matcher[0];
-				for (int i = 0; i < newCartes.length; i++) {
-					newCartes[(i * increment) % cartes.length] = cartes[i];
-				}
 				operations.add(new Increment(increment));
 			} else if (matcher2 != null) {
-				for (int i = 0; i < newCartes.length; i++) {
-					newCartes[i] = cartes[cartes.length - 1 - i];
-				}
+				operations.add(new NewStack());
 			} else if (matcher3 != null) {
 				int cut = matcher3[0];
 				if (cut < 0) {
-					cut += cartes.length;
+					cut += taille;
 				}
-				for (int i = 0; i < newCartes.length; i++) {
-					newCartes[i] = cartes[(i + cut) % cartes.length];
-				}
+				operations.add(new Cut(cut));
 			}
-			cartes = newCartes;
-			System.out.println(cartes[monNombre]);
 		}
-		for (int i = 0; i < 1000; i++) {
-			System.out.print(cartes[i] + "-");
+		for (int i = 0; i < 10000; i++) {
+			monNombre = operations.get(operations.size() - 1).calcul(operations, operations.size() - 1, taille,
+					monNombre);
+			System.out.println(monNombre);
+
 		}
+		System.out.println(
+				operations.get(operations.size() - 1).calcul(operations, operations.size() - 1, taille, monNombre));
 		return "";
 	}
 

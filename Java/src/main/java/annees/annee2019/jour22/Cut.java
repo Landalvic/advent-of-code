@@ -1,5 +1,7 @@
 package annees.annee2019.jour22;
 
+import java.util.List;
+
 public class Cut implements Operation {
 
 	private int cut;
@@ -18,8 +20,9 @@ public class Cut implements Operation {
 	}
 
 	@Override
-	public int calcul(int taille, int monNombre) {
-		return (monNombre + cut + taille) % taille;
+	public long calcul(List<Operation> operations, int index, long taille, long monNombre) {
+		long zone = (monNombre + cut + taille) % taille;
+		return Operation.lancerPrecedenteOperation(operations, index, taille, zone);
 	}
 
 }
