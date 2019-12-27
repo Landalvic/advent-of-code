@@ -3,7 +3,7 @@ package util;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MathUtils {
+public interface MathUtils {
 
 	public static String toHexString(byte[] bytes) {
 		StringBuilder retour = new StringBuilder();

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -22,7 +23,7 @@ public abstract class Annee2018Jour4 extends Exercice {
 		super();
 	}
 
-	protected Collection<Garde> inputToGardes(String input) {
+	protected Collection<Garde> inputToGardes(String input) throws AdventOfCodeException {
 		Stream<String> liste = FileUtils.streamOfLines(input);
 		List<Ligne> lignes = liste.map(this::toLigne).collect(toList());
 

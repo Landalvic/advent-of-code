@@ -14,4 +14,6 @@ public interface Operation {
 
 	long calcul(List<Operation> operations, int index, long taille, long monNombre);
 
+	long reverse(List<Operation> operations, int index, long taille, long monNombre);
+
 }

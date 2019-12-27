@@ -24,7 +24,7 @@ public class Annee2019Jour17Exercice1 extends Exercice {
 		int x = 0;
 		int y = 0;
 		while (!code.isFini()) {
-			Long retour = code.lancer();
+			Long retour = code.lancerFirstOutput();
 			Case c = new Case(x, y);
 			if (retour == null) {
 				break;

@@ -26,7 +26,7 @@ public class Annee2019Jour19Exercice1 extends Exercice {
 			inputs.add(x);
 			inputs.add(y);
 			code.init();
-			Long retour = code.lancer(inputs);
+			Long retour = code.lancerFirstOutput(inputs);
 			nbr += retour;
 			x++;
 			if (x > 49) {

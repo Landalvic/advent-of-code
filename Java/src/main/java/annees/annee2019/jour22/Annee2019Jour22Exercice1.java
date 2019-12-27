@@ -24,37 +24,37 @@ public class Annee2019Jour22Exercice1 extends Exercice {
 		for (int i = 0; i < cartes.length; i++) {
 			cartes[i] = i;
 		}
-		for (String string : lignes) {
-			int[] newCartes = new int[taille];
-			var matcher = FileUtils.trouverPatternInt(string, pattern1, 1);
-			var matcher2 = FileUtils.trouverPattern(string, pattern2, 0);
-			var matcher3 = FileUtils.trouverPatternInt(string, pattern3, 1);
-			if (matcher != null) {
-				int increment = matcher[0];
-				for (int i = 0; i < newCartes.length; i++) {
-					newCartes[(i * increment) % cartes.length] = cartes[i];
+		for (int j = 0; j < 5486; j++) {
+
+			for (String string : lignes) {
+				int[] newCartes = new int[taille];
+				var matcher = FileUtils.trouverPatternInt(string, pattern1, 1);
+				var matcher2 = FileUtils.trouverPattern(string, pattern2, 0);
+				var matcher3 = FileUtils.trouverPatternInt(string, pattern3, 1);
+				if (matcher.length > 0) {
+					int increment = matcher[0];
+					for (int i = 0; i < newCartes.length; i++) {
+						newCartes[(i * increment) % cartes.length] = cartes[i];
+					}
+				} else if (matcher2.length > 0) {
+					for (int i = 0; i < newCartes.length; i++) {
+						newCartes[i] = cartes[cartes.length - 1 - i];
+					}
+				} else if (matcher3.length > 0) {
+					int cut = matcher3[0];
+					if (cut < 0) {
+						cut += cartes.length;
+					}
+					for (int i = 0; i < newCartes.length; i++) {
+						newCartes[i] = cartes[(i + cut) % cartes.length];
+					}
 				}
-			} else if (matcher2 != null) {
-				for (int i = 0; i < newCartes.length; i++) {
-					newCartes[i] = cartes[cartes.length - 1 - i];
-				}
-			} else if (matcher3 != null) {
-				int cut = matcher3[0];
-				if (cut < 0) {
-					cut += cartes.length;
-				}
-				for (int i = 0; i < newCartes.length; i++) {
-					newCartes[i] = cartes[(i + cut) % cartes.length];
-				}
+				cartes = newCartes;
 			}
-			cartes = newCartes;
 		}
 		int position = 0;
 		for (int i : cartes) {
-			System.out.print(i);
-			if (i == 2019) {
-				break;
-			}
+			System.out.println(i);
 			position++;
 		}
 		return "" + position;

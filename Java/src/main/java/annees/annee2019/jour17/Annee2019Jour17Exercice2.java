@@ -27,7 +27,7 @@ public class Annee2019Jour17Exercice2 extends Exercice {
 		int y = 0;
 		List<Long> phrase = new ArrayList<Long>();
 		while (!code.isFini()) {
-			Long retour = code.lancer();
+			Long retour = code.lancerFirstOutput();
 			Case c = new Case(x, y);
 			if (retour == null) {
 				break;

@@ -1,7 +1,6 @@
 package util;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,30 +14,35 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import commun.AdventOfCodeException;
+
 public interface FileUtils {
 
-	public static Stream<String> streamOfLines(String input) {
+	public static boolean exist(String input) {
+		return Files.exists(Paths.get(input));
+	}
+
+	public static Stream<String> streamOfLines(String input) throws AdventOfCodeException {
 		try {
 			return Files.lines(Paths.get(input));
 		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
+			throw new AdventOfCodeException(e.getMessage(), e);
 		}
 	}
 
-	public static String firstLine(String input) {
-		return streamOfLines(input).findFirst().get();
+	public static String firstLine(String input) throws AdventOfCodeException {
+		return streamOfLines(input).findFirst().orElseThrow();
 	}
 
-	public static IntStream streamOfInt(String input) {
+	public static IntStream streamOfInt(String input) throws AdventOfCodeException {
 		return streamOfLines(input).mapToInt(Integer::parseInt);
 	}
 
-	public static List<String> listOfLines(String input) {
+	public static List<String> listOfLines(String input) throws AdventOfCodeException {
 		return streamOfLines(input).collect(Collectors.toList());
 	}
 
-	public static List<Integer> listOfIntegers(String input) {
+	public static List<Integer> listOfIntegers(String input) throws AdventOfCodeException {
 		return streamOfInt(input).boxed().collect(Collectors.toList());
 	}
 
@@ -88,7 +92,7 @@ public interface FileUtils {
 			}
 			return array;
 		} else {
-			return null;
+			return new int[0];
 		}
 	}
 
@@ -101,7 +105,7 @@ public interface FileUtils {
 			}
 			return array;
 		} else {
-			return null;
+			return new String[0];
 		}
 	}
 
@@ -117,21 +121,6 @@ public interface FileUtils {
 	public static boolean findPattern(String string, Pattern pattern) {
 		Matcher m = pattern.matcher(string);
 		return m.matches();
-	}
-
-	public static byte[] inputToByte(InputStream input) {
-		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-		try (InputStream input2 = input) {
-			int nRead;
-			byte[] data = new byte[16384];
-			while ((nRead = input.read(data, 0, data.length)) != -1) {
-				buffer.write(data, 0, nRead);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return buffer.toByteArray();
 	}
 
 }

@@ -10,4 +10,10 @@ public class NewStack implements Operation {
 		return Operation.lancerPrecedenteOperation(operations, index, taille, zone);
 	}
 
+	@Override
+	public long reverse(List<Operation> operations, int index, long taille, long monNombre) {
+		long zone = taille - 1 - monNombre;
+		return Operation.lancerPrecedenteOperation(operations, index, taille, zone);
+	}
+
 }

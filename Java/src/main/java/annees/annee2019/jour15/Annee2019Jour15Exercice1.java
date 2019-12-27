@@ -40,7 +40,7 @@ public class Annee2019Jour15Exercice1 extends Exercice {
 			var chemins = robot.getPosition().deplacement(dest);
 			try {
 				Direction dir = robot.getPosition().getDirection(chemins.get(1));
-				long retour = code.lancer(dir.getIntCode());
+				long retour = code.lancerFirstOutput(dir.getIntCode());
 				if (retour == 0) {
 					chemins.get(1).setMur(true);
 					chemins.get(1).setVerifie(true);

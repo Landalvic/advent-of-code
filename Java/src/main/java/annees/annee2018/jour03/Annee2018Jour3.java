@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import commun.AdventOfCodeException;
 import commun.Exercice;
 import util.FileUtils;
 
@@ -20,7 +21,7 @@ public abstract class Annee2018Jour3 extends Exercice {
 		tissu = new AtomicInteger[1000][1000];
 	}
 
-	protected List<Demande> inputToDemandes(String input) {
+	protected List<Demande> inputToDemandes(String input) throws AdventOfCodeException {
 		Stream<String> liste = FileUtils.streamOfLines(input);
 		return liste.map(this::toDemande).collect(toList());
 	}
