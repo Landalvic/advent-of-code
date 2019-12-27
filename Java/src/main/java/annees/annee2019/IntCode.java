@@ -20,6 +20,17 @@ public class IntCode implements Comparable<IntCode> {
 		init();
 	}
 
+	public IntCode(IntCode code) {
+		super();
+		pointer = code.pointer;
+		relativeBase = code.relativeBase;
+		nbrEtape = code.nbrEtape;
+		programme = code.programme;
+		blocs = Arrays.copyOf(code.blocs, code.blocs.length);
+		fini = code.fini;
+		adresse = code.adresse;
+	}
+
 	public void init() {
 		pointer = 0;
 		relativeBase = 0;
@@ -159,9 +170,7 @@ public class IntCode implements Comparable<IntCode> {
 	}
 
 	public List<Long> lancerAttendreInput(Long input) {
-		List<Long> list = new ArrayList<>();
-		list.add(input);
-		return lancerAttendreInput(list);
+		return lancerAttendreInput(Arrays.asList(input));
 	}
 
 	public List<Long> lancerAttendreInput(List<Long> inputs) {
@@ -173,9 +182,7 @@ public class IntCode implements Comparable<IntCode> {
 	}
 
 	public Long lancerFirstOutput(Long input) {
-		List<Long> list = new ArrayList<>();
-		list.add(input);
-		return lancerFirstOutput(list);
+		return lancerFirstOutput(Arrays.asList(input));
 	}
 
 	public Long lancerFirstOutput(List<Long> inputs) {
@@ -196,9 +203,7 @@ public class IntCode implements Comparable<IntCode> {
 	}
 
 	public List<Long> lancer(Long input) {
-		List<Long> list = new ArrayList<>();
-		list.add(input);
-		return lancer(list);
+		return lancer(Arrays.asList(input));
 	}
 
 	public List<Long> lancer(int nbrOutputs) {
