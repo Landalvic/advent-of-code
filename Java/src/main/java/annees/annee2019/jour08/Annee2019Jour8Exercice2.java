@@ -1,36 +1,25 @@
 package annees.annee2019.jour08;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import commun.AdventOfCodeException;
-import commun.Exercice;
-import util.FileUtils;
 
-public class Annee2019Jour8Exercice2 extends Exercice {
+public class Annee2019Jour8Exercice2 extends Annee2019Jour8 {
 
 	public static void main(String[] args) {
-		new Annee2019Jour8Exercice2().lancer("src/main/resources/annee2019/jour08/data.txt");
+		new Annee2019Jour8Exercice2().lancer(2019, 8, 2, false);
 	}
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		var ligne = FileUtils.firstLine(input);
 		int wide = 25;
 		int tall = 6;
-		List<List<List<Integer>>> pixels = new ArrayList<>();
-		for (int i = 0; i < ligne.length();) {
-			List<List<Integer>> couche = new ArrayList<>();
-			for (int j = 0; j < tall; j++) {
-				List<Integer> couche2 = new ArrayList<>();
-				for (int k = 0; k < wide; k++) {
-					couche2.add(Integer.parseInt("" + ligne.charAt(i)));
-					i++;
-				}
-				couche.add(couche2);
-			}
-			pixels.add(couche);
-		}
+		List<List<List<Integer>>> pixels = inputToImage(input, wide, tall);
+		int[][] image = creerImage(pixels, wide, tall);
+		return afficherMessage(image);
+	}
+
+	private int[][] creerImage(List<List<List<Integer>>> pixels, int wide, int tall) {
 		int[][] image = new int[tall][wide];
 		for (int i = 0; i < tall; i++) {
 			for (int k = 0; k < wide; k++) {
@@ -43,17 +32,22 @@ public class Annee2019Jour8Exercice2 extends Exercice {
 				}
 			}
 		}
+		return image;
+	}
+
+	private String afficherMessage(int[][] image) {
+		var message = new StringBuilder("\n\n");
 		for (int i = 0; i < image.length; i++) {
 			for (int j = 0; j < image[0].length; j++) {
 				if (image[i][j] == 0) {
-					System.out.print(" ");
+					message.append(" ");
 				} else {
-					System.out.print("X");
+					message.append("X");
 				}
 			}
-			System.out.println();
+			message.append("\n");
 		}
-		return "";
+		return message.toString();
 	}
 
 }

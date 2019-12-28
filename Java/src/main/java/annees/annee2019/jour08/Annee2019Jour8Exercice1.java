@@ -1,52 +1,36 @@
 package annees.annee2019.jour08;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import commun.AdventOfCodeException;
-import commun.Exercice;
-import util.FileUtils;
 
-public class Annee2019Jour8Exercice1 extends Exercice {
+public class Annee2019Jour8Exercice1 extends Annee2019Jour8 {
 
 	public static void main(String[] args) {
-		new Annee2019Jour8Exercice1().lancer("src/main/resources/annee2019/jour08/data.txt");
+		new Annee2019Jour8Exercice1().lancer(2019, 8, 1, false);
 	}
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		var ligne = FileUtils.firstLine(input);
 		int wide = 25;
 		int tall = 6;
-		List<List<Integer>> pixels = new ArrayList<>();
-		for (int i = 0; i < ligne.length();) {
-			List<Integer> couche = new ArrayList<>();
-			for (int j = 0; j < tall; j++) {
-				for (int k = 0; k < wide; k++) {
-					couche.add(Integer.parseInt("" + ligne.charAt(i)));
-					i++;
-				}
-			}
-			pixels.add(couche);
-		}
-		System.out.println(pixels);
-		List<Integer> fewest = null;
-		int min = 999999;
+		List<List<Integer>> pixels = inputToImage(input, wide, tall).stream()
+				.map(sousStream -> sousStream.stream().flatMap(List::stream).collect(Collectors.toList()))
+				.collect(Collectors.toList());
+		List<Integer> fewest = Collections.emptyList();
+		int min = Integer.MAX_VALUE;
 		for (List<Integer> list : pixels) {
-			var count = list.stream().filter(i -> i == 0).count();
-			System.out.println(count);
+			var count = list.stream().filter(pixel -> pixel == 0).count();
 			if (min > count) {
 				min = (int) count;
 				fewest = list;
 			}
 		}
-		long nbr1 = fewest.stream().filter(i -> i == 1).count();
-		long nbr2 = fewest.stream().filter(i -> i == 2).count();
-		System.out.println(fewest.stream().filter(i -> i == 0).count());
-		System.out.println(nbr1);
-		System.out.println(nbr2);
-		System.out.println(nbr1 * nbr2);
-		return "";
+		long nbr1 = fewest.stream().filter(pixel -> pixel == 1).count();
+		long nbr2 = fewest.stream().filter(pixel -> pixel == 2).count();
+		return String.valueOf(nbr1 * nbr2);
 	}
 
 }
