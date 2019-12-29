@@ -54,10 +54,8 @@ public class Vecteur {
 	}
 
 	public boolean intersectionSegmentWithoutLimit(Vecteur vecteur) {
-		if (Objects.equals(positionDepart, vecteur.positionDepart)
-				|| Objects.equals(positionDepart, vecteur.positionArrivee)
-				|| Objects.equals(positionArrivee, vecteur.positionDepart)
-				|| Objects.equals(positionArrivee, vecteur.positionArrivee)) {
+		if (Objects.equals(positionDepart, vecteur.positionDepart) || Objects.equals(positionDepart, vecteur.positionArrivee)
+				|| Objects.equals(positionArrivee, vecteur.positionDepart) || Objects.equals(positionArrivee, vecteur.positionArrivee)) {
 			return false;
 		} else {
 			return intersectionSegmentWithLimit(vecteur);
@@ -85,9 +83,8 @@ public class Vecteur {
 	}
 
 	public boolean intersectionLine(Vecteur vecteur) {
-		return Line2D.linesIntersect(positionDepart.getX(), positionDepart.getY(), positionArrivee.getX(),
-				positionArrivee.getY(), vecteur.positionDepart.getX(), vecteur.positionDepart.getY(),
-				vecteur.positionArrivee.getX(), vecteur.positionArrivee.getY());
+		return Line2D.linesIntersect(positionDepart.getX(), positionDepart.getY(), positionArrivee.getX(), positionArrivee.getY(),
+				vecteur.positionDepart.getX(), vecteur.positionDepart.getY(), vecteur.positionArrivee.getX(), vecteur.positionArrivee.getY());
 	}
 
 	public boolean onSegment(Position position) {
@@ -110,8 +107,7 @@ public class Vecteur {
 	}
 
 	public double longueur() {
-		return Math.abs(positionArrivee.getX() - positionDepart.getX())
-				+ Math.abs(positionArrivee.getY() - positionDepart.getY());
+		return positionDepart.distance(positionArrivee);
 	}
 
 	public Position getPositionDepart() {

@@ -25,24 +25,22 @@ public abstract class Annee2019Jour3 extends Exercice {
 			String direction = String.valueOf(wire.charAt(0));
 			int nombre = Integer.parseInt(wire.substring(1));
 			Wire newWire = null;
+			Position position;
 			switch (direction) {
 			case "R":
-				newWire = new Wire(lastPosition, new Position(lastPosition.getX() + nombre, lastPosition.getY()),
-						lastDistance);
+				position = new Position(lastPosition.getX() + nombre, lastPosition.getY());
 				break;
 			case "U":
-				newWire = new Wire(lastPosition, new Position(lastPosition.getX(), lastPosition.getY() + nombre),
-						lastDistance);
+				position = new Position(lastPosition.getX(), lastPosition.getY() + nombre);
 				break;
 			case "L":
-				newWire = new Wire(lastPosition, new Position(lastPosition.getX() - nombre, lastPosition.getY()),
-						lastDistance);
+				position = new Position(lastPosition.getX() - nombre, lastPosition.getY());
 				break;
 			default:
-				newWire = new Wire(lastPosition, new Position(lastPosition.getX(), lastPosition.getY() - nombre),
-						lastDistance);
+				position = new Position(lastPosition.getX(), lastPosition.getY() - nombre);
 				break;
 			}
+			newWire = new Wire(lastPosition, position, lastDistance);
 			lastPosition = newWire.getPositionArrivee();
 			lastDistance += newWire.longueur();
 			wires.add(newWire);

@@ -1,139 +1,39 @@
 package annees.annee2019.jour10;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class Asteroid implements Comparable<Asteroid> {
+import commun.Position;
 
-	private int x;
-	private int y;
-	private int x2;
-	private int y2;
+public class Asteroid {
 
-	public Asteroid(int x, int y) {
+	private Position position;
+	private Integer vision;
+
+	public Asteroid(Position position) {
 		super();
-		this.x = x;
-		this.y = y;
+		this.position = position;
+		vision = null;
 	}
 
-	public int getX2() {
-		return x2;
-	}
-
-	public void setX2(int x2) {
-		this.x2 = x2;
-	}
-
-	public int getY2() {
-		return y2;
-	}
-
-	public void setY2(int y2) {
-		this.y2 = y2;
-	}
-
-	public int calculerVision(Asteroid[][] asteroids) {
-		int calcul = 0;
-		for (int i = 0; i < asteroids.length; i++) {
-			for (int j = 0; j < asteroids[0].length; j++) {
-				if (asteroids[i][j] != null && asteroids[i][j] != this) {
-					boolean test = true;
-					int newX = asteroids[i][j].x - x;
-					int newY = asteroids[i][j].y - y;
-					boolean newXPositif = true;
-					boolean newYPositif = true;
-					if (newX < 0) {
-						newXPositif = false;
-					}
-					if (newY < 0) {
-						newYPositif = false;
-					}
-					a: for (int k = 0; k <= Math.abs(newX); k++) {
-						for (int k2 = 0; k2 <= Math.abs(newY); k2++) {
-							if ((k != Math.abs(newX) || k2 != Math.abs(newY)) && (k != 0 || k2 != 0)
-									&& (newX == 0 || newY == 0 || Math.abs(rapport(newX, k)) == Math.abs(rapport(newY, k2)))) {
-								int posX;
-								if (newXPositif) {
-									posX = x + k;
-								} else {
-									posX = x - k;
-								}
-								int posY;
-								if (newYPositif) {
-									posY = y + k2;
-								} else {
-									posY = y - k2;
-								}
-								if (asteroids[posX][posY] != null) {
-									test = false;
-									break a;
-								}
-							}
-						}
-					}
-					if (test) {
-						calcul++;
-					}
-				}
-			}
+	public int calculerVision(List<Asteroid> asteroids) {
+		if (vision == null) {
+			vision = asteroids.stream().map(asteroid -> asteroid.angle(this)).collect(Collectors.toSet()).size();
 		}
-		return calcul;
+		return vision;
 	}
 
-	public List<Asteroid> listeVision(Asteroid[][] asteroids) {
-		List<Asteroid> liste = new ArrayList<>();
-		for (int i = 0; i < asteroids.length; i++) {
-			for (int j = 0; j < asteroids[0].length; j++) {
-				if (asteroids[i][j] != null && asteroids[i][j] != this) {
-					boolean test = true;
-					int newX = asteroids[i][j].x - x;
-					int newY = asteroids[i][j].y - y;
-					boolean newXPositif = true;
-					boolean newYPositif = true;
-					if (newX < 0) {
-						newXPositif = false;
-					}
-					if (newY < 0) {
-						newYPositif = false;
-					}
-					a: for (int k = 0; k <= Math.abs(newX); k++) {
-						for (int k2 = 0; k2 <= Math.abs(newY); k2++) {
-							if ((k != Math.abs(newX) || k2 != Math.abs(newY)) && (k != 0 || k2 != 0)
-									&& (newX == 0 || newY == 0 || Math.abs(rapport(newX, k)) == Math.abs(rapport(newY, k2)))) {
-								int posX;
-								if (newXPositif) {
-									posX = x + k;
-								} else {
-									posX = x - k;
-								}
-								int posY;
-								if (newYPositif) {
-									posY = y + k2;
-								} else {
-									posY = y - k2;
-								}
-								if (asteroids[posX][posY] != null) {
-									test = false;
-									break a;
-								}
-							}
-						}
-					}
-					if (test) {
-						liste.add(asteroids[i][j]);
-					}
-				}
-			}
-		}
-		return liste;
+	public List<Asteroid> listeVision(List<Asteroid> asteroids) {
+		return asteroids.stream().filter(asteroid -> asteroid != this && !asteroid.vuBloquee(asteroids, this)).collect(Collectors.toList());
 	}
 
-	private static double rapport(int a, int b) {
-		return ((double) a) / b;
+	private boolean vuBloquee(List<Asteroid> asteroids, Asteroid centre) {
+		return asteroids.stream().anyMatch(asteroid -> asteroid != this && asteroid != centre && angle(centre) == asteroid.angle(centre)
+				&& asteroid.getPosition().distance(centre.getPosition()) < position.distance(centre.getPosition()));
 	}
 
-	public double angle() {
-		var angle = Math.atan2(-y2, x2) * (180 / Math.PI);
+	public double angle(Asteroid centre) {
+		var angle = Math.atan2(-(position.getY() - centre.position.getY()), position.getX() - centre.position.getX()) * (180 / Math.PI);
 		angle = (angle + 270) % 360;
 		if (angle == 0) {
 			angle = 360;
@@ -141,30 +41,20 @@ public class Asteroid implements Comparable<Asteroid> {
 		return angle;
 	}
 
-	public int getX() {
-		return x;
+	public Position getPosition() {
+		return position;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setPosition(Position position) {
+		this.position = position;
 	}
 
-	public int getY() {
-		return y;
+	public Integer getVision() {
+		return vision;
 	}
 
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	@Override
-	public String toString() {
-		return "Asteroid [x=" + x + ", y=" + y + "]" + angle();
-	}
-
-	@Override
-	public int compareTo(Asteroid o) {
-		return -Double.compare(angle(), o.angle());
+	public void setVision(Integer vision) {
+		this.vision = vision;
 	}
 
 }

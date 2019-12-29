@@ -12,7 +12,11 @@ public class Position {
 	}
 
 	public double distanceFromCenter() {
-		return Math.abs(x) + Math.abs(y);
+		return distance(new Position(0, 0));
+	}
+
+	public double distance(Position position) {
+		return Math.abs(x - position.x) + Math.abs(y - position.y);
 	}
 
 	public double getX() {
