@@ -1,31 +1,20 @@
 package annees.annee2019.jour11;
 
-import java.util.HashSet;
-import java.util.Set;
+import commun.Direction;
+import commun.Map;
+import commun.Position;
 
 public class Robot {
 
-	private int x;
-	private int y;
+	private Position position;
 	private Direction direction;
 	private int nbrPeinture;
-	private Set<Position> panelsPeints;
 
-	public Robot(int x, int y) {
+	public Robot(Position position) {
 		super();
-		this.x = x;
-		this.y = y;
+		this.position = position;
 		direction = Direction.HAUT;
 		nbrPeinture = 0;
-		panelsPeints = new HashSet<>();
-	}
-
-	public Set<Position> getPanelsPeints() {
-		return panelsPeints;
-	}
-
-	public void setPanelsPeints(Set<Position> panelsPeints) {
-		this.panelsPeints = panelsPeints;
 	}
 
 	public int getNbrPeinture() {
@@ -36,75 +25,29 @@ public class Robot {
 		this.nbrPeinture = nbrPeinture;
 	}
 
-	public void dessiner(int[][] map) {
-		for (int j = 0; j < map.length; j++) {
-			for (int j2 = 0; j2 < map[0].length; j2++) {
-				if (j == getY() && j2 == getX()) {
-					switch (getDirection()) {
-					case HAUT:
-						System.out.print("^");
-						break;
-					case GAUCHE:
-						System.out.print("<");
-						break;
-					case DROITE:
-						System.out.print(">");
-						break;
-					case BAS:
-						System.out.print("v");
-						break;
-					}
-				} else if (map[j2][j] == 0) {
-					System.out.print(".");
-				} else {
-					System.out.print("#");
-				}
-			}
-			System.out.println();
-		}
-	}
-
-	public void jouer(int[][] map, int couleur, int tourner) {
-		if (map[x][y] != couleur) {
+	public void jouer(Map<Peinture> map, int couleur, int tourner) {
+		var case1 = map.getCase(position);
+		if (case1.getCouleur() != couleur) {
 			nbrPeinture++;
 		}
-		panelsPeints.add(new Position(x, y));
-		map[x][y] = couleur;
+		case1.setCouleur(couleur);
 		if (tourner == 0) {
 			direction = direction.tourner(true);
 		} else {
 			direction = direction.tourner(false);
 		}
-		switch (direction) {
-		case HAUT:
-			y += -1;
-			break;
-		case BAS:
-			y += 1;
-			break;
-		case GAUCHE:
-			x += -1;
-			break;
-		case DROITE:
-			x += 1;
-			break;
+		position.bouger(direction);
+		if (map.getCase(position) == null) {
+			map.setCase(new Peinture(position, 0));
 		}
 	}
 
-	public int getX() {
-		return x;
+	public Position getPosition() {
+		return position;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
+	public void setPosition(Position position) {
+		this.position = position;
 	}
 
 	public Direction getDirection() {
@@ -113,11 +56,6 @@ public class Robot {
 
 	public void setDirection(Direction direction) {
 		this.direction = direction;
-	}
-
-	@Override
-	public String toString() {
-		return "Robot [x=" + x + ", y=" + y + ", direction=" + direction + ", nbrPeinture=" + nbrPeinture + "]";
 	}
 
 }

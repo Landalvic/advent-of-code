@@ -34,8 +34,7 @@ public class Hierarchie {
 		return bonChemin;
 	}
 
-	private List<Hierarchie> parcourir(Set<Hierarchie> sousListe, List<Hierarchie> chemin,
-			List<List<Hierarchie>> chemins, Hierarchie destination) {
+	private List<Hierarchie> parcourir(Set<Hierarchie> sousListe, List<Hierarchie> chemin, List<List<Hierarchie>> chemins, Hierarchie destination) {
 		for (Hierarchie o : sousListe) {
 			if (!chemin.contains(o)) {
 				List<Hierarchie> newChemin = new ArrayList<>(chemin);
@@ -89,6 +88,11 @@ public class Hierarchie {
 	public void ajouterEnfant(Hierarchie hierarchie) {
 		enfants.add(hierarchie);
 		hierarchie.parents.add(this);
+	}
+
+	@Override
+	public String toString() {
+		return "Hierarchie [parents=" + parents.size() + ", enfants=" + enfants.size() + "]";
 	}
 
 }
