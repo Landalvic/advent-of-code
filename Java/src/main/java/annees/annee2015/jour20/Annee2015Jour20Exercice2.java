@@ -18,9 +18,9 @@ public class Annee2015Jour20Exercice2 implements Runnable {
 		int total = 0;
 		while (total < input) {
 			numeroMaison++;
-			List<Integer> diviseurs = MathUtils.listeDiviseurs(numeroMaison);
+			List<Long> diviseurs = MathUtils.listeDiviseurs(numeroMaison);
 			total = 0;
-			for (Integer integer : diviseurs) {
+			for (Long integer : diviseurs) {
 				if (numeroMaison / integer <= 50) {
 					total += integer * 11;
 				}

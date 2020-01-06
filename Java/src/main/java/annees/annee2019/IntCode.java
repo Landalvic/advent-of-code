@@ -206,6 +206,10 @@ public class IntCode implements Comparable<IntCode> {
 		return lancer(Arrays.asList(input));
 	}
 
+	public List<Long> lancer(int nbrOutputs, Long input) {
+		return lancer(nbrOutputs, Arrays.asList(input));
+	}
+
 	public List<Long> lancer(int nbrOutputs) {
 		return lancer(nbrOutputs, new ArrayList<>());
 	}
@@ -216,8 +220,7 @@ public class IntCode implements Comparable<IntCode> {
 		List<Long> outputs = new ArrayList<>();
 		while (!fini) {
 			nbrEtape++;
-			int opcodePointer = Integer
-					.parseInt(String.valueOf(ipointer).substring(Math.max(String.valueOf(ipointer).length() - 2, 0)));
+			int opcodePointer = Integer.parseInt(String.valueOf(ipointer).substring(Math.max(String.valueOf(ipointer).length() - 2, 0)));
 			int mode1 = calculerMode1(ipointer);
 			int mode2 = calculerMode2(ipointer);
 			int mode3 = calculerMode3(ipointer);
@@ -363,16 +366,14 @@ public class IntCode implements Comparable<IntCode> {
 
 	private int calculerMode1(int ipointer) {
 		if (String.valueOf(ipointer).length() >= 3) {
-			return Integer.parseInt(String
-					.valueOf(String.valueOf(ipointer).charAt(Math.max(2 + String.valueOf(ipointer).length() - 5, 0))));
+			return Integer.parseInt(String.valueOf(String.valueOf(ipointer).charAt(Math.max(2 + String.valueOf(ipointer).length() - 5, 0))));
 		}
 		return 0;
 	}
 
 	private int calculerMode2(int ipointer) {
 		if (String.valueOf(ipointer).length() >= 4) {
-			return Integer.parseInt(String
-					.valueOf(String.valueOf(ipointer).charAt(Math.max(1 + String.valueOf(ipointer).length() - 5, 0))));
+			return Integer.parseInt(String.valueOf(String.valueOf(ipointer).charAt(Math.max(1 + String.valueOf(ipointer).length() - 5, 0))));
 		}
 		return 0;
 	}
@@ -395,8 +396,7 @@ public class IntCode implements Comparable<IntCode> {
 	}
 
 	private long calculerValeur2(int opcodePointer, int mode2) {
-		if (opcodePointer == 1 || opcodePointer == 2 || opcodePointer == 5 || opcodePointer == 6 || opcodePointer == 7
-				|| opcodePointer == 8) {
+		if (opcodePointer == 1 || opcodePointer == 2 || opcodePointer == 5 || opcodePointer == 6 || opcodePointer == 7 || opcodePointer == 8) {
 			if (mode2 == 1) {
 				return Long.parseLong(getBloc(pointer + 2));
 			} else if (mode2 == 2) {

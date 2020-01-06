@@ -8,7 +8,7 @@ import util.MathUtils;
 public class Annee2019Jour12Exercice2 extends Annee2019Jour12 {
 
 	public static void main(String[] args) {
-		new Annee2019Jour12Exercice2().lancer(2019, 12, 2, true);
+		new Annee2019Jour12Exercice2().lancer(2019, 12, 2, false);
 	}
 
 	@Override

@@ -3,6 +3,9 @@ package commun;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Map<T extends Case> {
 
@@ -136,6 +139,10 @@ public class Map<T extends Case> {
 		return dessiner(null, null);
 	}
 
+	public List<List<T>> getCases() {
+		return cases;
+	}
+
 	public String dessiner(Position position, String replacement) {
 		var builder = new StringBuilder("\n\n");
 		for (int i = minY; i <= maxY; i++) {
@@ -155,6 +162,26 @@ public class Map<T extends Case> {
 			builder.append("\n");
 		}
 		return builder.toString();
+	}
+
+	public Stream<T> streamAllCase() {
+		return cases.stream().flatMap(List::stream).filter(Objects::nonNull);
+	}
+
+	public List<T> listeAllCase() {
+		return streamAllCase().collect(Collectors.toList());
+	}
+
+	public T find(Predicate<T> predicate) {
+		for (int i = minX; i <= maxX; i++) {
+			for (int j = minY; j <= maxY; j++) {
+				T t = getCase(i, j);
+				if (t != null && predicate.test(t)) {
+					return t;
+				}
+			}
+		}
+		return null;
 	}
 
 }
