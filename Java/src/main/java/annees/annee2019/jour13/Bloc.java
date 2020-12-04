@@ -1,23 +1,24 @@
 package annees.annee2019.jour13;
 
 import commun.Case;
+import commun.Map;
 import commun.Position;
 
 public class Bloc extends Case {
 
-	private long value;
+	private long valeur;
 
-	public Bloc(Position position, long value) {
-		super(position);
-		this.value = value;
+	public Bloc(Map<Bloc> map, Position position, long value) {
+		super(map, position);
+		this.valeur = value;
 	}
 
-	public long getValue() {
-		return value;
+	public long getValeur() {
+		return valeur;
 	}
 
-	public void setValue(long value) {
-		this.value = value;
+	public void setValeur(long valeur) {
+		this.valeur = valeur;
 	}
 
 }

@@ -9,13 +9,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 import commun.AdventOfCodeException;
-import commun.Exercice;
 import util.FileUtils;
 
-public class Annee2018Jour2Exercice1 extends Exercice {
+public class Annee2018Jour2Exercice1 extends Annee2018Jour2 {
 
 	public static void main(String[] args) {
-		new Annee2018Jour2Exercice1().lancer("src/main/resources/annee2018/jour02/data.txt");
+		new Annee2018Jour2Exercice1().lancer(2018, 2, 1, false);
 	}
 
 	@Override

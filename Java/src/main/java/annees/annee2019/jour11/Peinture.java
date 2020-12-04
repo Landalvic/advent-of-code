@@ -1,14 +1,15 @@
 package annees.annee2019.jour11;
 
 import commun.Case;
+import commun.Map;
 import commun.Position;
 
 public class Peinture extends Case {
 
 	private int couleur;
 
-	public Peinture(Position position, int couleur) {
-		super(new Position(position));
+	public Peinture(Map<Peinture> peintures, Position position, int couleur) {
+		super(peintures, new Position(position));
 		this.couleur = couleur;
 	}
 

@@ -5,29 +5,29 @@ import commun.Vecteur;
 
 public class Wire extends Vecteur {
 
-	private double distance;
+	private double distanceDepuisDebut;
 
-	public Wire(Position positionDepart, Position positionArrivee, double distance) {
+	public Wire(Position positionDepart, Position positionArrivee, double distanceDepuisDebut) {
 		super(positionDepart, positionArrivee);
-		this.distance = distance;
+		this.distanceDepuisDebut = distanceDepuisDebut;
 	}
 
-	public Wire(double xDepart, double yDepart, double xArrivee, double yArrivee, double distance) {
+	public Wire(double xDepart, double yDepart, double xArrivee, double yArrivee, double distanceDepuisDebut) {
 		super(xDepart, yDepart, xArrivee, yArrivee);
-		this.distance = distance;
+		this.distanceDepuisDebut = distanceDepuisDebut;
 	}
 
 	public double calculDistance(Position intersect) {
 		var vecteur = new Vecteur(getPositionDepart(), intersect);
-		return distance + vecteur.longueur();
+		return distanceDepuisDebut + vecteur.longueur();
 	}
 
-	public double getDistance() {
-		return distance;
+	public double getDistanceDepuisDebut() {
+		return distanceDepuisDebut;
 	}
 
-	public void setDistance(double distance) {
-		this.distance = distance;
+	public void setDistanceDepuisDebut(double distanceDepuisDebut) {
+		this.distanceDepuisDebut = distanceDepuisDebut;
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class Wire extends Vecteur {
 		final int prime = 31;
 		int result = super.hashCode();
 		long temp;
-		temp = Double.doubleToLongBits(distance);
+		temp = Double.doubleToLongBits(distanceDepuisDebut);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
@@ -52,7 +52,7 @@ public class Wire extends Vecteur {
 			return false;
 		}
 		Wire other = (Wire) obj;
-		return Double.doubleToLongBits(distance) == Double.doubleToLongBits(other.distance);
+		return Double.doubleToLongBits(distanceDepuisDebut) == Double.doubleToLongBits(other.distanceDepuisDebut);
 	}
 
 }

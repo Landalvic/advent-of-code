@@ -31,19 +31,23 @@ public class Position {
 	}
 
 	public void bouger(Direction direction) {
+		bouger(direction, 1);
+	}
+
+	public void bouger(Direction direction, int distance) {
 		switch (direction) {
-		case HAUT:
-			y += -1;
-			break;
-		case BAS:
-			y += 1;
-			break;
-		case GAUCHE:
-			x += -1;
-			break;
-		case DROITE:
-			x += 1;
-			break;
+			case HAUT:
+				y += -distance;
+				break;
+			case BAS:
+				y += distance;
+				break;
+			case GAUCHE:
+				x += -distance;
+				break;
+			case DROITE:
+				x += distance;
+				break;
 		}
 	}
 

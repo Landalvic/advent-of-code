@@ -9,15 +9,15 @@ import java.util.stream.Stream;
 
 public class Map<T extends Case> {
 
-	private static final int TAILLE_DEFAUT = 100;
-	private List<List<T>> cases;
-	private int decalageX;
-	private int decalageY;
-	private int minX;
-	private int maxX;
-	private int minY;
-	private int maxY;
-	private int nombreNonNull;
+	protected static final int TAILLE_DEFAUT = 100;
+	protected List<List<T>> cases;
+	protected int decalageX;
+	protected int decalageY;
+	protected int minX;
+	protected int maxX;
+	protected int minY;
+	protected int maxY;
+	protected int nombreNonNull;
 
 	public Map() {
 		this(TAILLE_DEFAUT, TAILLE_DEFAUT);
@@ -45,11 +45,32 @@ public class Map<T extends Case> {
 		for (int i = 0; i < tailleX; i++) {
 			List<T> lignes = new ArrayList<>(tailleY);
 			for (int j = 0; j < tailleY; j++) {
-				lignes.add(null);
+				lignes.add(initCase(this, new Position(i, j)));
 			}
 			liste.add(lignes);
 		}
 		return liste;
+	}
+
+	protected T initCase(Map<? extends Case> map, Position position) {
+		return null;
+	}
+
+	public Case cancelCase(int x, int y) {
+		if (x + decalageX < 0) {
+			return null;
+		}
+		if (x + decalageX >= cases.size()) {
+			return null;
+		}
+		if (y + decalageY < 0) {
+			return null;
+		}
+		if (y + decalageY >= cases.get(0).size()) {
+			return null;
+		}
+		cases.get(x + decalageX).add(y + decalageY, null);
+		return cases.get(x + decalageX).remove(y + decalageY + 1);
 	}
 
 	public void setCase(T t) {

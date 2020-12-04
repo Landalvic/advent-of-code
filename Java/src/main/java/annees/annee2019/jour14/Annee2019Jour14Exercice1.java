@@ -6,45 +6,20 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import commun.AdventOfCodeException;
-import commun.Exercice;
-import util.FileUtils;
 
-public class Annee2019Jour14Exercice1 extends Exercice {
+public class Annee2019Jour14Exercice1 extends Annee2019Jour14 {
 
 	public static void main(String[] args) {
-		new Annee2019Jour14Exercice1().lancer("src/main/resources/annee2019/jour14/data.txt");
+		new Annee2019Jour14Exercice1().lancer(2019, 14, 1, true);
 	}
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		var lignes = FileUtils.listOfLines(input);
-		List<Reaction> reactions = new ArrayList<>();
-		for (String string : lignes) {
-			var compose = string.split("=>");
-			var besoins = compose[0].split(",");
-			List<Produit> produits = new ArrayList<Produit>();
-			for (String string2 : besoins) {
-				var element = string2.trim().split(" ");
-				produits.add(new Produit(element));
-			}
-			reactions.add(new Reaction(produits, new Produit(compose[1].trim().split(" "))));
-		}
-		List<Produit> quantites = new ArrayList<Produit>();
+		List<Reaction> reactions = inputToReactions(input);
+		List<Produit> quantites = new ArrayList<>();
 
 		long quantiteDepart = calculer(reactions, quantites, "FUEL");
-		long ores = 1000000000000L;
-		int multiplicateur = (int) (ores * 0.95 / quantiteDepart);
-		for (Produit produit : quantites) {
-			produit.setNbr(produit.getNbr() * multiplicateur);
-		}
-		long nbrOre = quantiteDepart * multiplicateur;
-		long fois = multiplicateur;
-		while (nbrOre < ores) {
-			nbrOre += (long) calculer(reactions, quantites, "FUEL");
-			fois++;
-		}
-
-		return "" + fois;
+		return "" + quantiteDepart;
 	}
 
 	private int calculer(List<Reaction> reactions, List<Produit> quantites, String besoin) {

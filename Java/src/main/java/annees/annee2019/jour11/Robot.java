@@ -38,7 +38,7 @@ public class Robot {
 		}
 		position.bouger(direction);
 		if (map.getCase(position) == null) {
-			map.setCase(new Peinture(position, 0));
+			map.setCase(new Peinture(map, position, 0));
 		}
 	}
 

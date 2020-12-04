@@ -16,7 +16,7 @@ public abstract class Annee2019Jour11 extends Exercice {
 		var code = new IntCode(programme);
 		var robot = new Robot(new Position(0, 0));
 		Map<Peinture> map = new Map<>();
-		map.setCase(new Peinture(robot.getPosition(), couleurDepart));
+		map.setCase(new Peinture(map, robot.getPosition(), couleurDepart));
 		while (!code.isFini()) {
 			List<Long> instructions = code.lancerAttendreInput((long) map.getCase(robot.getPosition()).getCouleur());
 			robot.jouer(map, instructions.get(0).intValue(), instructions.get(1).intValue());

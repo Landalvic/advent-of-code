@@ -23,10 +23,10 @@ public class Annee2019Jour13Exercice2 extends Annee2019Jour13 {
 				if (liste.get(0).intValue() == -1) {
 					score = liste.get(2).intValue();
 				} else {
-					map.setCase(new Bloc(new Position(liste.get(0).intValue(), liste.get(1).intValue()), liste.get(2).longValue()));
+					map.setCase(new Bloc(map, new Position(liste.get(0).intValue(), liste.get(1).intValue()), liste.get(2).longValue()));
 				}
-				Bloc paddle = map.find(c -> c.getValue() == 3);
-				Bloc ball = map.find(c -> c.getValue() == 4);
+				Bloc paddle = map.find(c -> c.getValeur() == 3);
+				Bloc ball = map.find(c -> c.getValeur() == 4);
 				if (paddle != null && ball != null) {
 					inputPaddle = (long) Double.compare(ball.getPosition().getX(), paddle.getPosition().getX());
 				}

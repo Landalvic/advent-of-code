@@ -4,10 +4,28 @@ public class Case {
 
 	private static final String AFFICHAGE = ".";
 	private Position position;
+	private Map<? extends Case> map;
+	private String value;
 
-	public Case(Position position) {
+	public Case(Map<? extends Case> map, Position position) {
 		super();
+		this.map = map;
 		this.position = position;
+	}
+
+	public Case(Map<? extends Case> map, Position position, String value) {
+		super();
+		this.map = map;
+		this.position = position;
+		this.value = value;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	public Position getPosition() {
@@ -20,6 +38,31 @@ public class Case {
 
 	public String afficher() {
 		return AFFICHAGE;
+	}
+
+	public Case bougerOuRester(Direction direction) {
+		Case bouger = bouger(direction);
+		return bouger == null ? this : bouger;
+	}
+
+	public Case bouger(Direction direction) {
+		switch (direction) {
+			case HAUT:
+				return map.getCase((int) position.getX(), (int) position.getY() - 1);
+			case BAS:
+				return map.getCase((int) position.getX(), (int) position.getY() + 1);
+			case GAUCHE:
+				return map.getCase((int) position.getX() - 1, (int) position.getY());
+			case DROITE:
+				return map.getCase((int) position.getX() + 1, (int) position.getY());
+			default:
+				return null;
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Case [position=" + position + "]";
 	}
 
 	@Override

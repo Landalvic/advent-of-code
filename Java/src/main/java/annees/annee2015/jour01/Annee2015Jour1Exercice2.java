@@ -3,13 +3,12 @@ package annees.annee2015.jour01;
 import org.apache.commons.lang3.StringUtils;
 
 import commun.AdventOfCodeException;
-import commun.Exercice;
 import util.FileUtils;
 
-public class Annee2015Jour1Exercice2 extends Exercice {
+public class Annee2015Jour1Exercice2 extends Annee2015Jour1 {
 
 	public static void main(String[] args) {
-		new Annee2015Jour1Exercice2().lancer("src/main/resources/annee2015/jour01/data.txt");
+		new Annee2015Jour1Exercice2().lancer(2015, 1, 2, false);
 	}
 
 	@Override
@@ -25,7 +24,7 @@ public class Annee2015Jour1Exercice2 extends Exercice {
 			}
 			if (etage == -1) {
 				position = i + 1;
-				break;
+				return String.valueOf(position);
 			}
 		}
 		return String.valueOf(position);

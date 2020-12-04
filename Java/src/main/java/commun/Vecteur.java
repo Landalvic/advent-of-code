@@ -38,7 +38,7 @@ public class Vecteur {
 	}
 
 	public Position pointOfIntersectionSegmentWithoutLimit(Vecteur vecteur) {
-		if (intersectionSegmentWithoutLimit(vecteur)) {
+		if (intersectionSegmentWithoutBord(vecteur)) {
 			return pointOfIntersectionLine(vecteur);
 		} else {
 			return null;
@@ -46,23 +46,23 @@ public class Vecteur {
 	}
 
 	public Position pointOfIntersectionSegmentWithLimit(Vecteur vecteur) {
-		if (intersectionSegmentWithLimit(vecteur)) {
+		if (intersectionSegmentWithBord(vecteur)) {
 			return pointOfIntersectionLine(vecteur);
 		} else {
 			return null;
 		}
 	}
 
-	public boolean intersectionSegmentWithoutLimit(Vecteur vecteur) {
+	public boolean intersectionSegmentWithoutBord(Vecteur vecteur) {
 		if (Objects.equals(positionDepart, vecteur.positionDepart) || Objects.equals(positionDepart, vecteur.positionArrivee)
 				|| Objects.equals(positionArrivee, vecteur.positionDepart) || Objects.equals(positionArrivee, vecteur.positionArrivee)) {
 			return false;
 		} else {
-			return intersectionSegmentWithLimit(vecteur);
+			return intersectionSegmentWithBord(vecteur);
 		}
 	}
 
-	public boolean intersectionSegmentWithLimit(Vecteur vecteur) {
+	public boolean intersectionSegmentWithBord(Vecteur vecteur) {
 		int o1 = orientation(vecteur.positionDepart);
 		int o2 = orientation(vecteur.positionArrivee);
 		int o3 = vecteur.orientation(positionDepart);
