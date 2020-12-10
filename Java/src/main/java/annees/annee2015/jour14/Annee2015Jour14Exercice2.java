@@ -2,7 +2,7 @@ package annees.annee2015.jour14;
 
 import java.util.List;
 
-import commun.AdventOfCodeException;
+import commun.structure.AdventOfCodeException;
 
 public class Annee2015Jour14Exercice2 extends Annee2015Jour14 {
 

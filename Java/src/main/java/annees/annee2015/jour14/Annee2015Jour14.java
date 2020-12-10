@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import commun.AdventOfCodeException;
-import commun.Exercice;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.structure.Exercice;
+import commun.util.FileUtils;
 
 public abstract class Annee2015Jour14 extends Exercice {
 

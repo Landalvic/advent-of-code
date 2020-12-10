@@ -3,9 +3,9 @@ package annees.annee2019.jour21;
 import java.util.List;
 
 import annees.annee2019.IntCode;
-import commun.AdventOfCodeException;
-import commun.Exercice;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.structure.Exercice;
+import commun.util.FileUtils;
 
 public class Annee2019Jour21Exercice2 extends Exercice {
 

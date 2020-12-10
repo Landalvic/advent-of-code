@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import annees.annee2019.IntCode;
-import commun.AdventOfCodeException;
-import commun.Exercice;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.structure.Exercice;
+import commun.util.FileUtils;
 
 public abstract class Annee2019Jour7 extends Exercice {
 

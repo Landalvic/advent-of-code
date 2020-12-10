@@ -2,12 +2,12 @@ package annees.annee2016.jour02;
 
 import java.util.List;
 
-import commun.AdventOfCodeException;
 import commun.Case;
 import commun.Direction;
 import commun.Map;
 import commun.Position;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.util.FileUtils;
 
 public class Annee2016Jour2Exercice2 extends Annee2016Jour2 {
 

@@ -2,8 +2,8 @@ package annees.annee2015.jour01;
 
 import org.apache.commons.lang3.StringUtils;
 
-import commun.AdventOfCodeException;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.util.FileUtils;
 
 public class Annee2015Jour1Exercice1 extends Annee2015Jour1 {
 

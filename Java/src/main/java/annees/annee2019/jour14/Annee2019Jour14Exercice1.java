@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import commun.AdventOfCodeException;
+import commun.structure.AdventOfCodeException;
 
 public class Annee2019Jour14Exercice1 extends Annee2019Jour14 {
 

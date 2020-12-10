@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import commun.AdventOfCodeException;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.util.FileUtils;
 
 public class Annee2018Jour1Exercice2 extends Annee2018Jour1 {
 

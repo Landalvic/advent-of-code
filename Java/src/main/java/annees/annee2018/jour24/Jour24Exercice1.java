@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import util.FileUtils;
+import commun.util.FileUtils;
 
 public class Jour24Exercice1 {
 

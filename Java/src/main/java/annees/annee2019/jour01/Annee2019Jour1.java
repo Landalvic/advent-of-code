@@ -1,6 +1,6 @@
 package annees.annee2019.jour01;
 
-import commun.Exercice;
+import commun.structure.Exercice;
 
 public abstract class Annee2019Jour1 extends Exercice {
 

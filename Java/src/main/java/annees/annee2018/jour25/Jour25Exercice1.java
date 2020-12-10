@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import util.FileUtils;
+import commun.util.FileUtils;
 
 public class Jour25Exercice1 {
 

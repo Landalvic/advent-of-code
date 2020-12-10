@@ -3,7 +3,7 @@ package annees.annee2018.jour08;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.FileUtils;
+import commun.util.FileUtils;
 
 public class Jour8Exercice2 {
 

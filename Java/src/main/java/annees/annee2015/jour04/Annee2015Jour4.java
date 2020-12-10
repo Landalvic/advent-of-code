@@ -2,8 +2,8 @@ package annees.annee2015.jour04;
 
 import java.security.MessageDigest;
 
-import commun.Exercice;
-import util.MathUtils;
+import commun.structure.Exercice;
+import commun.util.MathUtils;
 
 public abstract class Annee2015Jour4 extends Exercice {
 

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import commun.AdventOfCodeException;
-import commun.Exercice;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.structure.Exercice;
+import commun.util.FileUtils;
 
 public class Annee2019Jour16Exercice1 extends Exercice {
 

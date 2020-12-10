@@ -1,10 +1,10 @@
-package commun;
+package commun.structure;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import util.FileUtils;
+import commun.util.FileUtils;
 
 public abstract class Exercice {
 
@@ -12,10 +12,29 @@ public abstract class Exercice {
 	protected long debut;
 	protected boolean test;
 
+	public long getDebut() {
+		return debut;
+	}
+
+	public void setDebut(long debut) {
+		this.debut = debut;
+	}
+
+	public boolean isTest() {
+		return test;
+	}
+
+	public void setTest(boolean test) {
+		this.test = test;
+	}
+
 	public Exercice() {
 		super();
 		this.debut = System.currentTimeMillis();
 		test = false;
+	}
+
+	protected void init() {
 	}
 
 	protected abstract String run(String input) throws AdventOfCodeException;
@@ -43,6 +62,7 @@ public abstract class Exercice {
 
 	protected void tester(String input, int numero) {
 		try {
+			init();
 			var reponse = run(input);
 			logger.info("Test n°{} : {}", numero, reponse);
 		} catch (Exception e) {
@@ -52,6 +72,7 @@ public abstract class Exercice {
 
 	protected void lancer(String input) {
 		try {
+			init();
 			var reponse = run(input);
 			logger.info("{}", reponse);
 		} catch (Exception e) {

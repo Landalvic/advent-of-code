@@ -3,7 +3,7 @@ package annees.annee2018.jour22;
 import java.io.IOException;
 import java.util.List;
 
-import util.FileUtils;
+import commun.util.FileUtils;
 
 public class Jour22Exercice1 {
 

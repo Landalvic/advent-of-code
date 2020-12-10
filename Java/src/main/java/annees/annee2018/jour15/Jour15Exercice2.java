@@ -7,9 +7,9 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
-import commun.AdventOfCodeException;
-import commun.Exercice;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.structure.Exercice;
+import commun.util.FileUtils;
 
 public class Jour15Exercice2 extends Exercice {
 

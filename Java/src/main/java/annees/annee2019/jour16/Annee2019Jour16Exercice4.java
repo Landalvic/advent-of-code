@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.ejml.simple.SimpleMatrix;
 
-import commun.AdventOfCodeException;
-import commun.Exercice;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.structure.Exercice;
+import commun.util.FileUtils;
 
 public class Annee2019Jour16Exercice4 extends Exercice {
 

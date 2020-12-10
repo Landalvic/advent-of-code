@@ -3,9 +3,9 @@ package annees.annee2019.jour08;
 import java.util.ArrayList;
 import java.util.List;
 
-import commun.AdventOfCodeException;
-import commun.Exercice;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.structure.Exercice;
+import commun.util.FileUtils;
 
 public abstract class Annee2019Jour8 extends Exercice {
 

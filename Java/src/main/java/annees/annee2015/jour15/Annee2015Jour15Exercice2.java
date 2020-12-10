@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import util.FileUtils;
+import commun.util.FileUtils;
 
 public class Annee2015Jour15Exercice2 implements Runnable {
 

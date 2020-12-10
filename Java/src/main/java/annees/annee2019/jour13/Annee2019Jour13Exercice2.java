@@ -1,8 +1,8 @@
 package annees.annee2019.jour13;
 
-import commun.AdventOfCodeException;
 import commun.Map;
 import commun.Position;
+import commun.structure.AdventOfCodeException;
 
 public class Annee2019Jour13Exercice2 extends Annee2019Jour13 {
 

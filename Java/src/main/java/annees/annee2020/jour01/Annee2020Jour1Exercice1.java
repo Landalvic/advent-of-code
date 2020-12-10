@@ -2,8 +2,8 @@ package annees.annee2020.jour01;
 
 import java.util.List;
 
-import commun.AdventOfCodeException;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.util.FileUtils;
 
 public class Annee2020Jour1Exercice1 extends Annee2020Jour1 {
 
@@ -21,7 +21,7 @@ public class Annee2020Jour1Exercice1 extends Annee2020Jour1 {
 				}
 			}
 		}
-		return String.valueOf(0);
+		throw new AdventOfCodeException("Aucun élément trouvé");
 	}
 
 }

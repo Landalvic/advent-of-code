@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import util.FileUtils;
+import commun.util.FileUtils;
 
 public class Annee2015Jour19Exercice2 implements Runnable {
 

@@ -2,7 +2,7 @@ package annees.annee2015.jour20;
 
 import java.util.List;
 
-import util.MathUtils;
+import commun.util.MathUtils;
 
 public class Annee2015Jour20Exercice1 implements Runnable {
 

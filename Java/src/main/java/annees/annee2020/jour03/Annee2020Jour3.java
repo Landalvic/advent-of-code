@@ -1,29 +1,24 @@
 package annees.annee2020.jour03;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
+import commun.structure.ExerciceInputToObject;
+import commun.util.StreamUtils;
 
-import commun.AdventOfCodeException;
-import commun.Exercice;
-import util.FileUtils;
+public abstract class Annee2020Jour3 extends ExerciceInputToObject<List<Boolean>> {
 
-public abstract class Annee2020Jour3 extends Exercice {
+	@Override
+	protected void init() {
+	}
 
-	protected boolean[][] genererMap(String input) throws AdventOfCodeException {
-		List<String> liste = FileUtils.listOfLines(input);
-		boolean map[][] = new boolean[liste.size()][liste.get(0).length()];
-		for (int i = 0; i < map.length; i++) {
-			String string = liste.get(i);
-			for (int j = 0; j < string.length(); j++) {
-				if (StringUtils.equals(String.valueOf(string.charAt(j)), ".")) {
-					map[i][j] = false;
-				} else {
-					map[i][j] = true;
-				}
-			}
+	@Override
+	protected List<Boolean> ligneToObject(String ligne) {
+		List<Boolean> ligneBoolean = new ArrayList<>(ligne.length());
+		for (int j = 0; j < ligne.length(); j++) {
+			ligneBoolean.add(!StreamUtils.charEquals(ligne.charAt(j), "."));
 		}
-		return map;
+		return ligneBoolean;
 	}
 
 }

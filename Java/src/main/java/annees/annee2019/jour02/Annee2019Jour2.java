@@ -1,7 +1,7 @@
 package annees.annee2019.jour02;
 
 import annees.annee2019.IntCode;
-import commun.Exercice;
+import commun.structure.Exercice;
 
 public abstract class Annee2019Jour2 extends Exercice {
 

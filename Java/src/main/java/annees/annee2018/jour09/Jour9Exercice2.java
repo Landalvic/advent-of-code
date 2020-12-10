@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.regex.Pattern;
 
-import commun.AdventOfCodeException;
-import commun.Exercice;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.structure.Exercice;
+import commun.util.FileUtils;
 
 public class Jour9Exercice2 extends Exercice {
 

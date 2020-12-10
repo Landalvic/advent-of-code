@@ -1,4 +1,4 @@
-package commun;
+package commun.structure;
 
 public class AdventOfCodeException extends Exception {
 

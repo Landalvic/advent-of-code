@@ -3,9 +3,9 @@ package annees.annee2019.jour06;
 import java.util.HashMap;
 import java.util.Map;
 
-import commun.AdventOfCodeException;
-import commun.Exercice;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.structure.Exercice;
+import commun.util.FileUtils;
 
 public abstract class Annee2019Jour6 extends Exercice {
 

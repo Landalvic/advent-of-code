@@ -1,11 +1,11 @@
 package annees.annee2020.jour02;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 
-import commun.AdventOfCodeException;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.util.StreamUtils;
 
 public class Annee2020Jour2Exercice1 extends Annee2020Jour2 {
 
@@ -15,25 +15,12 @@ public class Annee2020Jour2Exercice1 extends Annee2020Jour2 {
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		List<String> liste = FileUtils.listOfLines(input);
-		int total = 0;
-		for (String string : liste) {
-			String[] blocs = FileUtils.trouverPattern(string, pattern, 4);
-			var nbr = Integer.parseInt(blocs[0]);
-			var nbr2 = Integer.parseInt(blocs[1]);
-			String lettre = blocs[2];
-			String mdp = blocs[3];
-			int count = 0;
-			for (int i = 0; i < mdp.length(); i++) {
-				if (StringUtils.equals(String.valueOf(mdp.charAt(i)), lettre)) {
-					count++;
-				}
-			}
-			if (count >= nbr && count <= nbr2) {
-				total++;
-			}
-		}
-		return String.valueOf(total);
+		Stream<Password> passwords = inputToStreamObject(input);
+		return String.valueOf(passwords.filter(password -> {
+			long count = StreamUtils.chars(password.getMotDePasse())
+					.filter(lettre -> StringUtils.equals(lettre, password.getLettre())).count();
+			return count >= password.getNbrMin() && count <= password.getNbrMax();
+		}).count());
 	}
 
 }

@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import commun.AdventOfCodeException;
-import commun.Exercice;
 import commun.Position;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.structure.Exercice;
+import commun.util.FileUtils;
 
 public abstract class Annee2019Jour10 extends Exercice {
 

@@ -23,7 +23,7 @@ import annees.annee2018.jour16.operations.MulI;
 import annees.annee2018.jour16.operations.MulR;
 import annees.annee2018.jour16.operations.SetI;
 import annees.annee2018.jour16.operations.SetR;
-import util.FileUtils;
+import commun.util.FileUtils;
 
 public class Jour21Exercice1 {
 

@@ -1,6 +1,6 @@
 package annees.annee2019.jour09;
 
-import commun.AdventOfCodeException;
+import commun.structure.AdventOfCodeException;
 
 public class Annee2019Jour9Exercice1 extends Annee2019Jour9 {
 

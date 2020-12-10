@@ -1,11 +1,17 @@
 package annees.annee2020.jour02;
 
-import java.util.regex.Pattern;
+import commun.structure.ExerciceInputToObject;
+import commun.util.FileUtils;
 
-import commun.Exercice;
+public abstract class Annee2020Jour2 extends ExerciceInputToObject<Password> {
 
-public abstract class Annee2020Jour2 extends Exercice {
+	@Override
+	protected void init() {
+	}
 
-	protected static final Pattern pattern = Pattern.compile("(.*)-(.*) (.*): (.*)");
+	@Override
+	protected Password ligneToObject(String ligne) {
+		return FileUtils.transformerPattern(ligne, Password.class);
+	}
 
 }

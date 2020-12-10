@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.FileUtils;
+import commun.util.FileUtils;
 
 public class Jour22Exercice2 {
 

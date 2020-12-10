@@ -2,8 +2,8 @@ package annees.annee2018.jour01;
 
 import java.util.stream.IntStream;
 
-import commun.AdventOfCodeException;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.util.FileUtils;
 
 public class Annee2018Jour1Exercice1 extends Annee2018Jour1 {
 

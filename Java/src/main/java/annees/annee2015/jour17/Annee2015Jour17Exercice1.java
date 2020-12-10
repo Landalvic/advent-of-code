@@ -3,7 +3,7 @@ package annees.annee2015.jour17;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.FileUtils;
+import commun.util.FileUtils;
 
 public class Annee2015Jour17Exercice1 implements Runnable {
 

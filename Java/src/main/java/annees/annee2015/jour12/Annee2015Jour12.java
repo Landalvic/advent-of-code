@@ -3,7 +3,7 @@ package annees.annee2015.jour12;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import commun.Exercice;
+import commun.structure.Exercice;
 
 public abstract class Annee2015Jour12 extends Exercice {
 

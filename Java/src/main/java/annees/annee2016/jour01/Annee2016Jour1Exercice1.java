@@ -2,10 +2,10 @@ package annees.annee2016.jour01;
 
 import org.apache.commons.lang3.StringUtils;
 
-import commun.AdventOfCodeException;
 import commun.Direction;
 import commun.Position;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.util.FileUtils;
 
 public class Annee2016Jour1Exercice1 extends Annee2016Jour1 {
 

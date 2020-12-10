@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import util.FileUtils;
+import commun.util.FileUtils;
 
 public class Jour23Exercice2 {
 

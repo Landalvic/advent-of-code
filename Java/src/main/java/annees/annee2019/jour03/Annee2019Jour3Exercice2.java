@@ -2,8 +2,8 @@ package annees.annee2019.jour03;
 
 import java.util.List;
 
-import commun.AdventOfCodeException;
 import commun.Position;
+import commun.structure.AdventOfCodeException;
 
 public class Annee2019Jour3Exercice2 extends Annee2019Jour3 {
 

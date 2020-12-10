@@ -1,8 +1,8 @@
 package annees.annee2019.jour02;
 
 import annees.annee2019.IntCode;
-import commun.AdventOfCodeException;
-import util.FileUtils;
+import commun.structure.AdventOfCodeException;
+import commun.util.FileUtils;
 
 public class Annee2019Jour2Exercice2 extends Annee2019Jour2 {
 

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import util.FileUtils;
+import commun.util.FileUtils;
 
 public class Jour10Exercice2 {
 
