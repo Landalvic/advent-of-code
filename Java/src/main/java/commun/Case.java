@@ -93,7 +93,7 @@ public class Case {
 
 		List<List<Case>> bonChemin = new ArrayList<>();
 		boolean trouve = false;
-		while (!trouve && chemins.size() != 0) {
+		while (!trouve && !chemins.isEmpty()) {
 			List<List<Case>> newChemins = new ArrayList<>();
 			for (List<Case> chemin : chemins) {
 				for (Case case1 : chemin.get(chemin.size() - 1).getCasesAdjacentes()) {

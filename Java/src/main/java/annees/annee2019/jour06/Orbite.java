@@ -7,7 +7,7 @@ public class Orbite extends Hierarchie {
 	private String code;
 
 	public Orbite(String code) {
-		super();
+		super(null, code);
 		this.code = code;
 	}
 

@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -68,6 +69,22 @@ public interface FileUtils {
 
 	public static List<Double> listOfDoubles(String input) throws AdventOfCodeException {
 		return streamOfDouble(input).boxed().collect(Collectors.toList());
+	}
+
+	public static Set<String> setOfLines(String input) throws AdventOfCodeException {
+		return streamOfLines(input).collect(Collectors.toSet());
+	}
+
+	public static Set<Integer> setOfIntegers(String input) throws AdventOfCodeException {
+		return streamOfInt(input).boxed().collect(Collectors.toSet());
+	}
+
+	public static Set<Long> setOfLongs(String input) throws AdventOfCodeException {
+		return streamOfLong(input).boxed().collect(Collectors.toSet());
+	}
+
+	public static Set<Double> setOfDoubles(String input) throws AdventOfCodeException {
+		return streamOfDouble(input).boxed().collect(Collectors.toSet());
 	}
 
 	public static StringBuilder lireLigne(String lien) {
