@@ -69,12 +69,31 @@ public class Case {
 			return map.getCase((int) position.getX() - 1, (int) position.getY());
 		case DROITE:
 			return map.getCase((int) position.getX() + 1, (int) position.getY());
+		case HAUT_GAUCHE:
+			return map.getCase((int) position.getX() - 1, (int) position.getY() - 1);
+		case HAUT_DROITE:
+			return map.getCase((int) position.getX() + 1, (int) position.getY() - 1);
+		case BAS_GAUCHE:
+			return map.getCase((int) position.getX() - 1, (int) position.getY() + 1);
+		case BAS_DROITE:
+			return map.getCase((int) position.getX() + 1, (int) position.getY() + 1);
 		default:
 			return null;
 		}
 	}
 
 	public List<Case> getCasesAdjacentes() {
+		List<Case> cases = new ArrayList<>();
+		for (Direction direction : Direction.values()) {
+			Case c = bouger(direction);
+			if (c != null) {
+				cases.add(c);
+			}
+		}
+		return cases;
+	}
+
+	public List<Case> getCasesAdjacentesDiag() {
 		List<Case> cases = new ArrayList<>();
 		for (Direction direction : Direction.values()) {
 			Case c = bouger(direction);
