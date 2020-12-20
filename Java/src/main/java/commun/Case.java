@@ -1,30 +1,37 @@
 package commun;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-public class Case {
+public abstract class Case<T extends Case<T>> {
 
 	private static final String AFFICHAGE = ".";
-	private Position position;
-	private Map<? extends Case> map;
-	private String value;
+	protected Position position;
+	private MapCases<T> map;
+	private String id;
 	private boolean mur;
 
-	public Case(Map<? extends Case> map, Position position) {
+	public Case(MapCases<T> map, Position position) {
 		super();
 		this.map = map;
 		this.position = position;
 		mur = false;
 	}
 
-	public Case(Map<? extends Case> map, Position position, String value) {
+	public Case(MapCases<T> map, Position position, String id) {
 		super();
 		this.map = map;
 		this.position = position;
-		this.value = value;
+		this.id = id;
 		mur = false;
 	}
+
+	public abstract T getThis();
 
 	public boolean isMur() {
 		return mur;
@@ -34,12 +41,12 @@ public class Case {
 		this.mur = mur;
 	}
 
-	public String getValue() {
-		return value;
+	public String getId() {
+		return id;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public Position getPosition() {
@@ -54,38 +61,73 @@ public class Case {
 		return AFFICHAGE;
 	}
 
-	public Case bougerOuRester(Direction direction) {
-		Case bouger = bouger(direction);
-		return bouger == null ? this : bouger;
+	public T bougerOuRester(Direction direction) {
+		T bouger = bouger(direction);
+		return bouger == null ? getThis() : bouger;
 	}
 
-	public Case bouger(Direction direction) {
+	public T bouger(Direction direction) {
 		switch (direction) {
-		case HAUT:
-			return map.getCase((int) position.getX(), (int) position.getY() - 1);
-		case BAS:
-			return map.getCase((int) position.getX(), (int) position.getY() + 1);
-		case GAUCHE:
-			return map.getCase((int) position.getX() - 1, (int) position.getY());
-		case DROITE:
-			return map.getCase((int) position.getX() + 1, (int) position.getY());
-		case HAUT_GAUCHE:
-			return map.getCase((int) position.getX() - 1, (int) position.getY() - 1);
-		case HAUT_DROITE:
-			return map.getCase((int) position.getX() + 1, (int) position.getY() - 1);
-		case BAS_GAUCHE:
-			return map.getCase((int) position.getX() - 1, (int) position.getY() + 1);
-		case BAS_DROITE:
-			return map.getCase((int) position.getX() + 1, (int) position.getY() + 1);
-		default:
-			return null;
+			case HAUT:
+				return map.getCase(position.getX(), position.getY() - 1);
+			case BAS:
+				return map.getCase(position.getX(), position.getY() + 1);
+			case GAUCHE:
+				return map.getCase(position.getX() - 1, position.getY());
+			case DROITE:
+				return map.getCase(position.getX() + 1, position.getY());
+			case HAUT_GAUCHE:
+				return map.getCase(position.getX() - 1, position.getY() - 1);
+			case HAUT_DROITE:
+				return map.getCase(position.getX() + 1, position.getY() - 1);
+			case BAS_GAUCHE:
+				return map.getCase(position.getX() - 1, position.getY() + 1);
+			case BAS_DROITE:
+				return map.getCase(position.getX() + 1, position.getY() + 1);
+			default:
+				return null;
 		}
 	}
 
-	public List<Case> getCasesAdjacentes() {
-		List<Case> cases = new ArrayList<>();
-		for (Direction direction : Direction.values()) {
-			Case c = bouger(direction);
+	public Set<T> getCasesAdjacentesNew() {
+		Set<T> cases = new HashSet<>();
+		for (int i = 0; i < position.getCoordonnees().length; i++) {
+			Position p = new Position(position);
+			p.getCoordonnees()[i] += 1;
+			cases.add(map.getCase(p));
+			p.getCoordonnees()[i] -= 2;
+			cases.add(map.getCase(p));
+		}
+		return cases;
+	}
+
+	public Set<T> getCasesAdjacentesDiagNDim() {
+		return getCasesAdjacentesDiagNDim(null);
+	}
+
+	public Set<T> getCasesAdjacentesDiagNDim(Function<Position, T> creation) {
+		Set<Position> positions = new HashSet<>();
+		positions.add(position);
+		for (int i = 0; i < position.getCoordonnees().length; i++) {
+			Set<Position> newPositions = new HashSet<>();
+			for (int j = -1; j <= 1; j++) {
+				for (Position p1 : positions) {
+					Position p = new Position(p1);
+					p.getCoordonnees()[i] += j;
+					newPositions.add(p);
+				}
+			}
+			positions.clear();
+			positions.addAll(newPositions);
+		}
+		positions.remove(position);
+		return positions.stream().map(p -> map.getOrAddCase(p, creation)).filter(Objects::nonNull).collect(Collectors.toSet());
+	}
+
+	public List<T> getCasesAdjacentes() {
+		List<T> cases = new ArrayList<>();
+		for (Direction direction : Direction.listeAxes()) {
+			T c = bouger(direction);
 			if (c != null) {
 				cases.add(c);
 			}
@@ -93,10 +135,10 @@ public class Case {
 		return cases;
 	}
 
-	public List<Case> getCasesAdjacentesDiag() {
-		List<Case> cases = new ArrayList<>();
-		for (Direction direction : Direction.values()) {
-			Case c = bouger(direction);
+	public List<T> getCasesAdjacentesDiag() {
+		List<T> cases = new ArrayList<>();
+		for (Direction direction : Direction.liste8Directions()) {
+			T c = bouger(direction);
 			if (c != null) {
 				cases.add(c);
 			}
@@ -104,33 +146,33 @@ public class Case {
 		return cases;
 	}
 
-	public List<Case> deplacement(Case destination) {
-		List<List<Case>> chemins = new ArrayList<>();
-		List<Case> cheminDepart = new ArrayList<>();
-		cheminDepart.add(this);
+	public List<T> deplacement(T destination) {
+		List<List<T>> chemins = new ArrayList<>();
+		List<T> cheminDepart = new ArrayList<>();
+		cheminDepart.add(getThis());
 		chemins.add(cheminDepart);
 
-		List<List<Case>> bonChemin = new ArrayList<>();
+		List<List<T>> bonChemin = new ArrayList<>();
 		boolean trouve = false;
 		while (!trouve && !chemins.isEmpty()) {
-			List<List<Case>> newChemins = new ArrayList<>();
-			for (List<Case> chemin : chemins) {
-				for (Case case1 : chemin.get(chemin.size() - 1).getCasesAdjacentes()) {
+			List<List<T>> newChemins = new ArrayList<>();
+			for (List<T> chemin : chemins) {
+				for (T case1 : chemin.get(chemin.size() - 1).getCasesAdjacentes()) {
 					if (destination == case1) {
-						List<Case> newChemin = new ArrayList<>(chemin);
+						List<T> newChemin = new ArrayList<>(chemin);
 						newChemin.add(case1);
 						bonChemin.add(newChemin);
 						trouve = true;
 					} else if (!case1.isMur() && !chemin.contains(case1)) {
 						boolean cheminInutile = false;
-						for (Case adj : case1.getCasesAdjacentes()) {
+						for (T adj : case1.getCasesAdjacentes()) {
 							if (adj != chemin.get(chemin.size() - 1) && chemin.contains(adj)) {
 								cheminInutile = true;
 								break;
 							}
 						}
 						if (!cheminInutile) {
-							for (List<Case> cheminAutre : chemins) {
+							for (List<T> cheminAutre : chemins) {
 								if (cheminAutre.contains(case1)) {
 									cheminInutile = true;
 									break;
@@ -138,7 +180,7 @@ public class Case {
 							}
 						}
 						if (!cheminInutile) {
-							for (List<Case> cheminAutre : newChemins) {
+							for (List<T> cheminAutre : newChemins) {
 								if (cheminAutre.get(cheminAutre.size() - 1) == case1) {
 									cheminInutile = true;
 									break;
@@ -146,7 +188,7 @@ public class Case {
 							}
 						}
 						if (!cheminInutile) {
-							List<Case> newChemin = new ArrayList<>(chemin);
+							List<T> newChemin = new ArrayList<>(chemin);
 							newChemin.add(case1);
 							newChemins.add(newChemin);
 						}
@@ -162,38 +204,28 @@ public class Case {
 	}
 
 	@Override
-	public String toString() {
-		return "Case [position=" + position + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((getPosition() == null) ? 0 : getPosition().hashCode());
+		result = prime * result + ((position == null) ? 0 : position.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
 		Case other = (Case) obj;
-		if (getPosition() == null) {
-			if (other.getPosition() != null) {
-				return false;
-			}
-		} else if (!getPosition().equals(other.getPosition())) {
-			return false;
-		}
+		if (position == null) {
+			if (other.position != null) return false;
+		} else if (!position.equals(other.position)) return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Case [position=" + position + "]";
 	}
 
 }

@@ -8,21 +8,22 @@ import commun.structure.AdventOfCodeException;
 public class Annee2019Jour3Exercice2 extends Annee2019Jour3 {
 
 	public static void main(String[] args) {
-		new Annee2019Jour3Exercice2().lancer(2019, 3, 2, false);
+		new Annee2019Jour3Exercice2().lancer(true);
+	}
+
+	public Annee2019Jour3Exercice2() {
+		super(2);
 	}
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		List<List<Wire>> wires = inputToWires(input);
+		List<List<Wire>> wires = inputToListObject(input);
 		double minDistance = Double.MAX_VALUE;
 		for (Wire wire : wires.get(0)) {
 			for (Wire wire2 : wires.get(1)) {
 				Position intersect = wire.pointOfIntersectionSegmentWithoutLimit(wire2);
 				if (intersect != null) {
-					double distance = wire.calculDistance(intersect) + wire2.calculDistance(intersect);
-					if (distance < minDistance) {
-						minDistance = distance;
-					}
+					minDistance = Math.min(wire.calculDistance(intersect) + wire2.calculDistance(intersect), minDistance);
 				}
 			}
 		}

@@ -1,14 +1,14 @@
 package annees.annee2019.jour11;
 
 import commun.Case;
-import commun.Map;
+import commun.MapOld;
 import commun.Position;
 
-public class Peinture extends Case {
+public class Peinture extends Case<Peinture> {
 
 	private int couleur;
 
-	public Peinture(Map<Peinture> peintures, Position position, int couleur) {
+	public Peinture(MapOld<Peinture> peintures, Position position, int couleur) {
 		super(peintures, new Position(position));
 		this.couleur = couleur;
 	}
@@ -45,7 +45,7 @@ public class Peinture extends Case {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Case other = (Case) obj;
+		Peinture other = (Peinture) obj;
 		if (getPosition() == null) {
 			if (other.getPosition() != null) {
 				return false;
@@ -54,6 +54,11 @@ public class Peinture extends Case {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public Peinture getThis() {
+		return this;
 	}
 
 }

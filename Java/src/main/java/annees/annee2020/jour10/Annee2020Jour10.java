@@ -4,8 +4,11 @@ import commun.structure.Exercice;
 
 public abstract class Annee2020Jour10 extends Exercice {
 
-	@Override
-	protected void init() {
+	public Annee2020Jour10(int exercice) {
+		super(2020, 10, exercice);
 	}
+
+	@Override
+	protected void init() {}
 
 }

@@ -4,12 +4,16 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import commun.structure.AdventOfCodeException;
-import commun.util.FileUtils;
+import commun.util.TexteUtils;
 
 public class Annee2020Jour4Exercice2 extends Annee2020Jour4 {
 
 	public static void main(String[] args) {
-		new Annee2020Jour4Exercice2().lancer(2020, 4, 2, true);
+		new Annee2020Jour4Exercice2().lancer(true);
+	}
+
+	public Annee2020Jour4Exercice2() {
+		super(2);
 	}
 
 	@Override
@@ -28,7 +32,7 @@ public class Annee2020Jour4Exercice2 extends Annee2020Jour4 {
 	private boolean gererPasseport(Passeport p) {
 		for (var entry : infos.entrySet()) {
 			if (!p.getInfos().containsKey(entry.getKey())
-					|| !FileUtils.findPattern(p.getInfos().get(entry.getKey()), entry.getValue())) {
+					|| !TexteUtils.findPattern(p.getInfos().get(entry.getKey()), entry.getValue())) {
 				return false;
 			}
 		}

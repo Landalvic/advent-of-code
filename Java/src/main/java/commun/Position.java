@@ -1,33 +1,28 @@
 package commun;
 
+import java.util.Arrays;
+
 public class Position {
 
-	private double x;
-	private double y;
-	private double z;
+	private double[] coordonnees;
 
 	public Position() {
 		super();
 	}
 
-	public Position(double x, double y) {
+	public Position(double... coordonnees) {
 		super();
-		this.x = x;
-		this.y = y;
+		this.coordonnees = coordonnees;
 	}
 
-	public Position(double x, double y, double z) {
+	public Position(int... coordonnees) {
 		super();
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		this.coordonnees = Arrays.stream(coordonnees).mapToDouble(i -> i).toArray();
 	}
 
 	public Position(Position position) {
 		super();
-		x = position.x;
-		y = position.y;
-		z = position.z;
+		coordonnees = position.coordonnees.clone();
 	}
 
 	public void bouger(Direction direction) {
@@ -37,24 +32,40 @@ public class Position {
 	public void bouger(Direction direction, int distance) {
 		switch (direction) {
 			case HAUT:
-				y += -distance;
+				coordonnees[1] += -distance;
 				break;
 			case BAS:
-				y += distance;
+				coordonnees[1] += distance;
 				break;
 			case GAUCHE:
-				x += -distance;
+				coordonnees[0] += -distance;
 				break;
 			case DROITE:
-				x += distance;
+				coordonnees[0] += distance;
+				break;
+			case HAUT_GAUCHE:
+				coordonnees[1] += -distance;
+				coordonnees[0] += -distance;
+				break;
+			case BAS_GAUCHE:
+				coordonnees[1] += distance;
+				coordonnees[0] += -distance;
+				break;
+			case HAUT_DROITE:
+				coordonnees[1] += -distance;
+				coordonnees[0] += distance;
+				break;
+			case BAS_DROITE:
+				coordonnees[1] += distance;
+				coordonnees[0] += distance;
 				break;
 		}
 	}
 
 	public void ajouter(Position position) {
-		x += position.x;
-		y += position.y;
-		z += position.z;
+		for (int i = 0; i < coordonnees.length; i++) {
+			coordonnees[i] += position.coordonnees[i];
+		}
 	}
 
 	public double distanceFromCenter() {
@@ -62,83 +73,90 @@ public class Position {
 	}
 
 	public double distance(Position position) {
-		return Math.abs(x - position.x) + Math.abs(y - position.y) + Math.abs(z - position.z);
+		double distance = 0;
+		for (int i = 0; i < coordonnees.length; i++) {
+			distance += Math.abs(coordonnees[i] - position.coordonnees[i]);
+		}
+		return distance;
+	}
+
+	public double getT() {
+		return coordonnees[3];
+	}
+
+	public void setT(double t) {
+		coordonnees[3] = t;
+	}
+
+	public void addT(double dt) {
+		coordonnees[3] += dt;
 	}
 
 	public double getX() {
-		return x;
+		return coordonnees[0];
 	}
 
 	public void setX(double x) {
-		this.x = x;
+		coordonnees[0] = x;
 	}
 
 	public void addX(double dx) {
-		x += dx;
+		coordonnees[0] += dx;
 	}
 
 	public double getY() {
-		return y;
+		return coordonnees[1];
 	}
 
 	public void setY(double y) {
-		this.y = y;
+		coordonnees[1] = y;
 	}
 
 	public void addY(double dy) {
-		y += dy;
+		coordonnees[1] += dy;
 	}
 
 	public double getZ() {
-		return z;
+		return coordonnees[2];
 	}
 
 	public void setZ(double z) {
-		this.z = z;
+		coordonnees[2] = z;
 	}
 
 	public void addZ(double dz) {
-		z += dz;
+		coordonnees[2] += dz;
+	}
+
+	public double[] getCoordonnees() {
+		return coordonnees;
+	}
+
+	public void setCoordonnees(double[] coordonnees) {
+		this.coordonnees = coordonnees;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(x);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(y);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(z);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + Arrays.hashCode(coordonnees);
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
 		Position other = (Position) obj;
-		if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)) {
-			return false;
-		}
-		if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y)) {
-			return false;
-		}
-		return Double.doubleToLongBits(z) == Double.doubleToLongBits(other.z);
+		if (!Arrays.equals(coordonnees, other.coordonnees)) return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Position [x=" + x + ", y=" + y + ", z=" + z + "]";
+		return "Position [coordonnees=" + Arrays.toString(coordonnees) + "]";
 	}
 
 }

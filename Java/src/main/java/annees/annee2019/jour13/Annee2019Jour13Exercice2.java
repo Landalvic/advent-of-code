@@ -1,6 +1,6 @@
 package annees.annee2019.jour13;
 
-import commun.Map;
+import commun.MapOld;
 import commun.Position;
 import commun.structure.AdventOfCodeException;
 
@@ -14,7 +14,7 @@ public class Annee2019Jour13Exercice2 extends Annee2019Jour13 {
 	public String run(String input) throws AdventOfCodeException {
 		var code = inputToCode(input);
 		code.getBlocs()[0] = "2";
-		Map<Bloc> map = new Map<>();
+		MapOld<Bloc> map = new MapOld<>();
 		long score = 0;
 		Long inputPaddle = null;
 		while (!code.isFini()) {

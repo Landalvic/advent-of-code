@@ -6,6 +6,10 @@ public abstract class Annee2020Jour6 extends ExerciceInputToObject<Groupe> {
 
 	protected Groupe groupes;
 
+	public Annee2020Jour6(int exercice) {
+		super(2020, 6, exercice);
+	}
+
 	@Override
 	protected void init() {
 		groupes = new Groupe();

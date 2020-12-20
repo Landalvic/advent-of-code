@@ -8,9 +8,12 @@ import commun.util.StreamUtils;
 
 public abstract class Annee2020Jour3 extends ExerciceInputToObject<List<Boolean>> {
 
-	@Override
-	protected void init() {
+	public Annee2020Jour3(int exercice) {
+		super(2020, 3, exercice);
 	}
+
+	@Override
+	protected void init() {}
 
 	@Override
 	protected List<Boolean> ligneToObject(String ligne) {

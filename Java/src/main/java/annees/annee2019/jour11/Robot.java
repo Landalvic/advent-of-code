@@ -1,7 +1,7 @@
 package annees.annee2019.jour11;
 
 import commun.Direction;
-import commun.Map;
+import commun.MapOld;
 import commun.Position;
 
 public class Robot {
@@ -25,7 +25,7 @@ public class Robot {
 		this.nbrPeinture = nbrPeinture;
 	}
 
-	public void jouer(Map<Peinture> map, int couleur, int tourner) {
+	public void jouer(MapOld<Peinture> map, int couleur, int tourner) {
 		var case1 = map.getCase(position);
 		if (case1.getCouleur() != couleur) {
 			nbrPeinture++;

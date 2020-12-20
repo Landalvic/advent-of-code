@@ -11,6 +11,18 @@ public abstract class Exercice {
 	protected static final Logger logger = LoggerFactory.getLogger(Exercice.class);
 	protected long debut;
 	protected boolean test;
+	protected int annee;
+	protected int jour;
+	protected int numeroExercice;
+
+	public Exercice(int annee, int jour, int numeroExercice) {
+		super();
+		this.annee = annee;
+		this.jour = jour;
+		this.numeroExercice = numeroExercice;
+		this.debut = System.currentTimeMillis();
+		test = false;
+	}
 
 	public long getDebut() {
 		return debut;
@@ -28,18 +40,15 @@ public abstract class Exercice {
 		this.test = test;
 	}
 
-	public Exercice() {
-		super();
-		this.debut = System.currentTimeMillis();
-		test = false;
-	}
-
-	protected void init() {
-	}
+	protected abstract void init();
 
 	protected abstract String run(String input) throws AdventOfCodeException;
 
-	protected void lancer(int annee, int jour, int exercice, boolean test) {
+	public void lancer(boolean test) {
+		lancer(test, true);
+	}
+
+	public void lancer(boolean test, boolean timer) {
 		this.test = test;
 		String jourStr = String.valueOf(jour);
 		if (jourStr.length() == 1) {
@@ -48,16 +57,16 @@ public abstract class Exercice {
 		String racine = "src/main/resources/annee" + annee + "/jour" + jourStr;
 		if (test) {
 			int numeroTest = 1;
-			String input = racine + "/test" + exercice + "-" + numeroTest + ".txt";
+			String input = racine + "/test" + numeroExercice + "-" + numeroTest + ".txt";
 			while (FileUtils.exist(input)) {
 				tester(input, numeroTest);
 				numeroTest++;
-				input = racine + "/test" + exercice + "-" + numeroTest + ".txt";
+				input = racine + "/test" + numeroExercice + "-" + numeroTest + ".txt";
 			}
 		}
 		this.test = false;
 		String input = racine + "/data.txt";
-		lancer(input);
+		lancer(input, timer);
 	}
 
 	protected void tester(String input, int numero) {
@@ -71,17 +80,23 @@ public abstract class Exercice {
 	}
 
 	protected void lancer(String input) {
+		lancer(input, true);
+	}
+
+	protected void lancer(String input, boolean timer) {
 		try {
 			init();
 			var reponse = run(input);
-			logger.info("{}", reponse);
+			logger.info("Année {} / Jour {} / Exercice {} : {}", annee, jour, numeroExercice, reponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
-		long fin = System.currentTimeMillis();
-		logger.info("********** Le batch se termine **********");
-		var calcul = DurationFormatUtils.formatDuration(fin - debut, "HH:mm:ss:SSS", true);
-		logger.info("Le batch a duré : {}", calcul);
+		if (timer) {
+			long fin = System.currentTimeMillis();
+			logger.info("********** Le batch se termine **********");
+			var calcul = DurationFormatUtils.formatDuration(fin - debut, "HH:mm:ss:SSS", true);
+			logger.info("Le batch a duré : {}", calcul);
+		}
 	}
 
 }

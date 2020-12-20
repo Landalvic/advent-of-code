@@ -7,7 +7,11 @@ import commun.util.FileUtils;
 public class Annee2019Jour2Exercice1 extends Annee2019Jour2 {
 
 	public static void main(String[] args) {
-		new Annee2019Jour2Exercice1().lancer(2019, 2, 1, false);
+		new Annee2019Jour2Exercice1().lancer(true);
+	}
+
+	public Annee2019Jour2Exercice1() {
+		super(1);
 	}
 
 	@Override

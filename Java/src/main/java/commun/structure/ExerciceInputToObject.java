@@ -10,6 +10,10 @@ import commun.util.FileUtils;
 
 public abstract class ExerciceInputToObject<T> extends Exercice {
 
+	public ExerciceInputToObject(int annee, int jour, int exercice) {
+		super(annee, jour, exercice);
+	}
+
 	protected Stream<T> inputToStreamObject(String input) throws AdventOfCodeException {
 		Stream<String> liste = FileUtils.streamOfLines(input);
 		return liste.map(this::ligneToObject);

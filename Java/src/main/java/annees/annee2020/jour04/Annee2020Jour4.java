@@ -11,6 +11,10 @@ public abstract class Annee2020Jour4 extends ExerciceInputToObject<Passeport> {
 	protected Passeport passeport;
 	protected Map<String, Pattern> infos;
 
+	public Annee2020Jour4(int exercice) {
+		super(2020, 4, exercice);
+	}
+
 	@Override
 	protected void init() {
 		passeport = new Passeport();

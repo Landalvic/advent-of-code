@@ -3,7 +3,11 @@ package annees.annee2019.jour04;
 public class Annee2019Jour4Exercice2 extends Annee2019Jour4 {
 
 	public static void main(String[] args) {
-		new Annee2019Jour4Exercice2().lancer(2019, 4, 2, false);
+		new Annee2019Jour4Exercice2().lancer(true);
+	}
+
+	public Annee2019Jour4Exercice2() {
+		super(2);
 	}
 
 	protected boolean respectCritere(int mdp) {

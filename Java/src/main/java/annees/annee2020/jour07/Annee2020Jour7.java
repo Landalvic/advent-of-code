@@ -7,12 +7,16 @@ import org.apache.commons.lang3.StringUtils;
 import commun.Hierarchie;
 import commun.Hierarchies;
 import commun.structure.ExerciceInputToObject;
-import commun.util.FileUtils;
+import commun.util.TexteUtils;
 
 public abstract class Annee2020Jour7 extends ExerciceInputToObject<Hierarchie> {
 
 	protected Pattern pattern;
 	protected Hierarchies hierarchies;
+
+	public Annee2020Jour7(int exercice) {
+		super(2020, 7, exercice);
+	}
 
 	@Override
 	protected void init() {
@@ -22,7 +26,7 @@ public abstract class Annee2020Jour7 extends ExerciceInputToObject<Hierarchie> {
 
 	@Override
 	protected Hierarchie ligneToObject(String ligne) {
-		var blocs = FileUtils.trouverPattern(ligne, pattern, 2);
+		var blocs = TexteUtils.trouverPattern(ligne, pattern, 2);
 		Hierarchie sac = hierarchies.trouverOuAjouter(blocs[0]);
 		if (!StringUtils.equals("no other bags", blocs[1].trim())) {
 			var sblocs = blocs[1].split(",", -1);

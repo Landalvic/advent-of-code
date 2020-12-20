@@ -7,7 +7,11 @@ import commun.structure.AdventOfCodeException;
 public class Annee2020Jour5Exercice2 extends Annee2020Jour5 {
 
 	public static void main(String[] args) {
-		new Annee2020Jour5Exercice2().lancer(2020, 5, 2, false);
+		new Annee2020Jour5Exercice2().lancer(false);
+	}
+
+	public Annee2020Jour5Exercice2() {
+		super(2);
 	}
 
 	@Override

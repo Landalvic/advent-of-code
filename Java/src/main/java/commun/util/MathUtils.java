@@ -1,5 +1,6 @@
 package commun.util;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -19,6 +20,10 @@ public interface MathUtils {
 			retour.append(hex);
 		}
 		return retour.toString();
+	}
+
+	public static long binaryToLong(String s, int base) {
+		return new BigInteger(s, base).longValue();
 	}
 
 	public static long denominateurCommun(long... nombres) {

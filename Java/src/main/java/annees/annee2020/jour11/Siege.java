@@ -5,25 +5,25 @@ import java.util.List;
 
 import commun.Case;
 import commun.Direction;
-import commun.Map;
+import commun.MapCases;
 import commun.Position;
 
-public class Siege extends Case {
+public class Siege extends Case<Siege> {
 
 	private Boolean occupe;
 	private Boolean futurePlace;
 
-	public Siege(Map<? extends Case> map, Position position, Boolean occupe) {
+	public Siege(MapCases<Siege> map, Position position, Boolean occupe) {
 		super(map, position);
 		this.occupe = occupe;
 	}
 
-	public List<Siege> getSiegesVus() {
+	public List<Siege> getSiegesEnVus() {
 		List<Siege> sieges = new ArrayList<>();
 		for (Direction direction : Direction.liste8Directions()) {
-			Siege c = (Siege) bouger(direction);
+			Siege c = bouger(direction);
 			while (c != null && c.getOccupe() == null) {
-				c = (Siege) c.bouger(direction);
+				c = c.bouger(direction);
 			}
 			if (c != null) {
 				sieges.add(c);
@@ -60,28 +60,8 @@ public class Siege extends Case {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((occupe == null) ? 0 : occupe.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Siege other = (Siege) obj;
-		if (occupe == null) {
-			if (other.occupe != null)
-				return false;
-		} else if (!occupe.equals(other.occupe))
-			return false;
-		return true;
+	public Siege getThis() {
+		return this;
 	}
 
 }

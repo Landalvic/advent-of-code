@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Map<T extends Case> {
+public class MapOld<T extends Case<T>> {
 
 	protected static final int TAILLE_DEFAUT = 100;
 	protected List<List<T>> cases;
@@ -19,7 +19,7 @@ public class Map<T extends Case> {
 	protected int maxY;
 	protected int nombreNonNull;
 
-	public Map() {
+	public MapOld() {
 		this(TAILLE_DEFAUT, TAILLE_DEFAUT);
 		decalageX = TAILLE_DEFAUT / 2;
 		decalageY = TAILLE_DEFAUT / 2;
@@ -29,7 +29,7 @@ public class Map<T extends Case> {
 		maxY = 0;
 	}
 
-	public Map(int tailleX, int tailleY) {
+	public MapOld(int tailleX, int tailleY) {
 		super();
 		cases = tableauVide(tailleX, tailleY);
 		decalageX = 0;
@@ -52,11 +52,11 @@ public class Map<T extends Case> {
 		return liste;
 	}
 
-	protected T initCase(Map<? extends Case> map, Position position) {
+	protected T initCase(MapOld<T> map, Position position) {
 		return null;
 	}
 
-	public Case cancelCase(int x, int y) {
+	public T cancelCase(int x, int y) {
 		if (x + decalageX < 0) {
 			return null;
 		}
