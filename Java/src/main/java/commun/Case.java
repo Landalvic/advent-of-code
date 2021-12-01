@@ -11,19 +11,20 @@ import java.util.stream.Collectors;
 public abstract class Case<T extends Case<T>> {
 
 	private static final String AFFICHAGE = ".";
-	protected Position position;
-	private MapCases<T> map;
-	private String id;
-	private boolean mur;
 
-	public Case(MapCases<T> map, Position position) {
+	protected Position position;
+	protected MapCases<T> map;
+	protected String id;
+	protected boolean mur;
+
+	protected Case(MapCases<T> map, Position position) {
 		super();
 		this.map = map;
 		this.position = position;
 		mur = false;
 	}
 
-	public Case(MapCases<T> map, Position position, String id) {
+	protected Case(MapCases<T> map, Position position, String id) {
 		super();
 		this.map = map;
 		this.position = position;
@@ -205,10 +206,7 @@ public abstract class Case<T extends Case<T>> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((position == null) ? 0 : position.hashCode());
-		return result;
+		return Objects.hash(position);
 	}
 
 	@Override
@@ -216,11 +214,8 @@ public abstract class Case<T extends Case<T>> {
 		if (this == obj) return true;
 		if (obj == null) return false;
 		if (getClass() != obj.getClass()) return false;
-		Case other = (Case) obj;
-		if (position == null) {
-			if (other.position != null) return false;
-		} else if (!position.equals(other.position)) return false;
-		return true;
+		Case<?> other = (Case<?>) obj;
+		return Objects.equals(position, other.position);
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public abstract class Annee {
 	protected long debut;
 	protected List<Exercice> exercices;
 
-	public Annee() {
+	protected Annee() {
 		super();
 		this.exercices = new ArrayList<>();
 		this.debut = System.currentTimeMillis();

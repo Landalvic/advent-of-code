@@ -24,16 +24,13 @@ public class ListeBlocs implements Bloc {
 		do {
 			opMax = null;
 			for (int i = 0; i < blocs.size(); i++) {
-				if (blocs.get(i) instanceof Operateur) {
-					Operateur op = (Operateur) blocs.get(i);
-					if (opMax == null || op.getPriority() > opMax.getPriority()) {
-						opMax = op;
-						indexMaxPriority = i;
-					}
+				if (blocs.get(i)instanceof Operateur op && (opMax == null || op.getPriority() > opMax.getPriority())) {
+					opMax = op;
+					indexMaxPriority = i;
 				}
 			}
 			if (opMax != null) {
-				blocs.add(indexMaxPriority - 1, new Valeur(String.valueOf(opMax.calcul(blocs.get(indexMaxPriority - 1).valeur(), blocs.get(indexMaxPriority + 1).valeur()))));
+				blocs.add(indexMaxPriority - 1, new BlocValeur(String.valueOf(opMax.calcul(blocs.get(indexMaxPriority - 1).valeur(), blocs.get(indexMaxPriority + 1).valeur()))));
 				blocs.remove(indexMaxPriority);
 				blocs.remove(indexMaxPriority);
 				blocs.remove(indexMaxPriority);
@@ -66,10 +63,10 @@ public class ListeBlocs implements Bloc {
 			}
 		}
 		if (minProchainOperateur == Integer.MAX_VALUE) {
-			blocs.add(new Valeur(input));
+			blocs.add(new BlocValeur(input));
 			return null;
 		} else {
-			blocs.add(new Valeur(input.substring(0, minProchainOperateur)));
+			blocs.add(new BlocValeur(input.substring(0, minProchainOperateur)));
 			return trouverProchainBloc(input.substring(minProchainOperateur), operateurs);
 		}
 	}

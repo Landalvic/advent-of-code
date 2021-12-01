@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import commun.util.FileUtils;
+import commun.util.TexteUtils;
 
 public class Jour23Exercice2 {
 
@@ -18,10 +19,9 @@ public class Jour23Exercice2 {
 		Position positionMax = new Position(-999999999, -999999999, -999999999);
 		long puissanceMin = 999999999;
 		for (String string : liste) {
-			String[] position = FileUtils.trouverPattern(string, positionPattern).split(",");
-			long rayon = FileUtils.trouverPatternInt(string, rayonPattern);
-			Nanobot nanobot = new Nanobot(Long.valueOf(position[0]), Long.valueOf(position[1]),
-					Long.valueOf(position[2]), rayon);
+			String[] position = TexteUtils.trouverPattern(string, positionPattern).split(",");
+			long rayon = TexteUtils.trouverPatternInt(string, rayonPattern);
+			Nanobot nanobot = new Nanobot(Long.valueOf(position[0]), Long.valueOf(position[1]), Long.valueOf(position[2]), rayon);
 			if (positionMin.getPositionX() > nanobot.getPosition().getPositionX()) {
 				positionMin.setPositionX(nanobot.getPosition().getPositionX());
 			}
@@ -133,10 +133,8 @@ public class Jour23Exercice2 {
 		List<PositionNbrWrapper> meilleursRetour = new ArrayList<>();
 		for (int i = 0; i < meilleursPoints.size(); i++) {
 			Position enCours = meilleursPoints.get(i).getPosition();
-			positionMin = new Position(enCours.getPositionX() - puissanceMin, enCours.getPositionY() - puissanceMin,
-					enCours.getPositionZ() - puissanceMin);
-			positionMax = new Position(enCours.getPositionX() + puissanceMin, enCours.getPositionY() + puissanceMin,
-					enCours.getPositionZ() + puissanceMin);
+			positionMin = new Position(enCours.getPositionX() - puissanceMin, enCours.getPositionY() - puissanceMin, enCours.getPositionZ() - puissanceMin);
+			positionMax = new Position(enCours.getPositionX() + puissanceMin, enCours.getPositionY() + puissanceMin, enCours.getPositionZ() + puissanceMin);
 			meilleursRetour.addAll(calcul(positionMin, positionMax, nanobots, newPuissanceMin));
 		}
 		return meilleursRetour;

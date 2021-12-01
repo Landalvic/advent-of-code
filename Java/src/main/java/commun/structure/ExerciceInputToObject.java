@@ -10,7 +10,7 @@ import commun.util.FileUtils;
 
 public abstract class ExerciceInputToObject<T> extends Exercice {
 
-	public ExerciceInputToObject(int annee, int jour, int exercice) {
+	protected ExerciceInputToObject(int annee, int jour, int exercice) {
 		super(annee, jour, exercice);
 	}
 
@@ -24,11 +24,11 @@ public abstract class ExerciceInputToObject<T> extends Exercice {
 	}
 
 	protected List<T> inputToListObject(String input) throws AdventOfCodeException {
-		return inputToStreamObject(input).collect(Collectors.toList());
+		return inputToStreamObject(input).toList();
 	}
 
 	protected List<T> inputToListObjectNotNull(String input) throws AdventOfCodeException {
-		return inputToStreamObjectNotNull(input).collect(Collectors.toList());
+		return inputToStreamObjectNotNull(input).toList();
 	}
 
 	protected Set<T> inputToSetObject(String input) throws AdventOfCodeException {

@@ -1,11 +1,13 @@
 package commun.calculatrice;
 
+import java.util.Objects;
+
 public abstract class Operateur implements Bloc, Comparable<Operateur> {
 
-	private String code;
-	private int priority;
+	protected String code;
+	protected int priority;
 
-	public Operateur(String code, int priority) {
+	protected Operateur(String code, int priority) {
 		super();
 		this.code = code;
 		this.priority = priority;
@@ -36,10 +38,7 @@ public abstract class Operateur implements Bloc, Comparable<Operateur> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		return result;
+		return Objects.hash(code);
 	}
 
 	@Override
@@ -48,10 +47,7 @@ public abstract class Operateur implements Bloc, Comparable<Operateur> {
 		if (obj == null) return false;
 		if (getClass() != obj.getClass()) return false;
 		Operateur other = (Operateur) obj;
-		if (code == null) {
-			if (other.code != null) return false;
-		} else if (!code.equals(other.code)) return false;
-		return true;
+		return Objects.equals(code, other.code);
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import commun.util.FileUtils;
+import commun.util.TexteUtils;
 
 public class Jour23Exercice1 {
 
@@ -15,10 +16,9 @@ public class Jour23Exercice1 {
 		List<Nanobot> nanobots = new ArrayList<>(liste.size());
 		Nanobot nanobotPlusPuissant = new Nanobot(0, 0, 0, 0);
 		for (String string : liste) {
-			String[] position = FileUtils.trouverPattern(string, positionPattern).split(",");
-			int rayon = FileUtils.trouverPatternInt(string, rayonPattern);
-			Nanobot nanobot = new Nanobot(Integer.valueOf(position[0]), Integer.valueOf(position[1]),
-					Integer.valueOf(position[2]), rayon);
+			String[] position = TexteUtils.trouverPattern(string, positionPattern).split(",");
+			int rayon = TexteUtils.trouverPatternInt(string, rayonPattern);
+			Nanobot nanobot = new Nanobot(Integer.valueOf(position[0]), Integer.valueOf(position[1]), Integer.valueOf(position[2]), rayon);
 			nanobots.add(nanobot);
 			if (nanobotPlusPuissant.getPuissanceSignal() < nanobot.getPuissanceSignal()) {
 				nanobotPlusPuissant = nanobot;

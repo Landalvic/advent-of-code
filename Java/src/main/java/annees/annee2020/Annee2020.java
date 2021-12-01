@@ -36,6 +36,10 @@ import commun.structure.Annee;
 
 public class Annee2020 extends Annee {
 
+	public static void main(String[] args) {
+		new Annee2020().lancer();
+	}
+
 	public Annee2020() {
 		super();
 		exercices.add(new Annee2020Jour1Exercice1());
@@ -70,10 +74,6 @@ public class Annee2020 extends Annee {
 		exercices.add(new Annee2020Jour15Exercice2());
 		exercices.add(new Annee2020Jour16Exercice1());
 		exercices.add(new Annee2020Jour16Exercice2());
-	}
-
-	public static void main(String[] args) {
-		new Annee2020().lancer();
 	}
 
 }

@@ -138,10 +138,7 @@ public class Position {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(coordonnees);
-		return result;
+		return Arrays.hashCode(coordonnees);
 	}
 
 	@Override
@@ -150,8 +147,7 @@ public class Position {
 		if (obj == null) return false;
 		if (getClass() != obj.getClass()) return false;
 		Position other = (Position) obj;
-		if (!Arrays.equals(coordonnees, other.coordonnees)) return false;
-		return true;
+		return Arrays.equals(coordonnees, other.coordonnees);
 	}
 
 	@Override

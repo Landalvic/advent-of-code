@@ -8,7 +8,7 @@ import commun.util.FileUtils;
 
 public abstract class ExerciceInputToMap<T extends Case<T>> extends Exercice {
 
-	public ExerciceInputToMap(int annee, int jour, int numeroExercice) {
+	protected ExerciceInputToMap(int annee, int jour, int numeroExercice) {
 		super(annee, jour, numeroExercice);
 	}
 

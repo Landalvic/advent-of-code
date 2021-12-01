@@ -83,8 +83,8 @@ public class Vecteur {
 	}
 
 	public boolean intersectionLine(Vecteur vecteur) {
-		return Line2D.linesIntersect(positionDepart.getX(), positionDepart.getY(), positionArrivee.getX(), positionArrivee.getY(),
-				vecteur.positionDepart.getX(), vecteur.positionDepart.getY(), vecteur.positionArrivee.getX(), vecteur.positionArrivee.getY());
+		return Line2D.linesIntersect(positionDepart.getX(), positionDepart.getY(), positionArrivee.getX(), positionArrivee.getY(), vecteur.positionDepart
+				.getX(), vecteur.positionDepart.getY(), vecteur.positionArrivee.getX(), vecteur.positionArrivee.getY());
 	}
 
 	public boolean onSegment(Position position) {
@@ -128,36 +128,16 @@ public class Vecteur {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((positionArrivee == null) ? 0 : positionArrivee.hashCode());
-		result = prime * result + ((positionDepart == null) ? 0 : positionDepart.hashCode());
-		return result;
+		return Objects.hash(positionDepart, positionArrivee);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
 		Vecteur other = (Vecteur) obj;
-		if (positionArrivee == null) {
-			if (other.positionArrivee != null)
-				return false;
-		} else if (!positionArrivee.equals(other.positionArrivee)) {
-			return false;
-		}
-		if (positionDepart == null) {
-			if (other.positionDepart != null) {
-				return false;
-			}
-		} else if (!positionDepart.equals(other.positionDepart)) {
-			return false;
-		}
-		return true;
+		return Objects.equals(positionDepart, other.positionDepart) && Objects.equals(positionArrivee, other.positionArrivee);
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import commun.structure.Exercice;
 
 public abstract class Annee2020Jour1 extends Exercice {
 
-	public Annee2020Jour1(int exercice) {
+	protected Annee2020Jour1(int exercice) {
 		super(2020, 1, exercice);
 	}
 

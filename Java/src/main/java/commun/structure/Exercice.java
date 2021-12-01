@@ -15,7 +15,7 @@ public abstract class Exercice {
 	protected int jour;
 	protected int numeroExercice;
 
-	public Exercice(int annee, int jour, int numeroExercice) {
+	protected Exercice(int annee, int jour, int numeroExercice) {
 		super();
 		this.annee = annee;
 		this.jour = jour;

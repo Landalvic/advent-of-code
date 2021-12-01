@@ -48,19 +48,19 @@ public interface FileUtils {
 	}
 
 	public static List<String> listOfLines(String input) throws AdventOfCodeException {
-		return streamOfLines(input).collect(Collectors.toList());
+		return streamOfLines(input).toList();
 	}
 
 	public static List<Integer> listOfIntegers(String input) throws AdventOfCodeException {
-		return streamOfInt(input).boxed().collect(Collectors.toList());
+		return streamOfInt(input).boxed().toList();
 	}
 
 	public static List<Long> listOfLongs(String input) throws AdventOfCodeException {
-		return streamOfLong(input).boxed().collect(Collectors.toList());
+		return streamOfLong(input).boxed().toList();
 	}
 
 	public static List<Double> listOfDoubles(String input) throws AdventOfCodeException {
-		return streamOfDouble(input).boxed().collect(Collectors.toList());
+		return streamOfDouble(input).boxed().toList();
 	}
 
 	public static Set<String> setOfLines(String input) throws AdventOfCodeException {

@@ -1,10 +1,10 @@
 package commun.calculatrice;
 
-public class Valeur implements Bloc {
+public class BlocValeur implements Bloc {
 
 	private String valeur;
 
-	public Valeur(String valeur) {
+	public BlocValeur(String valeur) {
 		super();
 		this.valeur = valeur;
 	}

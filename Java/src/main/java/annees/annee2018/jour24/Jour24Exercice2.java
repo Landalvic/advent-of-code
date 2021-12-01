@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 import commun.util.FileUtils;
+import commun.util.TexteUtils;
 
 public class Jour24Exercice2 {
 
@@ -29,23 +30,22 @@ public class Jour24Exercice2 {
 			} else if (StringUtils.equals(string, "Immune System:")) {
 				systemeImmunitaire = true;
 			} else if (StringUtils.isNotEmpty(string)) {
-				int nbrUnites = FileUtils.trouverPatternInt(string, nombrePattern);
-				int pv = FileUtils.trouverPatternInt(string, pvPattern);
-				int attaque = FileUtils.trouverPatternInt(string, attaquePattern);
-				int initiative = FileUtils.trouverPatternInt(string, initiativePattern);
-				TypeAttaque typeAttaque = TypeAttaque.fromId(FileUtils.trouverPattern(string, typeAttaquePattern));
-				String test = FileUtils.trouverPattern(string, immunitesPattern);
+				int nbrUnites = TexteUtils.trouverPatternInt(string, nombrePattern);
+				int pv = TexteUtils.trouverPatternInt(string, pvPattern);
+				int attaque = TexteUtils.trouverPatternInt(string, attaquePattern);
+				int initiative = TexteUtils.trouverPatternInt(string, initiativePattern);
+				TypeAttaque typeAttaque = TypeAttaque.fromId(TexteUtils.trouverPattern(string, typeAttaquePattern));
+				String test = TexteUtils.trouverPattern(string, immunitesPattern);
 				List<TypeAttaque> immunites = new ArrayList<>();
 				if (test != null) {
 					immunites = TypeAttaque.fromId(test.split(","));
 				}
-				test = FileUtils.trouverPattern(string, faiblessesPattern);
+				test = TexteUtils.trouverPattern(string, faiblessesPattern);
 				List<TypeAttaque> faiblesses = new ArrayList<>();
 				if (test != null) {
 					faiblesses = TypeAttaque.fromId(test.split(","));
 				}
-				Groupe groupe = new Groupe(systemeImmunitaire, nbrUnites, pv, attaque, typeAttaque, initiative,
-						immunites, faiblesses);
+				Groupe groupe = new Groupe(systemeImmunitaire, nbrUnites, pv, attaque, typeAttaque, initiative, immunites, faiblesses);
 				groupes.add(groupe);
 			}
 		}
@@ -69,6 +69,7 @@ public class Jour24Exercice2 {
 					groupe.initialiserTour();
 				}
 				Collections.sort(groupes, new Comparator<Groupe>() {
+
 					@Override
 					public int compare(Groupe o1, Groupe o2) {
 						return -Integer.compare(o1.puissanceEffective(), o2.puissanceEffective());
@@ -80,6 +81,7 @@ public class Jour24Exercice2 {
 					}
 				}
 				Collections.sort(groupes, new Comparator<Groupe>() {
+
 					@Override
 					public int compare(Groupe o1, Groupe o2) {
 						return -Integer.compare(o1.getInitiative(), o2.getInitiative());
