@@ -40,7 +40,7 @@ public abstract class Exercice {
 		this.test = test;
 	}
 
-	protected abstract void init();
+	protected void init() {}
 
 	protected abstract String run(String input) throws AdventOfCodeException;
 

@@ -14,7 +14,11 @@ import commun.util.FileUtils;
 public class Annee2018Jour2Exercice1 extends Annee2018Jour2 {
 
 	public static void main(String[] args) {
-		new Annee2018Jour2Exercice1().lancer(2018, 2, 1, false);
+		new Annee2018Jour2Exercice1().lancer(true);
+	}
+
+	public Annee2018Jour2Exercice1() {
+		super(1);
 	}
 
 	@Override

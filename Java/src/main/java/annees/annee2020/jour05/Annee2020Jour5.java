@@ -4,12 +4,9 @@ import commun.structure.ExerciceInputToObject;
 
 public abstract class Annee2020Jour5 extends ExerciceInputToObject<Integer> {
 
-	public Annee2020Jour5(int exercice) {
+	protected Annee2020Jour5(int exercice) {
 		super(2020, 5, exercice);
 	}
-
-	@Override
-	protected void init() {}
 
 	@Override
 	protected Integer ligneToObject(String ligne) {
@@ -33,6 +30,7 @@ public abstract class Annee2020Jour5 extends ExerciceInputToObject<Integer> {
 					minS += (maxS - minS) / 2;
 					break;
 				default:
+					break;
 			}
 		}
 		return (max - 1) * 8 + (maxS - 1);

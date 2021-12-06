@@ -6,15 +6,15 @@ import java.util.List;
 
 public class IntCode implements Comparable<IntCode> {
 
-	private int pointer;
-	private int relativeBase;
+	private long pointer;
+	private long relativeBase;
 	private long nbrEtape;
-	private String programme;
-	private String[] blocs;
+	private List<Long> programme;
+	private Long[] blocs;
 	private boolean fini;
 	private int adresse;
 
-	public IntCode(String programme) {
+	public IntCode(List<Long> programme) {
 		super();
 		this.programme = programme;
 		init();
@@ -35,7 +35,7 @@ public class IntCode implements Comparable<IntCode> {
 		pointer = 0;
 		relativeBase = 0;
 		nbrEtape = 0;
-		blocs = programme.split(",");
+		blocs = programme.toArray(new Long[programme.size()]);
 		fini = false;
 	}
 
@@ -55,54 +55,50 @@ public class IntCode implements Comparable<IntCode> {
 		this.nbrEtape = nbrEtape;
 	}
 
-	public String getBloc(int index) {
+	public Long getBloc(long index) {
 		if (blocs.length > index) {
-			return blocs[index];
+			return blocs[(int) index];
 		} else {
-			return "0";
+			return 0L;
 		}
 	}
 
-	public void setBloc(int index, String value) {
+	public void setBloc(long index, Long value) {
 		if (blocs.length <= index) {
 			int ancienneTaille = blocs.length;
-			blocs = Arrays.copyOf(blocs, index + 1);
+			blocs = Arrays.copyOf(blocs, (int) index + 1);
 			for (int i = ancienneTaille; i < blocs.length; i++) {
-				blocs[i] = "0";
+				blocs[i] = 0L;
 			}
 		}
-		blocs[index] = value;
+		blocs[(int) index] = value;
 	}
 
-	public int getPointer() {
+	public long getPointer() {
 		return pointer;
 	}
 
-	public void setPointer(int pointer) {
+	public void setPointer(long pointer) {
 		this.pointer = pointer;
 	}
 
-	public int getRelativeBase() {
+	public long getRelativeBase() {
 		return relativeBase;
 	}
 
-	public void setRelativeBase(int relativeBase) {
+	public void setRelativeBase(long relativeBase) {
 		this.relativeBase = relativeBase;
 	}
 
-	public String getProgramme() {
+	public List<Long> getProgramme() {
 		return programme;
 	}
 
-	public void setProgramme(String programme) {
+	public void setProgramme(List<Long> programme) {
 		this.programme = programme;
 	}
 
-	public String[] getBlocs() {
-		return blocs;
-	}
-
-	public void setBlocs(String[] blocs) {
+	public void setBlocs(Long[] blocs) {
 		this.blocs = blocs;
 	}
 
@@ -178,7 +174,7 @@ public class IntCode implements Comparable<IntCode> {
 	}
 
 	public Long lancerFirstOutput() {
-		return lancerFirstOutput(new ArrayList<Long>());
+		return lancerFirstOutput(new ArrayList<>());
 	}
 
 	public Long lancerFirstOutput(Long input) {
@@ -216,85 +212,85 @@ public class IntCode implements Comparable<IntCode> {
 
 	public List<Long> lancer(int nbrOutputs, List<Long> inputs) {
 		inputs = new ArrayList<>(inputs);
-		int ipointer = Integer.parseInt(getBloc(pointer));
+		long ipointer = getBloc(pointer).intValue();
 		List<Long> outputs = new ArrayList<>();
 		while (!fini) {
 			nbrEtape++;
 			int opcodePointer = Integer.parseInt(String.valueOf(ipointer).substring(Math.max(String.valueOf(ipointer).length() - 2, 0)));
-			int mode1 = calculerMode1(ipointer);
-			int mode2 = calculerMode2(ipointer);
-			int mode3 = calculerMode3(ipointer);
+			long mode1 = calculerMode1(ipointer);
+			long mode2 = calculerMode2(ipointer);
+			long mode3 = calculerMode3(ipointer);
 			long valeur1 = calculerValeur1(mode1);
 			long valeur2 = calculerValeur2(opcodePointer, mode2);
 			switch (opcodePointer) {
-			case 1:
-				intCode1(valeur1, valeur2, mode3);
-				break;
-			case 2:
-				intCode2(valeur1, valeur2, mode3);
-				break;
-			case 3:
-				if (inputs.isEmpty()) {
-					return outputs;
-				}
-				intCode3(inputs, mode1);
-				break;
-			case 4:
-				intCode4(outputs, valeur1);
-				if (outputs.size() == nbrOutputs) {
-					return outputs;
-				}
-				break;
-			case 5:
-				intCode5(valeur1, valeur2);
-				break;
-			case 6:
-				intCode6(valeur1, valeur2);
-				break;
-			case 7:
-				intCode7(valeur1, valeur2, mode3);
-				break;
-			case 8:
-				intCode8(valeur1, valeur2, mode3);
-				break;
-			case 9:
-				intCode9(valeur1);
-				break;
-			case 99:
-				intCode99();
-				break;
-			default:
-				pointer += 1;
-				break;
+				case 1:
+					intCode1(valeur1, valeur2, mode3);
+					break;
+				case 2:
+					intCode2(valeur1, valeur2, mode3);
+					break;
+				case 3:
+					if (inputs.isEmpty()) {
+						return outputs;
+					}
+					intCode3(inputs, mode1);
+					break;
+				case 4:
+					intCode4(outputs, valeur1);
+					if (outputs.size() == nbrOutputs) {
+						return outputs;
+					}
+					break;
+				case 5:
+					intCode5(valeur1, valeur2);
+					break;
+				case 6:
+					intCode6(valeur1, valeur2);
+					break;
+				case 7:
+					intCode7(valeur1, valeur2, mode3);
+					break;
+				case 8:
+					intCode8(valeur1, valeur2, mode3);
+					break;
+				case 9:
+					intCode9(valeur1);
+					break;
+				case 99:
+					intCode99();
+					break;
+				default:
+					pointer += 1;
+					break;
 			}
-			ipointer = Integer.parseInt(getBloc(pointer));
+			ipointer = getBloc(pointer);
 		}
 		return outputs;
 	}
 
-	private void intCode1(long valeur1, long valeur2, int mode3) {
+	private void intCode1(long valeur1, long valeur2, long mode3) {
 		if (mode3 == 2) {
-			setBloc(relativeBase + Integer.parseInt(getBloc(pointer + 3)), String.valueOf(valeur1 + valeur2));
+			setBloc(relativeBase + getBloc(pointer + 3), valeur1 + valeur2);
 		} else {
-			setBloc(Integer.parseInt(getBloc(pointer + 3)), String.valueOf(valeur1 + valeur2));
+			setBloc(getBloc(pointer + 3), valeur1 + valeur2);
 		}
 		pointer += 4;
 	}
 
-	private void intCode2(long valeur1, long valeur2, int mode3) {
+	private void intCode2(long valeur1, long valeur2, long mode3) {
 		if (mode3 == 2) {
-			setBloc(relativeBase + Integer.parseInt(getBloc(pointer + 3)), String.valueOf(valeur1 * valeur2));
+			setBloc(relativeBase + getBloc(pointer + 3), valeur1 * valeur2);
 		} else {
-			setBloc(Integer.parseInt(getBloc(pointer + 3)), String.valueOf(valeur1 * valeur2));
+			setBloc(getBloc(pointer + 3), valeur1 * valeur2);
 		}
 		pointer += 4;
 	}
 
-	private void intCode3(List<Long> inputs, int mode1) {
+	private void intCode3(List<Long> inputs, long mode1) {
 		if (mode1 == 2) {
-			setBloc(relativeBase + Integer.parseInt(getBloc(pointer + 1)), String.valueOf(inputs.remove(0)));
+			setBloc(relativeBase + getBloc(pointer + 1), inputs.remove(0));
 		} else {
-			setBloc(Integer.parseInt(getBloc(pointer + 1)), String.valueOf(inputs.remove(0)));
+			setBloc(getBloc(pointer + 1), inputs.remove(0));
 		}
 		pointer += 2;
 	}
@@ -320,35 +316,35 @@ public class IntCode implements Comparable<IntCode> {
 		}
 	}
 
-	private void intCode7(long valeur1, long valeur2, int mode3) {
+	private void intCode7(long valeur1, long valeur2, long mode3) {
 		if (valeur1 < valeur2) {
 			if (mode3 == 2) {
-				setBloc(relativeBase + Integer.parseInt(getBloc(pointer + 3)), "1");
+				setBloc(relativeBase + getBloc(pointer + 3), 1L);
 			} else {
-				setBloc(Integer.parseInt(getBloc(pointer + 3)), "1");
+				setBloc(getBloc(pointer + 3), 1L);
 			}
 		} else {
 			if (mode3 == 2) {
-				setBloc(relativeBase + Integer.parseInt(getBloc(pointer + 3)), "0");
+				setBloc(relativeBase + getBloc(pointer + 3), 0L);
 			} else {
-				setBloc(Integer.parseInt(getBloc(pointer + 3)), "0");
+				setBloc(getBloc(pointer + 3), 0L);
 			}
 		}
 		pointer += 4;
 	}
 
-	private void intCode8(long valeur1, long valeur2, int mode3) {
+	private void intCode8(long valeur1, long valeur2, long mode3) {
 		if (valeur1 == valeur2) {
 			if (mode3 == 2) {
-				setBloc(relativeBase + Integer.parseInt(getBloc(pointer + 3)), "1");
+				setBloc(relativeBase + getBloc(pointer + 3L), 1L);
 			} else {
-				setBloc(Integer.parseInt(getBloc(pointer + 3)), "1");
+				setBloc(getBloc(pointer + 3L), 1L);
 			}
 		} else {
 			if (mode3 == 2) {
-				setBloc(relativeBase + Integer.parseInt(getBloc(pointer + 3)), "0");
+				setBloc(relativeBase + getBloc(pointer + 3), 0L);
 			} else {
-				setBloc(Integer.parseInt(getBloc(pointer + 3)), "0");
+				setBloc(getBloc(pointer + 3), 0L);
 			}
 		}
 		pointer += 4;
@@ -364,45 +360,45 @@ public class IntCode implements Comparable<IntCode> {
 		fini = true;
 	}
 
-	private int calculerMode1(int ipointer) {
+	private int calculerMode1(long ipointer) {
 		if (String.valueOf(ipointer).length() >= 3) {
 			return Integer.parseInt(String.valueOf(String.valueOf(ipointer).charAt(Math.max(2 + String.valueOf(ipointer).length() - 5, 0))));
 		}
 		return 0;
 	}
 
-	private int calculerMode2(int ipointer) {
+	private int calculerMode2(long ipointer) {
 		if (String.valueOf(ipointer).length() >= 4) {
 			return Integer.parseInt(String.valueOf(String.valueOf(ipointer).charAt(Math.max(1 + String.valueOf(ipointer).length() - 5, 0))));
 		}
 		return 0;
 	}
 
-	private int calculerMode3(int ipointer) {
+	private int calculerMode3(long ipointer) {
 		if (String.valueOf(ipointer).length() >= 5) {
 			return Integer.parseInt(String.valueOf(String.valueOf(ipointer).charAt(0)));
 		}
 		return 0;
 	}
 
-	private long calculerValeur1(int mode1) {
+	private long calculerValeur1(long mode1) {
 		if (mode1 == 1) {
-			return Long.parseLong(getBloc(pointer + 1));
+			return getBloc(pointer + 1L);
 		} else if (mode1 == 2) {
-			return Long.parseLong(getBloc(relativeBase + Integer.parseInt(getBloc(pointer + 1))));
+			return getBloc(relativeBase + getBloc(pointer + 1L));
 		} else {
-			return Long.parseLong(getBloc(Integer.parseInt(getBloc(pointer + 1))));
+			return getBloc(getBloc(pointer + 1L));
 		}
 	}
 
-	private long calculerValeur2(int opcodePointer, int mode2) {
+	private long calculerValeur2(long opcodePointer, long mode2) {
 		if (opcodePointer == 1 || opcodePointer == 2 || opcodePointer == 5 || opcodePointer == 6 || opcodePointer == 7 || opcodePointer == 8) {
 			if (mode2 == 1) {
-				return Long.parseLong(getBloc(pointer + 2));
+				return getBloc(pointer + 2L);
 			} else if (mode2 == 2) {
-				return Long.parseLong(getBloc(relativeBase + Integer.parseInt(getBloc(pointer + 2))));
+				return getBloc(relativeBase + getBloc(pointer + 2L));
 			} else {
-				return Long.parseLong(getBloc(Integer.parseInt(getBloc(pointer + 2))));
+				return getBloc(getBloc(pointer + 2L));
 			}
 		}
 		return 0;

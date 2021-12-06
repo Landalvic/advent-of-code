@@ -18,7 +18,7 @@ public class Annee2020Jour3Exercice2 extends Annee2020Jour3 {
 	@Override
 	public String run(String input) throws AdventOfCodeException {
 		List<List<Boolean>> map = inputToListObject(input);
-		List<Long> totaux = new ArrayList<>();
+		List<Long> totaux = new ArrayList<>(5);
 		for (int k = 0; k < 5; k++) {
 			long total = 0;
 			for (int i = 1; i * (k / 4 + 1) < map.size(); i++) {

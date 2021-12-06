@@ -18,7 +18,7 @@ public class Annee2019Jour3Exercice1 extends Annee2019Jour3 {
 	@Override
 	public String run(String input) throws AdventOfCodeException {
 		List<List<Wire>> wires = inputToListObject(input);
-		double min = Integer.MAX_VALUE;
+		double min = Double.MAX_VALUE;
 		for (Wire wire : wires.get(0)) {
 			for (Wire wire2 : wires.get(1)) {
 				Position intersect = wire.pointOfIntersectionSegmentWithoutLimit(wire2);

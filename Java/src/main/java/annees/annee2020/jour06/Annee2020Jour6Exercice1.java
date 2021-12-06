@@ -1,6 +1,6 @@
 package annees.annee2020.jour06;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 import commun.structure.AdventOfCodeException;
 
@@ -16,8 +16,8 @@ public class Annee2020Jour6Exercice1 extends Annee2020Jour6 {
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		Stream<Groupe> textes = inputToStreamObjectNotNull(input);
-		return String.valueOf(textes.mapToInt(liste -> {
+		List<Groupe> textes = inputToListObject(input);
+		return String.valueOf(textes.stream().mapToInt(liste -> {
 			liste.getInfosPersonnes().stream().forEach(personne -> liste.getInfosPersonnes().get(0).addAll(personne));
 			return liste.getInfosPersonnes().get(0).size();
 		}).sum());

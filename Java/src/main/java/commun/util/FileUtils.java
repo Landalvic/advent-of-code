@@ -35,6 +35,37 @@ public interface FileUtils {
 		return streamOfLines(input).findFirst().orElseThrow();
 	}
 
+	public static List<Integer> firstLineOfInteger(String input, String separator) throws AdventOfCodeException {
+		var blocs = streamOfLines(input).findFirst().orElseThrow().split(separator);
+		List<Integer> retour = new ArrayList<>(blocs.length);
+		for (String b : blocs) {
+			retour.add(Integer.parseInt(b));
+		}
+		return retour;
+	}
+
+	public static List<Long> firstLineOfLong(String input, String separator) throws AdventOfCodeException {
+		var blocs = streamOfLines(input).findFirst().orElseThrow().split(separator);
+		List<Long> retour = new ArrayList<>(blocs.length);
+		for (String b : blocs) {
+			retour.add(Long.parseLong(b));
+		}
+		return retour;
+	}
+
+	public static List<Double> firstLineOfDouble(String input, String separator) throws AdventOfCodeException {
+		var blocs = streamOfLines(input).findFirst().orElseThrow().split(separator);
+		List<Double> retour = new ArrayList<>(blocs.length);
+		for (String b : blocs) {
+			retour.add(Double.parseDouble(b));
+		}
+		return retour;
+	}
+
+	public static Stream<List<String>> streamOfCharacters(String input) throws AdventOfCodeException {
+		return streamOfLines(input).map(TexteUtils::stringToList);
+	}
+
 	public static IntStream streamOfInt(String input) throws AdventOfCodeException {
 		return streamOfLines(input).mapToInt(Integer::parseInt);
 	}
@@ -61,6 +92,10 @@ public interface FileUtils {
 
 	public static List<Double> listOfDoubles(String input) throws AdventOfCodeException {
 		return streamOfDouble(input).boxed().toList();
+	}
+
+	public static List<List<String>> listOfCharacters(String input) throws AdventOfCodeException {
+		return streamOfCharacters(input).toList();
 	}
 
 	public static Set<String> setOfLines(String input) throws AdventOfCodeException {

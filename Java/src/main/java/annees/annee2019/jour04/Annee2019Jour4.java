@@ -6,20 +6,17 @@ import commun.util.FileUtils;
 
 public abstract class Annee2019Jour4 extends Exercice {
 
-	public Annee2019Jour4(int exercice) {
+	protected Annee2019Jour4(int exercice) {
 		super(2019, 4, exercice);
 	}
-
-	@Override
-	protected void init() {}
 
 	protected abstract boolean respectCritere(int mdp);
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		var blocs = FileUtils.firstLine(input).split("-", -1);
-		int min = Integer.parseInt(blocs[0]);
-		int max = Integer.parseInt(blocs[1]);
+		var blocs = FileUtils.firstLineOfInteger(input, "-");
+		int min = blocs.get(0);
+		int max = blocs.get(1);
 		int total = 0;
 		for (int i = min; i <= max; i++) {
 			if (respectCritere(i)) {

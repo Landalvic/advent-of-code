@@ -1,7 +1,11 @@
 package commun;
 
 import java.awt.geom.Line2D;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import commun.util.MathUtils;
 
 public class Vecteur {
 
@@ -18,6 +22,31 @@ public class Vecteur {
 		super();
 		positionDepart = new Position(xDepart, yDepart);
 		positionArrivee = new Position(xArrivee, yArrivee);
+	}
+
+	public List<Position> pointsOnSegment() {
+		List<Position> positions = new ArrayList<>();
+		if (Objects.equals(positionDepart, positionArrivee)) {
+			positions.add(positionDepart);
+			return positions;
+		}
+		var xDiff = positionArrivee.getX() - positionDepart.getX();
+		var yDiff = positionArrivee.getY() - positionDepart.getY();
+		var deno = MathUtils.plusGrandDiviseurCommun((long) xDiff, (long) yDiff);
+		var dx = xDiff / deno;
+		var dy = yDiff / deno;
+		for (int i = 0; i < deno + 1; i++) {
+			positions.add(new Position(positionDepart.getX() + (dx * i), positionDepart.getY() + (dy * i)));
+		}
+		return positions;
+	}
+
+	public boolean isVertical() {
+		return positionDepart.getX() == positionArrivee.getX();
+	}
+
+	public boolean isHorizontal() {
+		return positionDepart.getY() == positionArrivee.getY();
 	}
 
 	public Position pointOfIntersectionLine(Vecteur vecteur) {

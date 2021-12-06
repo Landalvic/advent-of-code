@@ -26,6 +26,14 @@ public interface MathUtils {
 		return new BigInteger(s, base).longValue();
 	}
 
+	public static long plusGrandDiviseurCommun(long a, long b) {
+		BigInteger b1 = BigInteger.valueOf(a);
+		BigInteger b2 = BigInteger.valueOf(b);
+		BigInteger gcd = b1.gcd(b2);
+		return gcd.intValue();
+	}
+
+	// TODO à tester
 	public static long denominateurCommun(long... nombres) {
 		Map<Long, Integer> diviseurs = mapDiviseursDenominateurCommun(nombres);
 		return denominateurCommun(diviseurs);

@@ -9,12 +9,16 @@ import commun.structure.AdventOfCodeException;
 public class Annee2019Jour6Exercice2 extends Annee2019Jour6 {
 
 	public static void main(String[] args) {
-		new Annee2019Jour6Exercice2().lancer(2019, 6, 2, false);
+		new Annee2019Jour6Exercice2().lancer(true);
+	}
+
+	public Annee2019Jour6Exercice2() {
+		super(2);
 	}
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		Map<String, Orbite> orbites = inputToOrbites(input);
+		Map<String, Hierarchie> orbites = inputToOrbites(input);
 		var you = orbites.get("YOU");
 		var destination = orbites.get("SAN");
 		List<Hierarchie> bonChemin = you.chemin(destination);

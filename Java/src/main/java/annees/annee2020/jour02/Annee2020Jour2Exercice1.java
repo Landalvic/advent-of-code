@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 import org.apache.commons.lang3.StringUtils;
 
 import commun.structure.AdventOfCodeException;
-import commun.util.StreamUtils;
+import commun.util.TexteUtils;
 
 public class Annee2020Jour2Exercice1 extends Annee2020Jour2 {
 
@@ -20,11 +20,11 @@ public class Annee2020Jour2Exercice1 extends Annee2020Jour2 {
 	@Override
 	public String run(String input) throws AdventOfCodeException {
 		Stream<Password> passwords = inputToStreamObject(input);
-		return String.valueOf(passwords.filter(password -> {
-			long count = StreamUtils.chars(password.getMotDePasse())
-					.filter(lettre -> StringUtils.equals(lettre, password.getLettre())).count();
+		var total = passwords.filter(password -> {
+			long count = TexteUtils.stringToStream(password.getMotDePasse()).filter(lettre -> StringUtils.equals(lettre, password.getLettre())).count();
 			return count >= password.getNbrMin() && count <= password.getNbrMax();
-		}).count());
+		}).count();
+		return String.valueOf(total);
 	}
 
 }

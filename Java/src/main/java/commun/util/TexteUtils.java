@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.PropertyAccessor;
@@ -14,6 +15,18 @@ import commun.annotation.PatternClass;
 import commun.structure.AdventOfCodeException;
 
 public interface TexteUtils {
+
+	public static boolean charEquals(char c, String lettre) {
+		return StringUtils.equals(String.valueOf(c), lettre);
+	}
+
+	public static List<String> stringToList(String texte) {
+		return stringToStream(texte).toList();
+	}
+
+	public static Stream<String> stringToStream(String texte) {
+		return texte.chars().mapToObj(i -> String.valueOf((char) i));
+	}
 
 	public static String trouverEntreParenthese(String input) {
 		int nbr = 0;

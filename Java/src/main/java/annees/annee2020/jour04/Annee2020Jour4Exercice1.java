@@ -1,6 +1,6 @@
 package annees.annee2020.jour04;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 import commun.structure.AdventOfCodeException;
 
@@ -16,7 +16,7 @@ public class Annee2020Jour4Exercice1 extends Annee2020Jour4 {
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		Stream<Passeport> passeports = inputToStreamObjectNotNull(input);
+		List<Passeport> passeports = inputToListObject(input);
 		infos.put("ecl", null);
 		infos.put("byr", null);
 		infos.put("iyr", null);
@@ -24,16 +24,7 @@ public class Annee2020Jour4Exercice1 extends Annee2020Jour4 {
 		infos.put("hgt", null);
 		infos.put("hcl", null);
 		infos.put("pid", null);
-		return String.valueOf(passeports.filter(this::gererPasseport).count());
-	}
-
-	private boolean gererPasseport(Passeport p) {
-		for (var entry : infos.entrySet()) {
-			if (!p.getInfos().containsKey(entry.getKey())) {
-				return false;
-			}
-		}
-		return true;
+		return String.valueOf(passeports.stream().filter(this::gererPasseport).count());
 	}
 
 }

@@ -3,8 +3,8 @@ package annees.annee2020.jour03;
 import java.util.List;
 import java.util.stream.Stream;
 
+import commun.StreamHistory;
 import commun.structure.AdventOfCodeException;
-import commun.util.StreamUtils;
 
 public class Annee2020Jour3Exercice1 extends Annee2020Jour3 {
 
@@ -19,8 +19,9 @@ public class Annee2020Jour3Exercice1 extends Annee2020Jour3 {
 	@Override
 	public String run(String input) throws AdventOfCodeException {
 		Stream<List<Boolean>> map = inputToStreamObject(input);
-		return String.valueOf(StreamUtils
-				.filterWithIndex(map, (ligne, index) -> ligne.get((index * 3) % ligne.size()).booleanValue()).count());
+		StreamHistory<List<Boolean>> streamHistory = new StreamHistory<>(0);
+		var count = streamHistory.stream(map).filter(ligne -> ligne.current().get((ligne.getIndex() * 3) % ligne.current().size()).booleanValue()).count();
+		return String.valueOf(count);
 	}
 
 }

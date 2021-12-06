@@ -16,9 +16,9 @@ public class Annee2019Jour2Exercice1 extends Annee2019Jour2 {
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		var programme = FileUtils.firstLine(input);
+		var programme = FileUtils.firstLineOfLong(input, ",");
 		var code = new IntCode(programme);
-		return lancerCode(code, 12, 2);
+		return String.valueOf(lancerCode(code, 12, 2));
 	}
 
 }

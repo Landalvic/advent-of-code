@@ -1,5 +1,7 @@
 package annees.annee2020.jour01;
 
+import commun.Position;
+import commun.StreamSearch;
 import commun.structure.AdventOfCodeException;
 import commun.util.FileUtils;
 
@@ -15,17 +17,19 @@ public class Annee2020Jour1Exercice2 extends Annee2020Jour1 {
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		var liste = FileUtils.listOfIntegers(input);
-		for (int i = 0; i < liste.size(); i++) {
-			for (int j = 0; j < liste.size(); j++) {
-				for (int k = 0; k < liste.size(); k++) {
-					if (i != j && j != k && i != k && liste.get(i) + liste.get(j) + liste.get(k) == 2020) {
-						return String.valueOf((liste.get(i) * liste.get(j) * liste.get(k)));
+		var stream = FileUtils.streamOfInt(input);
+		StreamSearch<Integer, Position> streamHistory = new StreamSearch<>();
+		var position = streamHistory.findCondition(stream.boxed(), i -> {
+			for (var previous : i.getListe()) {
+				for (var previous2 : i.getListe()) {
+					if (previous + previous2 + i.current() == 2020) {
+						return new Position(i.current(), previous, previous2);
 					}
 				}
 			}
-		}
-		throw new AdventOfCodeException("Aucun élément trouvé");
+			return null;
+		});
+		return String.valueOf((long) (position.getX() * position.getY() * position.getZ()));
 	}
 
 }

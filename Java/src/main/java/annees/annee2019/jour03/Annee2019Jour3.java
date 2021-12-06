@@ -8,12 +8,9 @@ import commun.structure.ExerciceInputToObject;
 
 public abstract class Annee2019Jour3 extends ExerciceInputToObject<List<Wire>> {
 
-	public Annee2019Jour3(int exercice) {
+	protected Annee2019Jour3(int exercice) {
 		super(2019, 3, exercice);
 	}
-
-	@Override
-	protected void init() {}
 
 	@Override
 	protected List<Wire> ligneToObject(String ligne) {
@@ -25,7 +22,7 @@ public abstract class Annee2019Jour3 extends ExerciceInputToObject<List<Wire>> {
 			String direction = String.valueOf(wire.charAt(0));
 			int nombre = Integer.parseInt(wire.substring(1));
 			Wire newWire = null;
-			Position position;
+			Position position = null;
 			switch (direction) {
 				case "R":
 					position = new Position(lastPosition.getX() + nombre, lastPosition.getY());
@@ -36,8 +33,10 @@ public abstract class Annee2019Jour3 extends ExerciceInputToObject<List<Wire>> {
 				case "L":
 					position = new Position(lastPosition.getX() - nombre, lastPosition.getY());
 					break;
-				default:
+				case "D":
 					position = new Position(lastPosition.getX(), lastPosition.getY() - nombre);
+					break;
+				default:
 					break;
 			}
 			newWire = new Wire(lastPosition, position, lastDistance);

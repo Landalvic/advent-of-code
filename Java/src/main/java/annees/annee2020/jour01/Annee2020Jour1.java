@@ -8,7 +8,4 @@ public abstract class Annee2020Jour1 extends Exercice {
 		super(2020, 1, exercice);
 	}
 
-	@Override
-	protected void init() {}
-
 }
