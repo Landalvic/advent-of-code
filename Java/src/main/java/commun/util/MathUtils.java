@@ -10,6 +10,14 @@ import java.util.Set;
 
 public interface MathUtils {
 
+	public static double mediane(double... a) {
+		if (a.length % 2 == 1) {
+			return a[(a.length + 1) / 2 - 1];
+		} else {
+			return (a[a.length / 2 - 1] + a[a.length / 2]) / 2;
+		}
+	}
+
 	public static String toHexString(byte[] bytes) {
 		StringBuilder retour = new StringBuilder();
 		for (int i = 0; i < bytes.length; i++) {
