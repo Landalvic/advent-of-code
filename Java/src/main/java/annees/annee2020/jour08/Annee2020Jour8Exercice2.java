@@ -40,10 +40,10 @@ public class Annee2020Jour8Exercice2 extends Annee2020Jour8 {
 	}
 
 	private Taches replaceTache(String input, int index, Tache tache) throws AdventOfCodeException {
-		Taches taches = new Taches(inputToListObject(input));
+		Taches taches = new Taches(new ArrayList<>(inputToListObject(input)));
 		Tache t = taches.getListeTaches().remove(index);
 		tache.setNbr(t.getNbr());
-		tache.setTest(t.isTest());
+		tache.setRunned(t.isRunned());
 		taches.getListeTaches().add(index, tache);
 		return taches;
 	}

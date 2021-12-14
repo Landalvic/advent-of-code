@@ -14,21 +14,12 @@ public abstract class Case<T extends Case<T>> {
 
 	protected Position position;
 	protected MapCases<T> map;
-	protected String id;
 	protected boolean mur;
 
 	protected Case(MapCases<T> map, Position position) {
 		super();
 		this.map = map;
 		this.position = position;
-		mur = false;
-	}
-
-	protected Case(MapCases<T> map, Position position, String id) {
-		super();
-		this.map = map;
-		this.position = position;
-		this.id = id;
 		mur = false;
 	}
 
@@ -40,14 +31,6 @@ public abstract class Case<T extends Case<T>> {
 
 	public void setMur(boolean mur) {
 		this.mur = mur;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public Position getPosition() {
@@ -145,6 +128,19 @@ public abstract class Case<T extends Case<T>> {
 			}
 		}
 		return cases;
+	}
+
+	public Set<T> deplacementsDisponible() {
+		return deplacementsDisponible(new HashSet<>());
+	}
+
+	protected Set<T> deplacementsDisponible(Set<T> liste) {
+		for (T t : getCasesAdjacentes()) {
+			if (!t.isMur() && liste.add(t)) {
+				liste.addAll(t.deplacementsDisponible(liste));
+			}
+		}
+		return liste;
 	}
 
 	public List<T> deplacement(T destination) {

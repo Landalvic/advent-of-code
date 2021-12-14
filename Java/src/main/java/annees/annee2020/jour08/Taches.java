@@ -33,4 +33,9 @@ public class Taches {
 		this.donnees = donnees;
 	}
 
+	@Override
+	public String toString() {
+		return "Taches [donnees=" + donnees + ", listeTaches=" + listeTaches + "]";
+	}
+
 }

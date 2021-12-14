@@ -1,46 +1,39 @@
 package annees.annee2020.jour07;
 
-import java.util.regex.Pattern;
-
 import org.apache.commons.lang3.StringUtils;
 
 import commun.Hierarchie;
 import commun.Hierarchies;
-import commun.structure.ExerciceInputToObject;
+import commun.Infos;
+import commun.structure.AdventOfCodeException;
+import commun.structure.Exercice;
+import commun.util.FileUtils;
 import commun.util.TexteUtils;
 
-public abstract class Annee2020Jour7 extends ExerciceInputToObject<Hierarchie> {
+public abstract class Annee2020Jour7 extends Exercice {
 
-	protected Pattern pattern;
-	protected Hierarchies hierarchies;
-
-	public Annee2020Jour7(int exercice) {
+	protected Annee2020Jour7(int exercice) {
 		super(2020, 7, exercice);
 	}
 
-	@Override
-	protected void init() {
-		pattern = Pattern.compile("^(.*) bags contain (.*).$");
-		hierarchies = new Hierarchies();
-	}
-
-	@Override
-	protected Hierarchie ligneToObject(String ligne) {
-		var blocs = TexteUtils.trouverPattern(ligne, pattern, 2);
-		Hierarchie sac = hierarchies.trouverOuAjouter(blocs[0]);
-		if (!StringUtils.equals("no other bags", blocs[1].trim())) {
-			var sblocs = blocs[1].split(",", -1);
-			for (String string : sblocs) {
-				if (!string.isEmpty()) {
-					var newS = string.replace("bags", "").trim();
-					var newT = newS.substring(2).replace("bags", "").replace("bag", "").trim();
-					var newNbr = Integer.parseInt(String.valueOf(newS.charAt(0)));
-					Hierarchie sacEnfant = hierarchies.trouverOuAjouter(newT);
-					sac.ajouterEnfant(sacEnfant, newNbr);
+	protected Hierarchies<Infos> inputTobags(String input) throws AdventOfCodeException {
+		var lignes = FileUtils.streamOfLines(input);
+		Hierarchies<Infos> hierarchies = new Hierarchies<>();
+		lignes.forEach(ligne -> {
+			var rule = TexteUtils.transformerPattern(ligne, Rule.class);
+			Hierarchie<Infos> sac = hierarchies.trouverOuAjouter(new Infos(rule.getConteneur()));
+			if (!StringUtils.equals("no other bags", rule.getContenu().trim())) {
+				var sblocs = rule.getContenu().split(",", -1);
+				for (String string : sblocs) {
+					if (!string.isEmpty()) {
+						var ruleContenu = TexteUtils.transformerPattern(string.trim(), RuleContenu.class);
+						Hierarchie<Infos> sacEnfant = hierarchies.trouverOuAjouter(new Infos(ruleContenu.getBag()));
+						sac.ajouterEnfant(sacEnfant, ruleContenu.getNombre());
+					}
 				}
 			}
-		}
-		return sac;
+		});
+		return hierarchies;
 	}
 
 }

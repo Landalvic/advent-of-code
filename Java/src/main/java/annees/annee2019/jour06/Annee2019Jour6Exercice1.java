@@ -1,8 +1,8 @@
 package annees.annee2019.jour06;
 
-import java.util.Map;
-
 import commun.Hierarchie;
+import commun.Hierarchies;
+import commun.Infos;
 import commun.structure.AdventOfCodeException;
 
 public class Annee2019Jour6Exercice1 extends Annee2019Jour6 {
@@ -17,8 +17,8 @@ public class Annee2019Jour6Exercice1 extends Annee2019Jour6 {
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		Map<String, Hierarchie> orbites = inputToOrbites(input);
-		return String.valueOf(orbites.entrySet().stream().mapToInt(orbite -> orbite.getValue().nombreParentsRecursif()).sum());
+		Hierarchies<Infos> orbites = inputToOrbites(input);
+		return String.valueOf(orbites.listeHierarchie().stream().mapToInt(Hierarchie::nombreParentsRecursif).sum());
 	}
 
 }

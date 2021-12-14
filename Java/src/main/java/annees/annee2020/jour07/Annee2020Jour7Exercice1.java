@@ -1,6 +1,8 @@
 package annees.annee2020.jour07;
 
 import commun.Hierarchie;
+import commun.Hierarchies;
+import commun.Infos;
 import commun.structure.AdventOfCodeException;
 
 public class Annee2020Jour7Exercice1 extends Annee2020Jour7 {
@@ -15,8 +17,8 @@ public class Annee2020Jour7Exercice1 extends Annee2020Jour7 {
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		inputToListObject(input);
-		Hierarchie notre = hierarchies.trouver("shiny gold");
+		Hierarchies<Infos> hierarchies = inputTobags(input);
+		Hierarchie<Infos> notre = hierarchies.trouver("shiny gold");
 		return String.valueOf(notre.parentsRecursif().size());
 	}
 

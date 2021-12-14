@@ -2,7 +2,7 @@ package annees.annee2016.jour02;
 
 import java.util.List;
 
-import commun.CaseDefault;
+import commun.SimpleCase;
 import commun.Direction;
 import commun.MapDefault;
 import commun.structure.AdventOfCodeException;
@@ -18,7 +18,7 @@ public class Annee2016Jour2Exercice1 extends Annee2016Jour2 {
 	public String run(String input) throws AdventOfCodeException {
 		List<String> etapes = FileUtils.listOfLines(input);
 		MapDefault map = new MapDefault(3, 3);
-		CaseDefault position = map.getCase(1, 1);
+		SimpleCase position = map.getCase(1, 1);
 		StringBuilder solution = new StringBuilder();
 		for (String etape : etapes) {
 			for (int i = 0; i < etape.length(); i++) {

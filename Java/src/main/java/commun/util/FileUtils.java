@@ -15,6 +15,7 @@ import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
+import commun.StreamBuilder;
 import commun.structure.AdventOfCodeException;
 
 public interface FileUtils {
@@ -35,8 +36,12 @@ public interface FileUtils {
 		return streamOfLines(input).findFirst().orElseThrow();
 	}
 
+	public static StreamBuilder firstLineOfStreamBuilder(String input) throws AdventOfCodeException {
+		return new StreamBuilder(firstLine(input));
+	}
+
 	public static List<Integer> firstLineOfInteger(String input, String separator) throws AdventOfCodeException {
-		var blocs = streamOfLines(input).findFirst().orElseThrow().split(separator);
+		var blocs = firstLine(input).split(separator);
 		List<Integer> retour = new ArrayList<>(blocs.length);
 		for (String b : blocs) {
 			retour.add(Integer.parseInt(b));
@@ -45,7 +50,7 @@ public interface FileUtils {
 	}
 
 	public static List<Long> firstLineOfLong(String input, String separator) throws AdventOfCodeException {
-		var blocs = streamOfLines(input).findFirst().orElseThrow().split(separator);
+		var blocs = firstLine(input).split(separator);
 		List<Long> retour = new ArrayList<>(blocs.length);
 		for (String b : blocs) {
 			retour.add(Long.parseLong(b));
@@ -54,7 +59,7 @@ public interface FileUtils {
 	}
 
 	public static List<Double> firstLineOfDouble(String input, String separator) throws AdventOfCodeException {
-		var blocs = streamOfLines(input).findFirst().orElseThrow().split(separator);
+		var blocs = firstLine(input).split(separator);
 		List<Double> retour = new ArrayList<>(blocs.length);
 		for (String b : blocs) {
 			retour.add(Double.parseDouble(b));
@@ -64,6 +69,10 @@ public interface FileUtils {
 
 	public static Stream<List<String>> streamOfCharacters(String input) throws AdventOfCodeException {
 		return streamOfLines(input).map(TexteUtils::stringToList);
+	}
+
+	public static Stream<StreamBuilder> streamOfStreamBuilder(String input) throws AdventOfCodeException {
+		return streamOfLines(input).map(StreamBuilder::new);
 	}
 
 	public static IntStream streamOfInt(String input) throws AdventOfCodeException {
@@ -96,6 +105,10 @@ public interface FileUtils {
 
 	public static List<List<String>> listOfCharacters(String input) throws AdventOfCodeException {
 		return streamOfCharacters(input).toList();
+	}
+
+	public static List<StreamBuilder> listOfStreamBuilder(String input) throws AdventOfCodeException {
+		return streamOfStreamBuilder(input).toList();
 	}
 
 	public static Set<String> setOfLines(String input) throws AdventOfCodeException {

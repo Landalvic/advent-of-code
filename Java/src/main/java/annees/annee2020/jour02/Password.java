@@ -56,4 +56,9 @@ public class Password {
 		this.motDePasse = motDePasse;
 	}
 
+	@Override
+	public String toString() {
+		return "Password [nbrMin=" + nbrMin + ", nbrMax=" + nbrMax + ", lettre=" + lettre + ", motDePasse=" + motDePasse + ", count=" + count + "]";
+	}
+
 }

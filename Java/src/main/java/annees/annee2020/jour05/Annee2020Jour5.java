@@ -1,6 +1,7 @@
 package annees.annee2020.jour05;
 
 import commun.structure.ExerciceInputToObject;
+import commun.util.TexteUtils;
 
 public abstract class Annee2020Jour5 extends ExerciceInputToObject<Integer> {
 
@@ -14,8 +15,8 @@ public abstract class Annee2020Jour5 extends ExerciceInputToObject<Integer> {
 		int max = 128;
 		int minS = 0;
 		int maxS = 8;
-		for (int i = 0; i < ligne.length(); i++) {
-			String c = String.valueOf(ligne.charAt(i));
+		var listeCaracteres = TexteUtils.stringToList(ligne);
+		for (String c : listeCaracteres) {
 			switch (c) {
 				case "F":
 					max -= (max - min) / 2;

@@ -1,5 +1,7 @@
 package annees.annee2021.jour08;
 
+import java.util.Arrays;
+
 public class Annee2021Jour8Exercice1 extends Annee2021Jour8 {
 
 	public static void main(String[] args) {
@@ -12,13 +14,7 @@ public class Annee2021Jour8Exercice1 extends Annee2021Jour8 {
 
 	@Override
 	protected int transformCode(CodeDigits code) {
-		int total = 0;
-		for (var digit : code.getOutput()) {
-			if (digit.length() == 4 || digit.length() == 3 || digit.length() == 2 || digit.length() == 7) {
-				total++;
-			}
-		}
-		return total;
+		return (int) Arrays.stream(code.getOutput()).filter(digit -> digit.length() == 4 || digit.length() == 3 || digit.length() == 2 || digit.length() == 7).count();
 	}
 
 }

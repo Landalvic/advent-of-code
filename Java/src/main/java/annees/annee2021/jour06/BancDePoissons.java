@@ -27,4 +27,9 @@ public class BancDePoissons {
 		this.nombre = nombre;
 	}
 
+	@Override
+	public String toString() {
+		return "BancDePoissons [numero=" + numero + ", nombre=" + nombre + "]";
+	}
+
 }

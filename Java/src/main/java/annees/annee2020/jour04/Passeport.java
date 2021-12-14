@@ -29,4 +29,9 @@ public class Passeport {
 		this.infos = infos;
 	}
 
+	@Override
+	public String toString() {
+		return "Passeport [infos=" + infos + "]";
+	}
+
 }

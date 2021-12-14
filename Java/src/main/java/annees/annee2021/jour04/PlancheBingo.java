@@ -1,5 +1,7 @@
 package annees.annee2021.jour04;
 
+import java.util.Arrays;
+
 public class PlancheBingo {
 
 	private NumeroBingo[][] planche = new NumeroBingo[5][5];
@@ -53,6 +55,11 @@ public class PlancheBingo {
 			}
 		}
 		return total;
+	}
+
+	@Override
+	public String toString() {
+		return "PlancheBingo [planche=" + Arrays.toString(planche) + "]";
 	}
 
 }

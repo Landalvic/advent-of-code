@@ -15,8 +15,8 @@ public class Annee2020Jour8Exercice1 extends Annee2020Jour8 {
 	@Override
 	public String run(String input) throws AdventOfCodeException {
 		Taches taches = new Taches(inputToListObject(input));
-		while (!taches.getIndex().isTest()) {
-			taches.getIndex().setTest(true);
+		while (!taches.getIndex().isRunned()) {
+			taches.getIndex().setRunned(true);
 			taches.getIndex().run(taches.getDonnees());
 		}
 		return String.valueOf(taches.getDonnees().getAccumulateur());

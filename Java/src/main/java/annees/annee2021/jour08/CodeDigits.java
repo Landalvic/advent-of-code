@@ -1,5 +1,7 @@
 package annees.annee2021.jour08;
 
+import java.util.Arrays;
+
 public class CodeDigits {
 
 	private String[] digits;
@@ -19,6 +21,11 @@ public class CodeDigits {
 
 	public void setOutput(String[] output) {
 		this.output = output;
+	}
+
+	@Override
+	public String toString() {
+		return "CodeDigits [digits=" + Arrays.toString(digits) + ", output=" + Arrays.toString(output) + "]";
 	}
 
 }

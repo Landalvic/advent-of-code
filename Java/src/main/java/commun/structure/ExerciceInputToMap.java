@@ -4,6 +4,7 @@ import java.util.List;
 
 import commun.Case;
 import commun.MapCases;
+import commun.Position;
 import commun.util.FileUtils;
 
 public abstract class ExerciceInputToMap<T extends Case<T>> extends Exercice {
@@ -19,12 +20,12 @@ public abstract class ExerciceInputToMap<T extends Case<T>> extends Exercice {
 			String ligne = lignes.get(i);
 			for (int j = 0; j < ligne.length(); j++) {
 				String c = String.valueOf(ligne.charAt(j));
-				map.addCase(ligneToMap(map, c, i, j));
+				map.addCase(ligneToMap(map, c, new Position(j, i)));
 			}
 		}
 		return map;
 	}
 
-	protected abstract T ligneToMap(MapCases<T> map, String charAt, int posY, int posX);
+	protected abstract T ligneToMap(MapCases<T> map, String charAt, Position position);
 
 }

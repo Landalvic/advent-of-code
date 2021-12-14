@@ -2,8 +2,10 @@ package commun.util;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,12 +18,48 @@ import commun.structure.AdventOfCodeException;
 
 public interface TexteUtils {
 
+	public static boolean equals(String texte, String... essais) {
+		for (String string : essais) {
+			if (StringUtils.equals(string, texte)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static String correspondanceOpposee(String caractere) {
+		switch (caractere) {
+			case ")":
+				return "(";
+			case "]":
+				return "[";
+			case "}":
+				return "{";
+			case ">":
+				return "<";
+			case "(":
+				return ")";
+			case "[":
+				return "]";
+			case "{":
+				return "}";
+			case "<":
+				return ">";
+			default:
+				return "";
+		}
+	}
+
 	public static boolean charEquals(char c, String lettre) {
 		return StringUtils.equals(String.valueOf(c), lettre);
 	}
 
 	public static List<String> stringToList(String texte) {
 		return stringToStream(texte).toList();
+	}
+
+	public static Set<String> stringToSet(String texte) {
+		return stringToStream(texte).collect(Collectors.toSet());
 	}
 
 	public static Stream<String> stringToStream(String texte) {

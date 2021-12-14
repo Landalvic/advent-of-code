@@ -44,11 +44,15 @@ public abstract class Exercice {
 
 	protected abstract String run(String input) throws AdventOfCodeException;
 
-	public void lancer(boolean test) {
-		lancer(test, true);
+	public String lancer() {
+		return lancer(false);
 	}
 
-	public void lancer(boolean test, boolean timer) {
+	public String lancer(boolean test) {
+		return lancer(test, true);
+	}
+
+	public String lancer(boolean test, boolean timer) {
 		this.test = test;
 		String jourStr = String.valueOf(jour);
 		if (jourStr.length() == 1) {
@@ -66,7 +70,7 @@ public abstract class Exercice {
 		}
 		this.test = false;
 		String input = racine + "/data.txt";
-		lancer(input, timer);
+		return lancer(input, timer);
 	}
 
 	protected void tester(String input, int numero) {
@@ -79,14 +83,15 @@ public abstract class Exercice {
 		}
 	}
 
-	protected void lancer(String input) {
-		lancer(input, true);
+	protected String lancer(String input) {
+		return lancer(input, true);
 	}
 
-	protected void lancer(String input, boolean timer) {
+	protected String lancer(String input, boolean timer) {
+		String reponse = null;
 		try {
 			init();
-			var reponse = run(input);
+			reponse = run(input);
 			logger.info("Année {} / Jour {} / Exercice {} : {}", annee, jour, numeroExercice, reponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -97,6 +102,7 @@ public abstract class Exercice {
 			var calcul = DurationFormatUtils.formatDuration(fin - debut, "HH:mm:ss:SSS", true);
 			logger.info("Le batch a duré : {}", calcul);
 		}
+		return reponse;
 	}
 
 }

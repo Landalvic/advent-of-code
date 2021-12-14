@@ -27,4 +27,9 @@ public class Digit {
 		this.wires = wires;
 	}
 
+	@Override
+	public String toString() {
+		return "Digit [nombre=" + nombre + ", wires=" + wires + "]";
+	}
+
 }

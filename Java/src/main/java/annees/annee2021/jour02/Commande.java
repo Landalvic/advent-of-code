@@ -27,4 +27,9 @@ public class Commande {
 		this.nombre = nombre;
 	}
 
+	@Override
+	public String toString() {
+		return "Commande [direction=" + direction + ", nombre=" + nombre + "]";
+	}
+
 }

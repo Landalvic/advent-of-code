@@ -6,19 +6,19 @@ public abstract class Tache {
 
 	@PatternAttribute(1)
 	private Integer nbr;
-	private boolean test;
+	private boolean runned;
 
-	public Tache() {
+	protected Tache() {
 		super();
-		test = false;
+		runned = false;
 	}
 
-	public boolean isTest() {
-		return test;
+	public boolean isRunned() {
+		return runned;
 	}
 
-	public void setTest(boolean test) {
-		this.test = test;
+	public void setRunned(boolean runned) {
+		this.runned = runned;
 	}
 
 	public int getNbr() {
@@ -30,5 +30,10 @@ public abstract class Tache {
 	}
 
 	public abstract void run(Donnees donnees);
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " [nbr=" + nbr + ", runned=" + runned + "]";
+	}
 
 }

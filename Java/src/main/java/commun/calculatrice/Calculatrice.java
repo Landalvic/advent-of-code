@@ -1,9 +1,6 @@
-package commun;
+package commun.calculatrice;
 
 import java.util.List;
-
-import commun.calculatrice.ListeBlocs;
-import commun.calculatrice.Operateur;
 
 public class Calculatrice {
 

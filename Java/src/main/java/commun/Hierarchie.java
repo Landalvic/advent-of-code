@@ -8,35 +8,79 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiPredicate;
+import java.util.function.UnaryOperator;
 
-public class Hierarchie {
+public class Hierarchie<T extends Infos> {
 
-	private String id;
-	private Hierarchies hierarchies;
-	private Map<Hierarchie, Integer> parents;
-	private Map<Hierarchie, Integer> enfants;
+	private T infos;
+	private Hierarchies<T> hierarchies;
+	private Map<Hierarchie<T>, Integer> parents;
+	private Map<Hierarchie<T>, Integer> enfants;
 
-	public Hierarchie(Hierarchies hierarchies, String id) {
+	public Hierarchie(Hierarchies<T> hierarchies, T infos) {
 		super();
 		this.hierarchies = hierarchies;
-		this.id = id;
+		this.infos = infos;
 		parents = new HashMap<>();
 		enfants = new HashMap<>();
 		hierarchies.ajouter(this);
 	}
 
-	public Hierarchies getHierarchies() {
+	public Set<Hierarchie<T>> parentsEtEnfants() {
+		Set<Hierarchie<T>> set = new HashSet<>();
+		set.addAll(parents.keySet());
+		set.addAll(enfants.keySet());
+		return set;
+	}
+
+	public Hierarchies<T> getHierarchies() {
 		return hierarchies;
 	}
 
-	public void setHierarchies(Hierarchies hierarchies) {
+	public void setHierarchies(Hierarchies<T> hierarchies) {
 		this.hierarchies = hierarchies;
 	}
 
-	public List<Hierarchie> chemin(Hierarchie destination) {
-		List<List<Hierarchie>> chemins = new ArrayList<>();
+	public <U extends Infos> List<Chemin<Hierarchie<T>, U>> listeChemins(Hierarchie<T> destination) {
+		return listeChemins(destination, (chemin, hierarchie) -> chemin.contains(hierarchie));
+	}
+
+	public <U extends Infos> List<Chemin<Hierarchie<T>, U>> listeChemins(Hierarchie<T> destination, BiPredicate<Chemin<Hierarchie<T>, U>, Hierarchie<T>> function) {
+		return listeChemins(destination, function, chemin -> null);
+	}
+
+	public <U extends Infos> List<Chemin<Hierarchie<T>, U>> listeChemins(Hierarchie<T> destination, BiPredicate<Chemin<Hierarchie<T>, U>, Hierarchie<T>> function,
+			UnaryOperator<U> instanceChemin) {
+		List<Chemin<Hierarchie<T>, U>> chemins = new ArrayList<>();
+		List<Chemin<Hierarchie<T>, U>> cheminsFinis = new ArrayList<>();
+		Chemin<Hierarchie<T>, U> first = new Chemin<>();
+		first.setInfos(instanceChemin.apply(null));
+		first.add(this);
+		chemins.add(first);
+		while (!chemins.isEmpty()) {
+			List<Chemin<Hierarchie<T>, U>> newChemins = new ArrayList<>();
+			for (var chemin : chemins) {
+				var voisins = chemin.get(chemin.size() - 1).parentsEtEnfants();
+				for (var v : voisins) {
+					Chemin<Hierarchie<T>, U> newChemin = new Chemin<>(chemin);
+					newChemin.setInfos(instanceChemin.apply(chemin.getInfos()));
+					if (function.test(newChemin, v)) {
+						newChemin.add(v);
+						var listeAjout = v == destination ? cheminsFinis : newChemins;
+						listeAjout.add(newChemin);
+					}
+				}
+			}
+			chemins = newChemins;
+		}
+		return cheminsFinis;
+	}
+
+	public List<Hierarchie<T>> chemin(Hierarchie<T> destination) {
+		List<List<Hierarchie<T>>> chemins = new ArrayList<>();
 		chemins.add(Arrays.asList(this));
-		List<Hierarchie> bonChemin = Collections.emptyList();
+		List<Hierarchie<T>> bonChemin = Collections.emptyList();
 		while (bonChemin.isEmpty()) {
 			var chemin = chemins.remove(0);
 			var last = chemin.get(chemin.size() - 1);
@@ -49,11 +93,11 @@ public class Hierarchie {
 		return bonChemin;
 	}
 
-	private List<Hierarchie> parcourir(Set<Hierarchie> sousListe, List<Hierarchie> chemin,
-			List<List<Hierarchie>> chemins, Hierarchie destination) {
-		for (Hierarchie o : sousListe) {
+	private List<Hierarchie<T>> parcourir(Set<Hierarchie<T>> sousListe, List<Hierarchie<T>> chemin,
+			List<List<Hierarchie<T>>> chemins, Hierarchie<T> destination) {
+		for (Hierarchie<T> o : sousListe) {
 			if (!chemin.contains(o)) {
-				List<Hierarchie> newChemin = new ArrayList<>(chemin);
+				List<Hierarchie<T>> newChemin = new ArrayList<>(chemin);
 				newChemin.add(o);
 				chemins.add(newChemin);
 				if (o == destination) {
@@ -64,19 +108,19 @@ public class Hierarchie {
 		return Collections.emptyList();
 	}
 
-	public Set<Hierarchie> parentsRecursif() {
-		Set<Hierarchie> parentsRetour = new HashSet<>();
+	public Set<Hierarchie<T>> parentsRecursif() {
+		Set<Hierarchie<T>> parentsRetour = new HashSet<>();
 		parentsRetour.addAll(parents.keySet());
-		for (Hierarchie hierarchie : parents.keySet()) {
+		for (Hierarchie<T> hierarchie : parents.keySet()) {
 			parentsRetour.addAll(hierarchie.parentsRecursif());
 		}
 		return parentsRetour;
 	}
 
-	public Set<Hierarchie> enfantsRecursif() {
-		Set<Hierarchie> enfantsRetour = new HashSet<>();
+	public Set<Hierarchie<T>> enfantsRecursif() {
+		Set<Hierarchie<T>> enfantsRetour = new HashSet<>();
 		enfantsRetour.addAll(enfants.keySet());
-		for (Hierarchie hierarchie : enfants.keySet()) {
+		for (Hierarchie<T> hierarchie : enfants.keySet()) {
 			enfantsRetour.addAll(hierarchie.enfantsRecursif());
 		}
 		return enfantsRetour;
@@ -84,7 +128,7 @@ public class Hierarchie {
 
 	public int nombreParentsRecursif() {
 		int total = parents.size();
-		for (Hierarchie hierarchie : parents.keySet()) {
+		for (Hierarchie<T> hierarchie : parents.keySet()) {
 			total += hierarchie.nombreParentsRecursif();
 		}
 		return total;
@@ -92,7 +136,7 @@ public class Hierarchie {
 
 	public int nombreEnfantsRecursif() {
 		int total = enfants.size();
-		for (Hierarchie hierarchie : enfants.keySet()) {
+		for (Hierarchie<T> hierarchie : enfants.keySet()) {
 			total += hierarchie.nombreEnfantsRecursif();
 		}
 		return total;
@@ -102,7 +146,7 @@ public class Hierarchie {
 		return nombreEnfantsRecursifAvecQuantite(this, 1);
 	}
 
-	private int nombreEnfantsRecursifAvecQuantite(Hierarchie hierarchie, int multiplicateur) {
+	private int nombreEnfantsRecursifAvecQuantite(Hierarchie<T> hierarchie, int multiplicateur) {
 		int total = hierarchie.getEnfants().values().stream().mapToInt(i -> i).sum() * multiplicateur;
 		for (var entry : hierarchie.getEnfants().entrySet()) {
 			total += nombreEnfantsRecursifAvecQuantite(entry.getKey(), entry.getValue() * multiplicateur);
@@ -110,51 +154,51 @@ public class Hierarchie {
 		return total;
 	}
 
-	public String getId() {
-		return id;
+	public T getInfos() {
+		return infos;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setInfos(T infos) {
+		this.infos = infos;
 	}
 
-	public Map<Hierarchie, Integer> getParents() {
+	public Map<Hierarchie<T>, Integer> getParents() {
 		return parents;
 	}
 
-	public void setParents(Map<Hierarchie, Integer> parents) {
+	public void setParents(Map<Hierarchie<T>, Integer> parents) {
 		this.parents = parents;
 	}
 
-	public Map<Hierarchie, Integer> getEnfants() {
+	public Map<Hierarchie<T>, Integer> getEnfants() {
 		return enfants;
 	}
 
-	public void setEnfants(Map<Hierarchie, Integer> enfants) {
+	public void setEnfants(Map<Hierarchie<T>, Integer> enfants) {
 		this.enfants = enfants;
 	}
 
-	public void ajouterParent(Hierarchie hierarchie) {
+	public void ajouterParent(Hierarchie<T> hierarchie) {
 		ajouterParent(hierarchie, 1);
 	}
 
-	public void ajouterParent(Hierarchie hierarchie, int nbr) {
+	public void ajouterParent(Hierarchie<T> hierarchie, int nbr) {
 		parents.put(hierarchie, nbr);
 		hierarchie.enfants.put(this, nbr);
 	}
 
-	public void ajouterEnfant(Hierarchie hierarchie) {
+	public void ajouterEnfant(Hierarchie<T> hierarchie) {
 		ajouterEnfant(hierarchie, 1);
 	}
 
-	public void ajouterEnfant(Hierarchie hierarchie, int nbr) {
+	public void ajouterEnfant(Hierarchie<T> hierarchie, int nbr) {
 		enfants.put(hierarchie, nbr);
 		hierarchie.parents.put(this, nbr);
 	}
 
 	@Override
 	public String toString() {
-		return "Hierarchie [id=" + id + ", parents=" + parents.size() + ", enfants=" + enfants.size() + "]";
+		return "Hierarchie [infos=" + infos + ", parents=" + parents.size() + ", enfants=" + enfants.size() + "]";
 	}
 
 }

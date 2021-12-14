@@ -3,7 +3,7 @@ package annees.annee2020.jour18;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import commun.Calculatrice;
+import commun.calculatrice.Calculatrice;
 import commun.calculatrice.OperateurAddition;
 import commun.calculatrice.OperateurMultiplication;
 import commun.structure.AdventOfCodeException;

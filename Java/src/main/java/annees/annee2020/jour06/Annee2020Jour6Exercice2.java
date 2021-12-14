@@ -17,11 +17,11 @@ public class Annee2020Jour6Exercice2 extends Annee2020Jour6 {
 	@Override
 	public String run(String input) throws AdventOfCodeException {
 		List<Groupe> textes = inputToListObject(input);
-		return String.valueOf(textes.stream().mapToInt(liste -> {
-			liste.getInfosPersonnes().stream()
-					.forEach(personne -> liste.getInfosPersonnes().get(0).retainAll(personne));
-			return liste.getInfosPersonnes().get(0).size();
-		}).sum());
+		return String.valueOf(textes.stream()
+				.mapToInt(liste -> {
+					liste.getInfosPersonnes().stream().forEach(personne -> liste.getInfosPersonnes().get(0).retainAll(personne));
+					return liste.getInfosPersonnes().get(0).size();
+				}).sum());
 	}
 
 }

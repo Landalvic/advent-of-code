@@ -27,4 +27,9 @@ public class NumeroBingo {
 		this.gagnant = gagnant;
 	}
 
+	@Override
+	public String toString() {
+		return "NumeroBingo [numero=" + numero + ", gagnant=" + gagnant + "]";
+	}
+
 }

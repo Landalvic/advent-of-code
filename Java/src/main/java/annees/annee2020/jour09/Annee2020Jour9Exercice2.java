@@ -25,10 +25,10 @@ public class Annee2020Jour9Exercice2 extends Annee2020Jour9 {
 			long total = 0;
 			long max = 0;
 			long min = Long.MAX_VALUE;
-			for (int j = 1; j < liste.size() - i; j++) {
-				total += liste.get(i + j);
-				max = Math.max(max, liste.get(i + j));
-				min = Math.min(min, liste.get(i + j));
+			for (int j = i; j < liste.size(); j++) {
+				total += liste.get(j);
+				max = Math.max(max, liste.get(j));
+				min = Math.min(min, liste.get(j));
 				if (total == resultatPartie1) {
 					return String.valueOf((min + max));
 				} else if (total > resultatPartie1) {

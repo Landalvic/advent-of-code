@@ -21,19 +21,17 @@ public class Annee2021Jour3Exercice1 extends Annee2021Jour3 {
 	@Override
 	public String run(String input) throws AdventOfCodeException {
 		var firstLine = FileUtils.firstLine(input);
-		var stream = FileUtils.streamOfCharacters(input);
+		var stream = FileUtils.streamOfStreamBuilder(input);
 		List<Position> gammas = new ArrayList<>(firstLine.length());
 		List<Position> epsilons = new ArrayList<>(firstLine.length());
 		for (int i = 0; i < firstLine.length(); i++) {
 			gammas.add(new Position(0, 0));
 			epsilons.add(new Position(0, 0));
 		}
-		stream.forEach(list -> {
-			for (int j = 0; j < list.size(); j++) {
-				updatePosition(list.get(j), gammas.get(j));
-				updatePosition(list.get(j), epsilons.get(j));
-			}
-		});
+		stream.forEach(list -> list.forEach(caractere -> {
+			updatePosition(caractere, gammas.get(list.getIndex()));
+			updatePosition(caractere, epsilons.get(list.getIndex()));
+		}));
 		var gamma = calcul(gammas, "1", "0");
 		var epsilon = calcul(gammas, "0", "1");
 		return String.valueOf(gamma * epsilon);
