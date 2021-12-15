@@ -3,7 +3,7 @@ package annees.annee2020.jour17;
 import java.util.HashSet;
 import java.util.Set;
 
-import commun.MapCases;
+import commun.MapModifiable;
 import commun.Position;
 import commun.structure.AdventOfCodeException;
 import commun.structure.ExerciceInputToMap;
@@ -29,7 +29,7 @@ public abstract class Annee2020Jour17 extends ExerciceInputToMap<Cube> {
 		return String.valueOf(map.listeAllCase().stream().filter(Cube::isActif).count());
 	}
 
-	protected void gererSiege(MapCases<Cube> map, Cube cube, Set<Cube> cubesAdj, boolean ajout) {
+	protected void gererSiege(MapModifiable<Cube> map, Cube cube, Set<Cube> cubesAdj, boolean ajout) {
 		Set<Cube> adj = ajout ? cube.getCasesAdjacentesDiagNDim(position -> {
 			Cube c = new Cube(map, position, false);
 			if (cubesAdj != null) {
@@ -46,7 +46,7 @@ public abstract class Annee2020Jour17 extends ExerciceInputToMap<Cube> {
 	}
 
 	@Override
-	protected Cube ligneToMap(MapCases<Cube> map, String charAt, int posY, int posX) {
+	protected Cube ligneToMap(MapModifiable<Cube> map, String charAt, int posY, int posX) {
 		int[] pos = new int[dimension];
 		pos[0] = posX;
 		pos[1] = posY;

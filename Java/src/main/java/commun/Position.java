@@ -25,6 +25,12 @@ public class Position {
 		coordonnees = position.coordonnees.clone();
 	}
 
+	public Position voisin(Direction direction) {
+		var p = new Position(Arrays.copyOf(coordonnees, coordonnees.length));
+		p.bouger(direction);
+		return p;
+	}
+
 	public void bouger(Direction direction) {
 		bouger(direction, 1);
 	}

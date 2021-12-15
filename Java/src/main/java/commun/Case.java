@@ -13,10 +13,10 @@ public abstract class Case<T extends Case<T>> {
 	private static final String AFFICHAGE = ".";
 
 	protected Position position;
-	protected MapCases<T> map;
+	protected InterfaceMap<T> map;
 	protected boolean mur;
 
-	protected Case(MapCases<T> map, Position position) {
+	protected Case(InterfaceMap<T> map, Position position) {
 		super();
 		this.map = map;
 		this.position = position;
@@ -141,6 +141,58 @@ public abstract class Case<T extends Case<T>> {
 			}
 		}
 		return liste;
+	}
+
+	public List<List<T>> listeChemins(T destination) {
+		List<List<T>> chemins = new ArrayList<>();
+		List<List<T>> cheminsFinis = new ArrayList<>();
+		List<T> cheminDepart = new ArrayList<>();
+		cheminDepart.add(getThis());
+		chemins.add(cheminDepart);
+
+		while (!chemins.isEmpty()) {
+			List<List<T>> newChemins = new ArrayList<>();
+			for (List<T> chemin : chemins) {
+				for (T case1 : chemin.get(chemin.size() - 1).getCasesAdjacentes()) {
+					if (destination == case1) {
+						List<T> newChemin = new ArrayList<>(chemin);
+						newChemin.add(case1);
+						cheminsFinis.add(newChemin);
+					} else if (!case1.isMur() && !chemin.contains(case1)) {
+						boolean cheminInutile = false;
+						for (T adj : case1.getCasesAdjacentes()) {
+							if (adj != chemin.get(chemin.size() - 1) && chemin.contains(adj)) {
+								cheminInutile = true;
+								break;
+							}
+						}
+						if (!cheminInutile) {
+							for (List<T> cheminAutre : chemins) {
+								if (cheminAutre.contains(case1)) {
+									cheminInutile = true;
+									break;
+								}
+							}
+						}
+						if (!cheminInutile) {
+							for (List<T> cheminAutre : newChemins) {
+								if (cheminAutre.get(cheminAutre.size() - 1) == case1) {
+									cheminInutile = true;
+									break;
+								}
+							}
+						}
+						if (!cheminInutile) {
+							List<T> newChemin = new ArrayList<>(chemin);
+							newChemin.add(case1);
+							newChemins.add(newChemin);
+						}
+					}
+				}
+			}
+			chemins = newChemins;
+		}
+		return cheminsFinis;
 	}
 
 	public List<T> deplacement(T destination) {

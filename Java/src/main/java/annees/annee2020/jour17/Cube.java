@@ -1,12 +1,12 @@
 package annees.annee2020.jour17;
 
 import commun.Case;
-import commun.MapCases;
+import commun.MapModifiable;
 import commun.Position;
 
 public class Cube extends Case<Cube> {
 
-	public Cube(MapCases<Cube> map, Position position, boolean actif) {
+	public Cube(MapModifiable<Cube> map, Position position, boolean actif) {
 		super(map, position);
 		this.actif = actif;
 	}

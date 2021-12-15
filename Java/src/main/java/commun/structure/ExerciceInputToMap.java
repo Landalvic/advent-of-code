@@ -3,8 +3,11 @@ package commun.structure;
 import java.util.List;
 
 import commun.Case;
-import commun.MapCases;
+import commun.InterfaceMap;
+import commun.MapModifiable;
+import commun.MapUnmodifiable;
 import commun.Position;
+import commun.SimpleCase;
 import commun.util.FileUtils;
 
 public abstract class ExerciceInputToMap<T extends Case<T>> extends Exercice {
@@ -13,9 +16,14 @@ public abstract class ExerciceInputToMap<T extends Case<T>> extends Exercice {
 		super(annee, jour, numeroExercice);
 	}
 
-	protected MapCases<T> inputToMap(String input) throws AdventOfCodeException {
+	protected InterfaceMap<T> inputToMap(String input, boolean fixedButOptimized) throws AdventOfCodeException {
 		List<String> lignes = FileUtils.listOfLines(input);
-		MapCases<T> map = new MapCases<>();
+		InterfaceMap<T> map;
+		if (fixedButOptimized) {
+			map = new MapUnmodifiable<>(new SimpleCase[lignes.get(0).length()][lignes.size()]);
+		} else {
+			map = new MapModifiable<>();
+		}
 		for (int i = 0; i < lignes.size(); i++) {
 			String ligne = lignes.get(i);
 			for (int j = 0; j < ligne.length(); j++) {
@@ -26,6 +34,6 @@ public abstract class ExerciceInputToMap<T extends Case<T>> extends Exercice {
 		return map;
 	}
 
-	protected abstract T ligneToMap(MapCases<T> map, String charAt, Position position);
+	protected abstract T ligneToMap(InterfaceMap<T> map, String charAt, Position position);
 
 }

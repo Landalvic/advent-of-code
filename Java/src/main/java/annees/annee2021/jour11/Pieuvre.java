@@ -1,7 +1,7 @@
 package annees.annee2021.jour11;
 
 import commun.Case;
-import commun.MapCases;
+import commun.InterfaceMap;
 import commun.Position;
 
 public class Pieuvre extends Case<Pieuvre> {
@@ -9,7 +9,7 @@ public class Pieuvre extends Case<Pieuvre> {
 	private int nombre;
 	private boolean clignotement;
 
-	public Pieuvre(MapCases<Pieuvre> map, Position position, int nombre) {
+	public Pieuvre(InterfaceMap<Pieuvre> map, Position position, int nombre) {
 		super(map, position);
 		this.nombre = nombre;
 		clignotement = false;

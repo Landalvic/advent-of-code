@@ -1,6 +1,6 @@
 package annees.annee2020.jour11;
 
-import commun.MapCases;
+import commun.MapModifiable;
 import commun.Position;
 import commun.structure.AdventOfCodeException;
 import commun.structure.ExerciceInputToMap;
@@ -18,7 +18,7 @@ public abstract class Annee2020Jour11 extends ExerciceInputToMap<Siege> {
 
 	@Override
 	public String run(String input) throws AdventOfCodeException {
-		MapCases<Siege> map = inputToMap(input);
+		MapModifiable<Siege> map = inputToMap(input);
 		boolean auMoinsUnChangement;
 		do {
 			map.streamAllCase().forEach(this::gererSiege);
@@ -36,7 +36,7 @@ public abstract class Annee2020Jour11 extends ExerciceInputToMap<Siege> {
 	}
 
 	@Override
-	protected Siege ligneToMap(MapCases<Siege> map, String charAt, int posY, int posX) {
+	protected Siege ligneToMap(MapModifiable<Siege> map, String charAt, int posY, int posX) {
 		switch (charAt) {
 			case "L":
 				return new Siege(map, new Position(posX, posY), false);

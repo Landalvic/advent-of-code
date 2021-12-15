@@ -5,7 +5,7 @@ import java.util.List;
 
 import commun.Case;
 import commun.Direction;
-import commun.MapCases;
+import commun.MapModifiable;
 import commun.Position;
 
 public class Siege extends Case<Siege> {
@@ -13,7 +13,7 @@ public class Siege extends Case<Siege> {
 	private Boolean occupe;
 	private Boolean futurePlace;
 
-	public Siege(MapCases<Siege> map, Position position, Boolean occupe) {
+	public Siege(MapModifiable<Siege> map, Position position, Boolean occupe) {
 		super(map, position);
 		this.occupe = occupe;
 	}

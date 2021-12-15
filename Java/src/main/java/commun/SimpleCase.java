@@ -4,11 +4,11 @@ public class SimpleCase<T> extends Case<SimpleCase<T>> {
 
 	private T id;
 
-	public SimpleCase(MapCases<SimpleCase<T>> map, Position position) {
+	public SimpleCase(InterfaceMap<SimpleCase<T>> map, Position position) {
 		super(map, position);
 	}
 
-	public SimpleCase(MapCases<SimpleCase<T>> map, Position position, T id) {
+	public SimpleCase(InterfaceMap<SimpleCase<T>> map, Position position, T id) {
 		super(map, position);
 		this.id = id;
 	}
