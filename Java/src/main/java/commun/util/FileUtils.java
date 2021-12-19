@@ -36,6 +36,10 @@ public interface FileUtils {
 		return streamOfLines(input).findFirst().orElseThrow();
 	}
 
+	public static <T> T firstLineOfPattern(String input, Class<? extends T> clazz) throws AdventOfCodeException {
+		return TexteUtils.transformerPattern(firstLine(input), clazz);
+	}
+
 	public static StreamBuilder firstLineOfStreamBuilder(String input) throws AdventOfCodeException {
 		return new StreamBuilder(firstLine(input));
 	}

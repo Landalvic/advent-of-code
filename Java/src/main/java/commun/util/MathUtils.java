@@ -18,7 +18,7 @@ public interface MathUtils {
 		}
 	}
 
-	public static String toHexString(byte[] bytes) {
+	public static String hexToString(byte[] bytes) {
 		StringBuilder retour = new StringBuilder();
 		for (int i = 0; i < bytes.length; i++) {
 			String hex = Integer.toHexString(0xFF & bytes[i]);
@@ -28,6 +28,27 @@ public interface MathUtils {
 			retour.append(hex);
 		}
 		return retour.toString();
+	}
+
+	public static String stringToHex(String str) {
+		StringBuilder stringBuilder = new StringBuilder();
+		char[] charArray = str.toCharArray();
+		for (char c : charArray) {
+			String charToHex = Integer.toHexString(c);
+			stringBuilder.append(charToHex);
+		}
+		return stringBuilder.toString();
+	}
+
+	public static String hexToBinary(String hex, int longueur) {
+		int i = Integer.parseInt(hex, 16);
+		String binary = Integer.toBinaryString(i);
+		StringBuilder s = new StringBuilder();
+		for (int j = 0; j < longueur - binary.length(); j++) {
+			s.append("0");
+		}
+		s.append(binary);
+		return s.toString();
 	}
 
 	public static long binaryToLong(String s, int base) {

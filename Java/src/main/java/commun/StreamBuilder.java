@@ -76,6 +76,14 @@ public class StreamBuilder {
 		return this;
 	}
 
+	public String substring(int start, int end) {
+		return builder.substring(start, end);
+	}
+
+	public String substring(int start) {
+		return builder.substring(start);
+	}
+
 	public String charAt(int index) {
 		return String.valueOf(builder.charAt(index));
 	}
